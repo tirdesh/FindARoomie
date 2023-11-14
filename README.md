@@ -101,7 +101,54 @@ These commands help in creating a new branch, switching to it, staging changes, 
 - **I want** to easily create an account and log in to "Find a Roomie",
 - **So that** I can securely access the features for finding or listing a room.
 
-## User Story 2: Effortless Room Search
+### API Resources:
+1. **Endpoint:** `/api/users`
+   - **Method:** `GET`
+   - **Description:** Retrieve a list of users.
+
+2. **Endpoint:** `/api/users/{userId}`
+   - **Method:** `GET`
+   - **Description:** Retrieve user details by ID.
+
+3. **Endpoint:** `/api/users/{userId}`
+   - **Method:** `PUT`
+   - **Description:** Update user details by ID.
+
+4. **Endpoint:** `/api/signup`
+   - **Method:** `POST`
+   - **Description:** Create a new user account.
+
+5. **Endpoint:** `/api/login`
+   - **Method:** `POST`
+   - **Description:** Authenticate and log in a user.
+
+6. **Endpoint:** `/api/password-reset`
+   - **Method:** `POST`
+   - **Description:** Reset user password.
+
+## User Story 2:  Profile Management and Access
+- **As** a new user,
+- **I want** to efficiently manage my profile and access the "Profile Management" features,
+- **So that** I can keep my profile information up to date and utilize the available profile management functionalities.
+
+### API Resources:
+1. **Endpoint:** `/api/profiles`
+   - **Method:** `POST`
+   - **Description:** Create a new user profile.
+
+2. **Endpoint:** `/api/profiles/{username}`
+   - **Method:** `GET`
+   - **Description:** Retrieve user profile by username.
+
+3. **Endpoint:** `/api/profiles/{username}`
+   - **Method:** `PUT`
+   - **Description:** Update user profile by username.
+
+4. **Endpoint:** `/api/profiles/{username}`
+   - **Method:** `DELETE`
+   - **Description:** Delete user profile by username.
+
+## User Story 3: Effortless Room Search
 - **As** a student looking for accommodation,
 - **I want** to find the perfect room,
 - **Utilizing** specific filters like location, budget, and amenities,
@@ -124,22 +171,22 @@ These commands help in creating a new branch, switching to it, staging changes, 
    - **Method:** `DELETE`
    - **Description:** Delete a saved filter by ID.
 
-## User Story 3: Listing a Room
+## User Story 4: Listing a Room
 - **As** a room owner,
 - **I want** to list my available room with detailed preferences and amenities,
 - **So that** I can attract suitable roommates.
  
-## User Story 4: In-App Communication
+## User Story 5: In-App Communication
 - **As** a user,
 - **I want** to communicate safely with potential roommates within the app,
 - **So that** I can discuss details without sharing personal contact information prematurely.
 
-## User Story 5: Blog and Community Engagement
+## User Story 6: Blog and Community Engagement
 - **As** a user interested in shared living best practices,
 - **I want** to access and contribute to blogs and community discussions within the app,
 - **So that** I can learn from and engage with a community of like-minded individuals.
  
-## User Story 6: User Verification and Safety
+## User Story 7: User Verification and Safety
 - **As** a user concerned about safety,
 - **I want** to know that other users are verified,
 - **So that** I feel secure in my interactions and potential living arrangements.
