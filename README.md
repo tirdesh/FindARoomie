@@ -70,13 +70,14 @@
 
 ## Handling GIT:
 - Creating a new branch
-  - git branch new-branch-name
-  - git checkout new-branch-name
+git branch new-branch-name
+git checkout new-branch-name
+git checkout -b new-branch-name
 
 - Commit Changes
-  - git add .
-  - git commit -m "Your commit message"
-  - git push origin new-branch-name
+git add .
+git commit -m "Your commit message"
+git push origin new-branch-name
 
 ## Domain Driven Design
 <p align="center">
@@ -84,12 +85,12 @@
 </p>
 
 # Find a Roomie - User Stories
- 
+
 ## User Story 1: Account Creation and Login
 - **As** a new user,
 - **I want** to easily create an account and log in to "Find a Roomie",
 - **So that** I can securely access the features for finding or listing a room.
- 
+
 ## User Story 2: Searching for a Room
 - **As** a student looking for accommodation,
 - **I want** to search for rooms using specific filters like location, budget, and amenities,
