@@ -1,0 +1,70 @@
+openapi: 3.1.0
+info:
+  title: Room Filtering API
+  description: REST API for filtering rooms using CRUD operations.
+  version: '1.0'
+servers:
+  - url: http://localhost:8080
+paths:
+  /roomlistings/filters:
+    get:
+      operationId: get-saved-filters
+      description: Get saved filters
+      responses:
+        "200":
+          description: Successful retrieval
+          content:
+            application/json:
+              example:
+                - id: "filter123"
+                  name: "City Center Under 800"
+                  parameters:
+                    $ref: "#/components/schemas/FilterParameters"
+                - id: "filter456"
+                  name: "Suburb"
+                  parameters:
+                    $ref: "#/components/schemas/FilterParameters"
+        "401":
+          description: Unauthenticated request
+          content:
+            application/json:
+              example:
+                code: "AuthenticationError"
+                message: "User is not authenticated."
+
+components:
+  schemas:
+    FilterParameters:
+      type: object
+      properties:
+        location:
+          type: string
+          examples:
+            - "City Center"
+        price_range:
+          type: string
+          examples:
+            - "500-800"
+        amenities:
+          type: array
+          items:
+            type: string
+          examples:
+            - ["WiFi", "Laundry"]
+        lease_duration:
+          type: string
+          examples:
+            - "6 months"
+        room_size:
+          type: string
+          examples:
+            - "Medium"
+        pet_policy:
+          type: string
+          examples:
+            - "No Pets"
+        available_from:
+          type: string
+          format: date
+          examples:
+            - "2023-12-01"
