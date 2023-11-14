@@ -116,4 +116,17 @@ git push origin new-branch-name
 - **I want** to know that other users are verified,
 - **So that** I feel secure in my interactions and potential living arrangements.
 
-## User Story 7: 
+## User Story 7: Advanced Roommate Matching
+- **As** a user with specific living preferences,
+- **I want** to use an advanced matching system to find compatible roommates,
+- **So that** I can ensure a harmonious living environment.
+ 
+## User Story 8: Checklist and Preferences
+- **As** a user,
+- **I want** to create a checklist of my room and roommate preferences,
+- **So that** the search results are tailored to my specific needs.
+ 
+## User Story 9: Roommate Agreement
+- **As** a user finalizing a roommate arrangement,
+- **I want** to access resources and templates for roommate agreements,
+- **So that** both parties have clear, agreed-upon terms from the beginning.
