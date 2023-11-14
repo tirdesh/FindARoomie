@@ -83,4 +83,3 @@ git push origin new-branch-name
 <p align="center">
   <img src="images/Domain Driven Design.drawio.png" alt="Alt text"/>
 </p>
-
