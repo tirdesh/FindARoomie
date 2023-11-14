@@ -3,11 +3,12 @@
 <p align="center">
   <img src="images/image.png" alt="Alt text"/>
 </p>
+
 # Team Maverick Team 37
-Abhishek Chintapalli
-Abhinav Chary Eeranti
-Tirdesh Pettugani
-Sai Krishna Kotla
+- Abhishek Chintapalli
+- Abhinav Chary Eeranti
+- Tirdesh Pettugani
+- Sai Krishna Kotla
 
 # Find a Roomie
 
@@ -67,5 +68,19 @@ Sai Krishna Kotla
 ### Account
 - Manage personal details and connections akin to social media features.
 
+## Handling GIT:
+- Creating a new branch
+git branch new-branch-name
+git checkout new-branch-name
+git checkout -b new-branch-name
 
+- Commit Changes
+git add .
+git commit -m "Your commit message"
+git push origin new-branch-name
+
+## Domain Driven Design
+<p align="center">
+  <img src="images/Domain Driven Design.drawio.png" alt="Alt text"/>
+</p>
 
