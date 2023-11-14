@@ -112,6 +112,33 @@ paths:
               example:
                 code: "NotFoundError"
                 message: "Filter not found."
+    delete:
+      operationId: delete-filter
+      description: Delete a saved filter by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          example: "filter123"
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Filter deleted successfully
+        "401":
+          description: Unauthenticated request
+          content:
+            application/json:
+              example:
+                code: "AuthenticationError"
+                message: "User is not authenticated."
+        "404":
+          description: Filter not found
+          content:
+            application/json:
+              example:
+                code: "NotFoundError"
+                message: "Filter not found."
 
 
 components:
