@@ -95,3 +95,13 @@ git push origin new-branch-name
 - **As** a student looking for accommodation,
 - **I want** to search for rooms using specific filters like location, budget, and amenities,
 - **So that** I can find a room that fits my needs and preferences.
+
+## User Story 3: Listing a Room
+- **As** a room owner,
+- **I want** to list my available room with detailed preferences and amenities,
+- **So that** I can attract suitable roommates.
+ 
+## User Story 4: In-App Communication
+- **As** a user,
+- **I want** to communicate safely with potential roommates within the app,
+- **So that** I can discuss details without sharing personal contact information prematurely.
