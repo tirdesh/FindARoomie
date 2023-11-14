@@ -84,4 +84,17 @@ git push origin new-branch-name
   <img src="images/Domain Driven Design.drawio.png" alt="Alt text"/>
 </p>
 
-## Abhinav Branch first push
+## User Stories
+
+User Story 1: Account Creation and Login
+•    As a new user
+•    I want to easily create an account and log in to "Find a Roomie"
+•    So that I can securely access the features for finding or listing a room
+User Story 2: Searching for a Room
+•    As a student looking for accommodation
+•    I want to search for rooms using specific filters like location, budget, and amenities
+•    So that I can find a room that fits my needs and preferences
+User Story 3: Listing a Room
+•    As a room owner,
+•    I want to list my available room with detailed preferences and amenities
+•    So that I can attract suitable roommates
