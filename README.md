@@ -105,3 +105,13 @@ git push origin new-branch-name
 - **As** a user,
 - **I want** to communicate safely with potential roommates within the app,
 - **So that** I can discuss details without sharing personal contact information prematurely.
+
+## User Story 5: Blog and Community Engagement
+- **As** a user interested in shared living best practices,
+- **I want** to access and contribute to blogs and community discussions within the app,
+- **So that** I can learn from and engage with a community of like-minded individuals.
+ 
+## User Story 6: User Verification and Safety
+- **As** a user concerned about safety,
+- **I want** to know that other users are verified,
+- **So that** I feel secure in my interactions and potential living arrangements.
