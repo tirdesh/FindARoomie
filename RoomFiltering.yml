@@ -31,6 +31,45 @@ paths:
               example:
                 code: "AuthenticationError"
                 message: "User is not authenticated."
+    post:
+      operationId: save-filter
+      description: Save a new filter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SavedFilterInput"
+      responses:
+        "201":
+          description: Filter saved successfully
+          content:
+            application/json:
+              example:
+                id: "filter123"
+                name: "City Center Under 800"
+                parameters:
+                  location: "City Center"
+                  price_range: "500-800"
+                  amenities: ["WiFi", "Laundry"]
+                  lease_duration: "6 months"
+                  room_size: "Medium"
+                  pet_policy: "No Pets"
+                  available_from: "2023-12-01"
+        "400":
+          description: Bad request - Invalid input data
+          content:
+            application/json:
+              example:
+                code: "InvalidInputError"
+                message: "Invalid input data."
+        "401":
+          description: Unauthenticated request
+          content:
+            application/json:
+              example:
+                code: "AuthenticationError"
+                message: "User is not authenticated."
 
 components:
   schemas:
@@ -68,3 +107,13 @@ components:
           format: date
           examples:
             - "2023-12-01"
+
+    SavedFilterInput:
+      type: object
+      properties:
+        name:
+          type: string
+          examples:
+            - "City Center Under 800"
+        parameters:
+          $ref: "#/components/schemas/FilterParameters"
