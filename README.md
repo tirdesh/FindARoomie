@@ -4,7 +4,7 @@
   <img src="images/image.png" alt="Alt text"/>
 </p>
 
-# Team Maverick Team 37
+# Team Maverick Team 35
 - Abhishek Chintapalli
 - Abhinav Chary Eeranti
 - Tirdesh Pettugani
@@ -95,3 +95,23 @@ git push origin new-branch-name
 - **As** a student looking for accommodation,
 - **I want** to search for rooms using specific filters like location, budget, and amenities,
 - **So that** I can find a room that fits my needs and preferences.
+
+## User Story 3: Listing a Room
+- **As** a room owner,
+- **I want** to list my available room with detailed preferences and amenities,
+- **So that** I can attract suitable roommates.
+ 
+## User Story 4: In-App Communication
+- **As** a user,
+- **I want** to communicate safely with potential roommates within the app,
+- **So that** I can discuss details without sharing personal contact information prematurely.
+
+## User Story 5: Blog and Community Engagement
+- **As** a user interested in shared living best practices,
+- **I want** to access and contribute to blogs and community discussions within the app,
+- **So that** I can learn from and engage with a community of like-minded individuals.
+ 
+## User Story 6: User Verification and Safety
+- **As** a user concerned about safety,
+- **I want** to know that other users are verified,
+- **So that** I feel secure in my interactions and potential living arrangements.
