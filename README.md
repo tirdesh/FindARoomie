@@ -199,7 +199,7 @@ These commands help in creating a new branch, switching to it, staging changes, 
   - **method:** `PUT`
   - **Description:** Update the blog with selected blog id
 
-4. **Endpoint:** `/community_blogs`
+4. **Endpoint:** `/community_blogs/{blogID}`
   - **method:** `DELETE`
   - **Description:** Delete the blog with selected blog id
  
