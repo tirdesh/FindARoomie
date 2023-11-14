@@ -49,13 +49,7 @@ paths:
                 id: "filter123"
                 name: "City Center Under 800"
                 parameters:
-                  location: "City Center"
-                  price_range: "500-800"
-                  amenities: ["WiFi", "Laundry"]
-                  lease_duration: "6 months"
-                  room_size: "Medium"
-                  pet_policy: "No Pets"
-                  available_from: "2023-12-01"
+                  $ref: "#/components/schemas/FilterParameters"
         "400":
           description: Bad request - Invalid input data
           content:
@@ -70,6 +64,55 @@ paths:
               example:
                 code: "AuthenticationError"
                 message: "User is not authenticated."
+  /roomlistings/filters/{id}:
+    put:
+      operationId: update-filter
+      description: Update a saved filter by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          example: "filter123"
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SavedFilterInput"
+      responses:
+        "200":
+          description: Filter updated successfully
+          content:
+            application/json:
+              example:
+                id: "filter123"
+                name: "City Center Under 900"
+                parameters:
+                  $ref: "#/components/schemas/FilterParameters"
+        "400":
+          description: Bad request - Invalid input data
+          content:
+            application/json:
+              example:
+                code: "InvalidInputError"
+                message: "Invalid input data."
+        "401":
+          description: Unauthenticated request
+          content:
+            application/json:
+              example:
+                code: "AuthenticationError"
+                message: "User is not authenticated."
+        "404":
+          description: Filter not found
+          content:
+            application/json:
+              example:
+                code: "NotFoundError"
+                message: "Filter not found."
+
 
 components:
   schemas:
