@@ -69,32 +69,60 @@
 - Manage personal details and connections akin to social media features.
 
 ## Handling GIT:
-- Creating a new branch
+
+### Creating a new branch:
+
+```bash
 git branch new-branch-name
 git checkout new-branch-name
+# or using a single command
 git checkout -b new-branch-name
+```
 
-- Commit Changes
+### Commit Changes:
+
+```bash
 git add .
 git commit -m "Your commit message"
 git push origin new-branch-name
+```
 
-## Domain Driven Design
+These commands help in creating a new branch, switching to it, staging changes, committing them, and pushing the changes to the remote repository.
+
+## Object Model Using Domain Driven Design
 <p align="center">
-  <img src="images/Domain Driven Design.drawio.png" alt="Alt text"/>
+  <img width="717" alt="Object Model" src="https://github.com/info-6150-fall-2023/final-project-mavericks/assets/145165383/3db253b6-86d5-4c6b-a437-b480e4d18381">
 </p>
 
-# Find a Roomie - User Stories
+# Find a Roomie - User Stories and Corresponding REST API Resources
 
 ## User Story 1: Account Creation and Login
 - **As** a new user,
 - **I want** to easily create an account and log in to "Find a Roomie",
 - **So that** I can securely access the features for finding or listing a room.
 
-## User Story 2: Searching for a Room
+## User Story 2: Effortless Room Search
 - **As** a student looking for accommodation,
-- **I want** to search for rooms using specific filters like location, budget, and amenities,
-- **So that** I can find a room that fits my needs and preferences.
+- **I want** to find the perfect room,
+- **Utilizing** specific filters like location, budget, and amenities,
+- **So that** the room aligns seamlessly with my needs and preferences.
+
+### API Resources:
+1. **Endpoint:** `/roomlistings/filters`
+   - **Method:** `GET`
+   - **Description:** Get saved filters for room searches.
+
+2. **Endpoint:** `/roomlistings/filters`
+   - **Method:** `POST`
+   - **Description:** Save a new filter.
+
+3. **Endpoint:** `/roomlistings/filters/{id}`
+   - **Method:** `PUT`
+   - **Description:** Update a saved filter by ID.
+
+4. **Endpoint:** `/roomlistings/filters/{id}`
+   - **Method:** `DELETE`
+   - **Description:** Delete a saved filter by ID.
 
 ## User Story 3: Listing a Room
 - **As** a room owner,
