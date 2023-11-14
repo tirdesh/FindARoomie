@@ -25,12 +25,7 @@ paths:
                   parameters:
                     $ref: "#/components/schemas/FilterParameters"
         "401":
-          description: Unauthenticated request
-          content:
-            application/json:
-              example:
-                code: "AuthenticationError"
-                message: "User is not authenticated."
+          $ref: "#/components/responses/AuthenticationError"
     post:
       operationId: save-filter
       description: Save a new filter
@@ -51,19 +46,9 @@ paths:
                 parameters:
                   $ref: "#/components/schemas/FilterParameters"
         "400":
-          description: Bad request - Invalid input data
-          content:
-            application/json:
-              example:
-                code: "InvalidInputError"
-                message: "Invalid input data."
+          $ref: "#/components/responses/InvalidInputError"
         "401":
-          description: Unauthenticated request
-          content:
-            application/json:
-              example:
-                code: "AuthenticationError"
-                message: "User is not authenticated."
+          $ref: "#/components/responses/AuthenticationError"
   /roomlistings/filters/{id}:
     put:
       operationId: update-filter
@@ -92,26 +77,11 @@ paths:
                 parameters:
                   $ref: "#/components/schemas/FilterParameters"
         "400":
-          description: Bad request - Invalid input data
-          content:
-            application/json:
-              example:
-                code: "InvalidInputError"
-                message: "Invalid input data."
+          $ref: "#/components/responses/InvalidInputError"
         "401":
-          description: Unauthenticated request
-          content:
-            application/json:
-              example:
-                code: "AuthenticationError"
-                message: "User is not authenticated."
+          $ref: "#/components/responses/AuthenticationError"
         "404":
-          description: Filter not found
-          content:
-            application/json:
-              example:
-                code: "NotFoundError"
-                message: "Filter not found."
+          $ref: "#/components/responses/NotFoundError"
     delete:
       operationId: delete-filter
       description: Delete a saved filter by ID
@@ -124,24 +94,45 @@ paths:
             type: string
       responses:
         "204":
-          description: Filter deleted successfully
+          $ref: "#/components/responses/FilterDeleted"
         "401":
-          description: Unauthenticated request
-          content:
-            application/json:
-              example:
-                code: "AuthenticationError"
-                message: "User is not authenticated."
+          $ref: "#/components/responses/AuthenticationError"
         "404":
-          description: Filter not found
-          content:
-            application/json:
-              example:
-                code: "NotFoundError"
-                message: "Filter not found."
-
+          $ref: "#/components/responses/NotFoundError"
 
 components:
+  responses:
+    FilterDeleted:
+      description: Filter deleted successfully
+      content:
+        application/json:
+          example:
+            message: "Filter deleted successfully"
+
+    AuthenticationError:
+      description: User is not authenticated
+      content:
+        application/json:
+          example:
+            code: "AuthenticationError"
+            message: "User is not authenticated"
+
+    InvalidInputError:
+      description: Invalid input data
+      content:
+        application/json:
+          example:
+            code: "InvalidInputError"
+            message: "Invalid input data"
+
+    NotFoundError:
+      description: Filter not found
+      content:
+        application/json:
+          example:
+            code: "NotFoundError"
+            message: "Filter not found"
+
   schemas:
     FilterParameters:
       type: object
