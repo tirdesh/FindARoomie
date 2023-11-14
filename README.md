@@ -175,6 +175,23 @@ These commands help in creating a new branch, switching to it, staging changes, 
 - **As** a room owner,
 - **I want** to list my available room with detailed preferences and amenities,
 - **So that** I can attract suitable roommates.
+
+### API Resources:
+1. **Endpoint:** `/api/rooms`
+  - **method:** `GET`
+  - **Description:** Get a list of available rooms.
+
+2. **Endpoint:** `/api/rooms`
+  - **method:** `POST`
+  - **Description:** List a room as available with detailed preferences and amenities.
+
+3. **Endpoint:** `/api/rooms/{roomNumber}`
+  - **method:** `PUT`
+  - **Description:**  Update details of a room listing by room number.
+
+4. **Endpoint:** `/api/rooms/{roomNumber}`
+  - **method:** `DELETE`
+  - **Description:** Delete a room listing by room number.
  
 ## User Story 5: In-App Communication
 - **As** a user,
@@ -207,3 +224,12 @@ These commands help in creating a new branch, switching to it, staging changes, 
 - **As** a user concerned about safety,
 - **I want** to know that other users are verified,
 - **So that** I feel secure in my interactions and potential living arrangements.
+## User Story 8: Checklist and Preferences
+- **As** a user,
+- **I want** to create a checklist of my room and roommate preferences,
+- **So that** the search results are tailored to my specific needs.
+ 
+## User Story 9: Roommate Agreement
+- **As** a user finalizing a roommate arrangement,
+- **I want** to access resources and templates for roommate agreements,
+- **So that** both parties have clear, agreed-upon terms from the beginning.
