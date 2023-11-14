@@ -69,64 +69,141 @@
 - Manage personal details and connections akin to social media features.
 
 ## Handling GIT:
-- Creating a new branch
+
+### Creating a new branch:
+
+```bash
 git branch new-branch-name
 git checkout new-branch-name
+# or using a single command
 git checkout -b new-branch-name
+```
 
-- Commit Changes
+### Commit Changes:
+
+```bash
 git add .
 git commit -m "Your commit message"
 git push origin new-branch-name
+```
 
-## Domain Driven Design
+These commands help in creating a new branch, switching to it, staging changes, committing them, and pushing the changes to the remote repository.
+
+## Object Model Using Domain Driven Design
 <p align="center">
-  <img src="images/Domain Driven Design.drawio.png" alt="Alt text"/>
+  <img width="717" alt="Object Model" src="https://github.com/info-6150-fall-2023/final-project-mavericks/assets/145165383/3db253b6-86d5-4c6b-a437-b480e4d18381">
 </p>
 
-# Find a Roomie - User Stories
+# Find a Roomie - User Stories and Corresponding REST API Resources
 
 ## User Story 1: Account Creation and Login
 - **As** a new user,
 - **I want** to easily create an account and log in to "Find a Roomie",
 - **So that** I can securely access the features for finding or listing a room.
 
-## User Story 2: Searching for a Room
-- **As** a student looking for accommodation,
-- **I want** to search for rooms using specific filters like location, budget, and amenities,
-- **So that** I can find a room that fits my needs and preferences.
+### API Resources:
+1. **Endpoint:** `/api/users`
+   - **Method:** `GET`
+   - **Description:** Retrieve a list of users.
 
-## User Story 3: Listing a Room
+2. **Endpoint:** `/api/users/{userId}`
+   - **Method:** `GET`
+   - **Description:** Retrieve user details by ID.
+
+3. **Endpoint:** `/api/users/{userId}`
+   - **Method:** `PUT`
+   - **Description:** Update user details by ID.
+
+4. **Endpoint:** `/api/signup`
+   - **Method:** `POST`
+   - **Description:** Create a new user account.
+
+5. **Endpoint:** `/api/login`
+   - **Method:** `POST`
+   - **Description:** Authenticate and log in a user.
+
+6. **Endpoint:** `/api/password-reset`
+   - **Method:** `POST`
+   - **Description:** Reset user password.
+
+## User Story 2:  Profile Management and Access
+- **As** a new user,
+- **I want** to efficiently manage my profile and access the "Profile Management" features,
+- **So that** I can keep my profile information up to date and utilize the available profile management functionalities.
+
+### API Resources:
+1. **Endpoint:** `/api/profiles`
+   - **Method:** `POST`
+   - **Description:** Create a new user profile.
+
+2. **Endpoint:** `/api/profiles/{username}`
+   - **Method:** `GET`
+   - **Description:** Retrieve user profile by username.
+
+3. **Endpoint:** `/api/profiles/{username}`
+   - **Method:** `PUT`
+   - **Description:** Update user profile by username.
+
+4. **Endpoint:** `/api/profiles/{username}`
+   - **Method:** `DELETE`
+   - **Description:** Delete user profile by username.
+
+## User Story 3: Effortless Room Search
+- **As** a student looking for accommodation,
+- **I want** to find the perfect room,
+- **Utilizing** specific filters like location, budget, and amenities,
+- **So that** the room aligns seamlessly with my needs and preferences.
+
+### API Resources:
+1. **Endpoint:** `/roomlistings/filters`
+   - **Method:** `GET`
+   - **Description:** Get saved filters for room searches.
+
+2. **Endpoint:** `/roomlistings/filters`
+   - **Method:** `POST`
+   - **Description:** Save a new filter.
+
+3. **Endpoint:** `/roomlistings/filters/{id}`
+   - **Method:** `PUT`
+   - **Description:** Update a saved filter by ID.
+
+4. **Endpoint:** `/roomlistings/filters/{id}`
+   - **Method:** `DELETE`
+   - **Description:** Delete a saved filter by ID.
+
+## User Story 4: Listing a Room
 - **As** a room owner,
 - **I want** to list my available room with detailed preferences and amenities,
 - **So that** I can attract suitable roommates.
  
-## User Story 4: In-App Communication
+## User Story 5: In-App Communication
 - **As** a user,
 - **I want** to communicate safely with potential roommates within the app,
 - **So that** I can discuss details without sharing personal contact information prematurely.
 
-## User Story 5: Blog and Community Engagement
+## User Story 6: Blog and Community Engagement
 - **As** a user interested in shared living best practices,
 - **I want** to access and contribute to blogs and community discussions within the app,
 - **So that** I can learn from and engage with a community of like-minded individuals.
+
+### API Resources:
+1. **Endpoint:** `/community_blogs`
+  - **method:** `GET`
+  - **Description:** Retrieve all the blogs
+
+2. **Endpoint:** `/community_blogs`
+  - **method:** `POST`
+  - **Description:** Post a new Blog with a blogID
+
+3. **Endpoint:** `/community_blogs/{blogID}`
+  - **method:** `PUT`
+  - **Description:** Update the blog with selected blog id
+
+4. **Endpoint:** `/community_blogs/{blogID}`
+  - **method:** `DELETE`
+  - **Description:** Delete the blog with selected blog id
  
-## User Story 6: User Verification and Safety
+## User Story 7: User Verification and Safety
 - **As** a user concerned about safety,
 - **I want** to know that other users are verified,
 - **So that** I feel secure in my interactions and potential living arrangements.
-
-## User Story 7: Advanced Roommate Matching
-- **As** a user with specific living preferences,
-- **I want** to use an advanced matching system to find compatible roommates,
-- **So that** I can ensure a harmonious living environment.
- 
-## User Story 8: Checklist and Preferences
-- **As** a user,
-- **I want** to create a checklist of my room and roommate preferences,
-- **So that** the search results are tailored to my specific needs.
- 
-## User Story 9: Roommate Agreement
-- **As** a user finalizing a roommate arrangement,
-- **I want** to access resources and templates for roommate agreements,
-- **So that** both parties have clear, agreed-upon terms from the beginning.
