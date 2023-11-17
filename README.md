@@ -233,3 +233,11 @@ These commands help in creating a new branch, switching to it, staging changes, 
 - **As** a user finalizing a roommate arrangement,
 - **I want** to access resources and templates for roommate agreements,
 - **So that** both parties have clear, agreed-upon terms from the beginning.
+
+## Set up project in VS code:
+### commands:
+   -  npm init
+   -  npm use 18 (since 20 is not working in Abhinav and Abhishek's environment)
+   -  npm i -s express mongoose cors debug
+### package.json:
+   - add ***"type": "module"***
