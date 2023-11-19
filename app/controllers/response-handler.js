@@ -6,9 +6,10 @@ export const setResponse = (data, response) => {
 }
 
 export const setErrorResponse = (err, response) => {
+    console.log("Actual Error for server manager: ", err);
     response.status(500)
         .json({
             code: "Service Error",
-            message: err
+            message: "An Error Occured While Processing Your Request"
         })
 }
