@@ -18,7 +18,13 @@ const blogSchema = new Schema({
     blogContent: {
         type: String,
         required: true
-    }
+    },
+    blogComments: [
+        {
+            user: {type: String, required: true},
+            comment: {type: String, required: true}
+        }
+    ]
 });
 
 const blogModel = mongoose.model('Blog', blogSchema);
