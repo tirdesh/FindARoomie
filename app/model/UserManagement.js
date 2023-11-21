@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import 'dotenv/config';
 
 const Schema = mongoose.Schema;
 
@@ -37,7 +38,7 @@ const userSchema = new Schema({
 
 // Password hashing 
 userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
+    // if (!this.isModified('password')) return next();
 
     try {
         const salt = await bcrypt.genSalt();
@@ -54,14 +55,13 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 
 // JWT Token generation method
 userSchema.methods.generateAuthToken = function () {
-    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRE,
+    return jwt.sign({ id: this._id }, process.env.SECRET_KEY, {
+        expiresIn: "1h",
     });
 };
 
 userSchema.methods.resetPassword = async function (newPassword) {
-    const salt = await bcrypt.genSalt();
-    this.password = await bcrypt.hash(newPassword, salt);
+    this.password  = newPassword;
 };
 
 const userModel = mongoose.model('User', userSchema);

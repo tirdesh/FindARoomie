@@ -3,6 +3,7 @@ import * as blogControllers from '../controllers/blog-controller.js';
 
 const router = express.Router();
 
+
 router.route('/')
     .get(blogControllers.displayBlogs)
     .post(blogControllers.postBlog);
