@@ -1,8 +1,10 @@
+// Importing necessary libraries and configurations
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import 'dotenv/config';
+import bcrypt from "bcrypt"; // Used for password hashing
+import jwt from "jsonwebtoken"; // Used for JSON Web Token generation
+import 'dotenv/config'; // For accessing environment 
 
+// Creating a Schema object from mongoose
 const Schema = mongoose.Schema;
 
 // User schema

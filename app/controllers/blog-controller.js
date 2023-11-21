@@ -1,6 +1,7 @@
 import * as blogSevices from '../services/blogServices.js';
 import { setErrorResponse, setResponse } from './response-handler.js';
 
+// Asynchronous function to handle the display of blogs.
 export const displayBlogs = async (request, response) =>{
     try{
         const params = {...request.query};
@@ -10,7 +11,7 @@ export const displayBlogs = async (request, response) =>{
         setErrorResponse(err, response);
     }
 }
-
+// Asynchronous function to handle the creation of a new blog post.
 export const postBlog = async (request, response) =>{
     try{
         const blogData = {...request.body};
@@ -20,7 +21,7 @@ export const postBlog = async (request, response) =>{
         setErrorResponse(err, response);
     }
 }
-
+// Function to retrieve a single blog post by its ID.
 export const getBlog = async (request, response) =>{
     try{
         const id = request.params.id;
@@ -30,7 +31,7 @@ export const getBlog = async (request, response) =>{
         setErrorResponse(err, response);
     }
 }
-
+// Function to update a blog post.
 export const updateBlog = async (request, response) =>{
     try{
         const id = request.params.id;
@@ -41,7 +42,7 @@ export const updateBlog = async (request, response) =>{
         setErrorResponse(err, response);
     }
 }
-
+// Function to delete a blog post.
 export const deleteBlog = async (request, response) =>{
     try{
         const id = request.params.id;

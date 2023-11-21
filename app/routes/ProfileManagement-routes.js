@@ -1,3 +1,4 @@
+// Importing the express and controller functions.
 import express from 'express';
 import * as profileController from '../controllers/ProfileManagement-controller.js';
 
