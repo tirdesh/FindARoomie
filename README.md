@@ -238,6 +238,6 @@ These commands help in creating a new branch, switching to it, staging changes, 
 ### commands:
    -  npm init
    -  npm use 18 (since 20 is not working in Abhinav and Abhishek's environment)
-   -  npm i -s express mongoose cors debug
+   -  npm i -s express mongoose cors debug bcrypt jsonwebtoken dotenv
 ### package.json:
    - add ***"type": "module"***

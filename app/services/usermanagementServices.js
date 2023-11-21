@@ -38,7 +38,7 @@ export const loginUser = async (email, password) => {
 
 // Service to reset user password
 export const resetUserPassword = async (userId, newPassword) => {
-    const user = await User.findById(userId).exec();
+    const user = await User.findOne({userId}).exec();
     if (!user) {
         throw new Error('User not found');
     }
