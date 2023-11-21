@@ -22,7 +22,7 @@ export const postBlog = async (request, response) =>{
 }
 
 export const getBlog = async (request, response) =>{
-    try{    
+    try{
         const id = request.params.id;
         const blog = await blogSevices.findById(id);
         setResponse(blog, response);
