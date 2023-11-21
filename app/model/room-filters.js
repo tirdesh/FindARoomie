@@ -1,7 +1,10 @@
+// Importing mongoose library for MongoDB.
 import mongoose  from "mongoose";
 
+// Creating a Schema object from mongoose
 const Schema = mongoose.Schema;
 
+// Defining the schema for a room filter document.
 const roomFilterSchema = new Schema({
     name: {
         type: String,

@@ -1,6 +1,7 @@
 import * as roomfilterServices from '../services/roomfilterServices.js';
 import { setErrorResponse, setResponse } from './response-handler.js';
 
+// Display Roo Filters
 export const displayRoomFilters = async (request, response) =>{
     try{
         const params = {...request.query};
@@ -11,6 +12,7 @@ export const displayRoomFilters = async (request, response) =>{
     }
 }
 
+// Post Room Filters
 export const postRoomFilter = async (request, response) =>{
     try{
         const roomfilterData = {...request.body};
@@ -21,6 +23,7 @@ export const postRoomFilter = async (request, response) =>{
     }
 }
 
+// Get Room Filter
 export const getRoomFilter = async (request, response) =>{
     try{    
         const id = request.params.id;
@@ -31,6 +34,7 @@ export const getRoomFilter = async (request, response) =>{
     }
 }
 
+// Update Room Filter
 export const updateRoomFilter = async (request, response) =>{
     try{
         const id = request.params.id;
@@ -41,7 +45,7 @@ export const updateRoomFilter = async (request, response) =>{
         setErrorResponse(err, response);
     }
 }
-
+// Delete Room filter
 export const deleteRoomFilter = async (request, response) =>{
     try{
         const id = request.params.id;
