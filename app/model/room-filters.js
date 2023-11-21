@@ -19,7 +19,7 @@ const roomFilterSchema = new Schema({
         {
             location: {type: String, required: true},
             price_range: {type: String},
-            amenities: {type: Array},
+            amenities: {type: [String]},
             lease_duration: {type: String},
             room_size:{type: String},
             pet_policy:{type: String},
