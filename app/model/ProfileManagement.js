@@ -1,7 +1,8 @@
+// Importing mongoose library
 import mongoose from "mongoose";
-
+// Creating a Schema object from mongoose
 const Schema = mongoose.Schema;
-
+// Profile management schema
 const profileSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
