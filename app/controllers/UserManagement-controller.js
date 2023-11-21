@@ -1,6 +1,7 @@
 import * as userServices from '../services/usermanagementServices.js';
 import { setResponse, setConflictResponse, setUnauthorizedResponse, setErrorResponse } from './response-handler.js';
 
+// User Signup
 export const createUser = async (request, response) => {
     try {
         const userData = { ...request.body };
@@ -15,6 +16,7 @@ export const createUser = async (request, response) => {
     }
 };
 
+// User Login
 export const loginUser = async (request, response) => {
     try {
         const { email, password } = request.body;
@@ -30,6 +32,7 @@ export const loginUser = async (request, response) => {
     }
 };
 
+// Reset Password for the user
 export const resetPassword = async (request, response) => {
     try {
         const { userId, newPassword } = request.body;

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
-
+// Profile management schema
 const profileSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,

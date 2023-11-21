@@ -243,7 +243,6 @@ These commands help in creating a new branch, switching to it, staging changes, 
    - add ***"type": "module"***
 
 # API Testing Guide with Postman
-
 ## Testing User Login with Postman
 
 ### Prerequisites:
