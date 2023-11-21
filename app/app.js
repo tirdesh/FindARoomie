@@ -17,7 +17,7 @@ const initialize = (app) => {
     app.use(express.urlencoded());
 
     // Connecting to MongoDB using mongoose
-    mongoose.connect('mongodb+srv://eerantia:eerantia@testcluster.pu9tsrc.mongodb.net/roomies?retryWrites=true&w-majority');
+    mongoose.connect('mongodb+srv://eerantia:eerantia@testcluster.pu9tsrc.mongodb.net/roomies?retryWrites=true&w=majority');
 
     // Registering the application routes
     registerRouter(app);
