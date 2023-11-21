@@ -15,7 +15,6 @@ export const setNotFoundResponse = (message, response) => {
 };
 
 export const setErrorResponse = (err, response, statusCode = 500) => {
-    console.error("Actual Error for server manager: ", err);
     let message = err.message || 'An Error Occurred While Processing Your Request';
     let code = 'Service Error';
     response.status(statusCode).json({ code, message });
