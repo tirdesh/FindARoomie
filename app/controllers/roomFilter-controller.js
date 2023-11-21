@@ -1,4 +1,4 @@
-import * as roomfilterServices from '../services/roomFilterServices.js';
+import * as roomfilterServices from '../services/roomfilterServices.js';
 import { setErrorResponse, setResponse } from './response-handler.js';
 
 export const displayRoomFilters = async (request, response) =>{

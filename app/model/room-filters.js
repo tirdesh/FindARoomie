@@ -3,17 +3,13 @@ import mongoose  from "mongoose";
 const Schema = mongoose.Schema;
 
 const roomFilterSchema = new Schema({
-    id: {
-        type: String,
-        required: true
-    },
     name: {
         type: String,
         required: true
     },
     dateOfCreation: {
-        type: String,
-        required: true
+        type: Date,
+        default: Date.now
     },
     filterParams: [
         {
