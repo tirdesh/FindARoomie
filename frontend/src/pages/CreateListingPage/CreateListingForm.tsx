@@ -36,7 +36,7 @@ const StepForm: React.FC = () => {
   };
 
   return (
-    <Grid container spacing={3}>
+    <Grid sx={{marginTop: 10}} container spacing={3}>
       <Grid item xs={3}>
       <Stepper activeStep={step - 1} orientation="vertical" sx={{ minWidth: '200px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
           {steps.map((label, index) => (
