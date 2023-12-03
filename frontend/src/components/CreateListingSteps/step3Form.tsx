@@ -13,8 +13,12 @@ const Step3Form: React.FC = () => {
   const uniqueFeaturesOptions = useSelector((state: RootState) => state.listOptions.uniqueFeatures);
   const sharedAmenitiesOptions = useSelector((state: RootState) => state.listOptions.amenities);
 
-  const handleInputChange = (field: keyof typeof formState, value: string | boolean) => {
+  const handleInputChange = (field: keyof typeof formState, value: string) => {
     dispatch(updateForm({ roomAndPropertyDetails: { ...formState, [field]: value } }));
+  };
+
+  const handleFurnishedButtonClick = (furnishedType: string) => {
+    handleInputChange('furnished', furnishedType);
   };
 
   const handleUniqueFeaturesChange = (_event: React.ChangeEvent<{}>, values: string[]) => {
@@ -49,16 +53,22 @@ const Step3Form: React.FC = () => {
           </Typography>
           <ButtonGroup variant="contained" color="primary">
             <Button
-              onClick={() => handleInputChange('furnished', true)}
-              variant={formState.furnished ? 'contained' : 'outlined'}
+              onClick={() => handleFurnishedButtonClick('fully')}
+              variant={formState.furnished === 'fully' ? 'contained' : 'outlined'}
             >
-              Yes
+              Fully
             </Button>
             <Button
-              onClick={() => handleInputChange('furnished', false)}
-              variant={!formState.furnished ? 'contained' : 'outlined'}
+              onClick={() => handleFurnishedButtonClick('semi')}
+              variant={formState.furnished === 'semi' ? 'contained' : 'outlined'}
             >
-              No
+              Semi
+            </Button>
+            <Button
+              onClick={() => handleFurnishedButtonClick('unfurnished')}
+              variant={formState.furnished === 'unfurnished' ? 'contained' : 'outlined'}
+            >
+              Unfurnished
             </Button>
           </ButtonGroup>
         </Box>
@@ -79,16 +89,6 @@ const Step3Form: React.FC = () => {
           )}
         />
       </Grid>
-      {/* Common Areas */}
-      <Grid item xs={12}>
-        <TextField
-          label="Common Areas"
-          type="text"
-          value={formState.commonAreas}
-          onChange={(e) => handleInputChange('commonAreas', e.target.value)}
-          fullWidth
-        />
-      </Grid>
       {/* Shared Amenities */}
       <Grid item xs={12}>
         <Autocomplete
@@ -100,18 +100,18 @@ const Step3Form: React.FC = () => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Shared Amenities"
+              label="Amenities"
             />
           )}
         />
       </Grid>
-      {/* Property Size */}
+      {/* Property Description */}
       <Grid item xs={12}>
         <TextField
-          label="Property Size"
+          label="Property Description"
           type="text"
-          value={formState.propertySize}
-          onChange={(e) => handleInputChange('propertySize', e.target.value)}
+          value={formState.propertyDescription}
+          onChange={(e) => handleInputChange('propertyDescription', e.target.value)}
           fullWidth
         />
       </Grid>
