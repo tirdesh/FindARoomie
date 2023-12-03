@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { incrementStep, decrementStep } from '../../redux/slices/CreateListingStepSlice';
 import { RootState } from '../../redux/store';
 import { Button, Stepper, Step, StepLabel, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 // Import your step components
 import Step1 from '../../components/CreateListingSteps/step1Form';
@@ -18,9 +19,15 @@ const StepForm: React.FC = () => {
   const dispatch = useDispatch();
   const step = useSelector((state: RootState) => state.step.currentStep);
   const formData = useSelector((state: RootState) => state.form); // Assuming `form` is the slice holding your form data
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
   const handleNext = () => {
-    dispatch(incrementStep());
+    if (step < steps.length) {
+        dispatch(incrementStep());
+      } else {
+        // If it's the last step, navigate to the summary page
+        navigate('/summary');
+      }
     console.log(formData)
   };
 
@@ -61,7 +68,8 @@ const StepForm: React.FC = () => {
             onClick={handleNext}
             style={{ alignSelf: 'flex-end' }}
           >
-            {step < steps.length ? 'Next' : 'Submit'}
+            Next
+            {/* step < steps.length ? 'Next' : 'Submit' */}
           </Button>
         </div>
       </Grid>
