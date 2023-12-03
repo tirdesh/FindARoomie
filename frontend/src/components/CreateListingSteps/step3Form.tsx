@@ -110,6 +110,8 @@ const Step3Form: React.FC = () => {
         <TextField
           label="Property Description"
           type="text"
+          multiline
+          rows={2}
           value={formState.propertyDescription}
           onChange={(e) => handleInputChange('propertyDescription', e.target.value)}
           fullWidth

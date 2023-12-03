@@ -9,6 +9,8 @@ import { Button, Stepper, Step, StepLabel, Grid } from '@mui/material';
 import Step1 from '../../components/CreateListingSteps/step1Form';
 import Step2 from '../../components/CreateListingSteps/step2Form';
 import Step3 from '../../components/CreateListingSteps/step3Form';
+import Step4 from '../../components/CreateListingSteps/step4Form';
+import Step5 from '../../components/CreateListingSteps/step5Form';
 
 const steps = ["Location Information", "Pricing and Lease Details", "Room and Property Details", "House Rules and Tenant Requirements", "Contact Info"]; // Update the step labels
 
@@ -42,7 +44,8 @@ const StepForm: React.FC = () => {
           {step === 1 && <Step1 />}
           {step === 2 && <Step2 />}
           {step === 3 && <Step3 />}
-          {/* Add other steps as needed */}
+          {step === 4 && <Step4 />}
+          {step === 5 && <Step5 />}
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
           <Button
