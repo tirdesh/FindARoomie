@@ -3,10 +3,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createListingFormReducer from './slices/CreateListingFormSlice';
 import createListingStepReducer from './slices/CreateListingStepSlice';
+import ListingOptionsSliceReducer from './slices/ListingOptionsSlice';
 
 const rootReducer = {
   form: createListingFormReducer,
   step: createListingStepReducer,
+  listOptions: ListingOptionsSliceReducer,
   // Add more reducers if needed
 };
 
