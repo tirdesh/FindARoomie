@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { incrementStep, decrementStep } from '../../redux/slices/CreateListingStepSlice';
 import { RootState } from '../../redux/store';
 import { Button, Stepper, Step, StepLabel, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 // Import your step components
 import Step1 from '../../components/CreateListingSteps/step1Form';
@@ -18,9 +19,15 @@ const StepForm: React.FC = () => {
   const dispatch = useDispatch();
   const step = useSelector((state: RootState) => state.step.currentStep);
   const formData = useSelector((state: RootState) => state.form); // Assuming `form` is the slice holding your form data
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
   const handleNext = () => {
-    dispatch(incrementStep());
+    if (step < steps.length) {
+        dispatch(incrementStep());
+      } else {
+        // If it's the last step, navigate to the summary page
+        navigate('/summary');
+      }
     console.log(formData)
   };
 
@@ -31,7 +38,7 @@ const StepForm: React.FC = () => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={3}>
-        <Stepper activeStep={step - 1} orientation="vertical" sx={{ minWidth: '200px' }}>
+      <Stepper activeStep={step - 1} orientation="vertical" sx={{ minWidth: '200px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
           {steps.map((label, index) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
@@ -39,14 +46,14 @@ const StepForm: React.FC = () => {
           ))}
         </Stepper>
       </Grid>
-      <Grid item xs={9} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
-        <div style={{ flexGrow: 1 }}>
+      <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', overflowY: 'scroll', minHeight: 0 }}>
+        <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', overflowY: 'scroll', height: '350px',  padding: '8px', scrollbarWidth: 'thin', scrollbarColor: '#888 transparent' , '&::-webkit-scrollbar-thumb': { background: '#888' } }}>
           {step === 1 && <Step1 />}
           {step === 2 && <Step2 />}
           {step === 3 && <Step3 />}
           {step === 4 && <Step4 />}
           {step === 5 && <Step5 />}
-        </div>
+        </Grid>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
           <Button
             disabled={step === 1}
@@ -61,7 +68,8 @@ const StepForm: React.FC = () => {
             onClick={handleNext}
             style={{ alignSelf: 'flex-end' }}
           >
-            {step < steps.length ? 'Next' : 'Submit'}
+            Next
+            {/* step < steps.length ? 'Next' : 'Submit' */}
           </Button>
         </div>
       </Grid>

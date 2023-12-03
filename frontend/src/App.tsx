@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import RoomFiltersAxios from './pages/sample-apiconnector-axios';
 import RoomFiltersFetch from './pages/sample-apiconnector-fetch';
 import CreateListingForm from './pages/CreateListingPage/CreateListingForm';
+import SummaryPage from './pages/CreateListingPage/SummaryPage';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/fetch" element={<RoomFiltersFetch />} />
           <Route path="/axios" element={<RoomFiltersAxios />} />
           <Route path="/test" element={<CreateListingForm />} />
+          <Route path="/summary" element={<SummaryPage />} />
         </Routes>
       </div>
     </Router>
