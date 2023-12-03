@@ -8,15 +8,18 @@ import { Button, Stepper, Step, StepLabel, Grid } from '@mui/material';
 // Import your step components
 import Step1 from '../../components/CreateListingSteps/step1Form';
 import Step2 from '../../components/CreateListingSteps/step2Form';
+import Step3 from '../../components/CreateListingSteps/step3Form';
 
-const steps = ["Location Information", "Other Step Info", "Step 3", "Step 4", "Step 5"]; // Update the step labels
+const steps = ["Location Information", "Pricing and Lease Details", "Room and Property Details", "House Rules and Tenant Requirements", "Contact Info"]; // Update the step labels
 
 const StepForm: React.FC = () => {
   const dispatch = useDispatch();
   const step = useSelector((state: RootState) => state.step.currentStep);
+  const formData = useSelector((state: RootState) => state.form); // Assuming `form` is the slice holding your form data
 
   const handleNext = () => {
     dispatch(incrementStep());
+    console.log(formData)
   };
 
   const handlePrev = () => {
@@ -38,6 +41,7 @@ const StepForm: React.FC = () => {
         <div style={{ flexGrow: 1 }}>
           {step === 1 && <Step1 />}
           {step === 2 && <Step2 />}
+          {step === 3 && <Step3 />}
           {/* Add other steps as needed */}
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>

@@ -11,6 +11,7 @@ const Step3Form: React.FC = () => {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form.roomAndPropertyDetails);
   const uniqueFeaturesOptions = useSelector((state: RootState) => state.listOptions.uniqueFeatures);
+  const sharedAmenitiesOptions = useSelector((state: RootState) => state.listOptions.amenities);
 
   const handleInputChange = (field: keyof typeof formState, value: string | boolean) => {
     dispatch(updateForm({ roomAndPropertyDetails: { ...formState, [field]: value } }));
@@ -22,6 +23,12 @@ const Step3Form: React.FC = () => {
     handleInputChange('uniqueFeatures', joinedValues);
   };
   
+  const handleAmenitiesChange = (_event: React.ChangeEvent<{}>, values: string[]) => {
+    // Join the selected values into a single string separated by '::'
+    const joinedValues = values.join('::');
+    handleInputChange('sharedAmenities', joinedValues);
+  };
+
   return (
     <Grid container spacing={2}>
       {/* Room Size */}
@@ -84,12 +91,18 @@ const Step3Form: React.FC = () => {
       </Grid>
       {/* Shared Amenities */}
       <Grid item xs={12}>
-        <TextField
-          label="Shared Amenities"
-          type="text"
-          value={formState.sharedAmenities}
-          onChange={(e) => handleInputChange('sharedAmenities', e.target.value)}
-          fullWidth
+        <Autocomplete
+          multiple
+          id="shared-amenities"
+          options={sharedAmenitiesOptions}  // Replace with your shared amenities options
+          value={formState.sharedAmenities ? formState.sharedAmenities.split('::') : []}
+          onChange={handleAmenitiesChange}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Shared Amenities"
+            />
+          )}
         />
       </Grid>
       {/* Property Size */}
