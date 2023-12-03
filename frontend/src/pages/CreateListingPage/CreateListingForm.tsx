@@ -38,7 +38,7 @@ const StepForm: React.FC = () => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={3}>
-        <Stepper activeStep={step - 1} orientation="vertical" sx={{ minWidth: '200px' }}>
+      <Stepper activeStep={step - 1} orientation="vertical" sx={{ minWidth: '200px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
           {steps.map((label, index) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
@@ -46,14 +46,14 @@ const StepForm: React.FC = () => {
           ))}
         </Stepper>
       </Grid>
-      <Grid item xs={9} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
-        <div style={{ flexGrow: 1 }}>
+      <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', overflowY: 'scroll', minHeight: 0 }}>
+        <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', overflowY: 'scroll', height: '350px',  padding: '8px', scrollbarWidth: 'thin', scrollbarColor: '#888 transparent' , '&::-webkit-scrollbar-thumb': { background: '#888' } }}>
           {step === 1 && <Step1 />}
           {step === 2 && <Step2 />}
           {step === 3 && <Step3 />}
           {step === 4 && <Step4 />}
           {step === 5 && <Step5 />}
-        </div>
+        </Grid>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
           <Button
             disabled={step === 1}
