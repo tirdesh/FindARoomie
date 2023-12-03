@@ -6,6 +6,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography, Grid, Paper,
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { submitForm } from '../../redux/slices/CreateListingFormSlice';
 import { useNavigate } from 'react-router-dom';
+import './summary.css';
 
 const SummaryPage: React.FC = () => {
   const formData = useSelector((state: RootState) => state.form);
@@ -34,10 +35,10 @@ const SummaryPage: React.FC = () => {
   );
 
   return (
-    <Grid container spacing={2}>
+    <Grid className='summaryGrid' container spacing={2}>
       <Grid item xs={12}>
-        <Paper elevation={3} style={{ padding: '16px' }}>
-          <Typography variant="h6">Summary</Typography>
+        <Paper className='formPaper' elevation={3} style={{ padding: '16px' }}>
+          <Typography textAlign={'center'} variant="h4">Summary</Typography>
 
           {renderAccordion("Location Information", (
             <Typography>

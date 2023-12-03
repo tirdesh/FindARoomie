@@ -3,8 +3,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { incrementStep, decrementStep } from '../../redux/slices/CreateListingStepSlice';
 import { RootState } from '../../redux/store';
-import { Button, Stepper, Step, StepLabel, Grid } from '@mui/material';
+import { Button, Stepper, Step, StepLabel, Grid, Paper, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import './common.css'
 
 // Import your step components
 import Step1 from '../../components/CreateListingSteps/step1Form';
@@ -36,7 +37,11 @@ const StepForm: React.FC = () => {
   };
 
   return (
-    <Grid container spacing={3}>
+      <Paper className='formPaper' elevation={3}>
+        <Typography sx={{textAlign: 'center', marginBottom: 5}} variant='h3'>
+          Post your listing
+        </Typography>
+      <Grid className='formGrid'  container spacing={3}>
       <Grid item xs={3}>
       <Stepper activeStep={step - 1} orientation="vertical" sx={{ minWidth: '200px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
           {steps.map((label, index) => (
@@ -46,8 +51,8 @@ const StepForm: React.FC = () => {
           ))}
         </Stepper>
       </Grid>
-      <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', overflowY: 'scroll', minHeight: 0 }}>
-        <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', overflowY: 'scroll', height: '350px',  padding: '8px', scrollbarWidth: 'thin', scrollbarColor: '#888 transparent' , '&::-webkit-scrollbar-thumb': { background: '#888' } }}>
+      <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', overflowY: 'auto', minHeight: 0 }}>
+        <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', overflowY: 'auto', height: '350px',  padding: '8px', scrollbarWidth: 'thin', scrollbarColor: '#888 transparent' , '&::-webkit-scrollbar-thumb': { background: '#888' } }}>
           {step === 1 && <Step1 />}
           {step === 2 && <Step2 />}
           {step === 3 && <Step3 />}
@@ -74,6 +79,9 @@ const StepForm: React.FC = () => {
         </div>
       </Grid>
     </Grid>
+      </Paper>
+      
+    
   );
 };
 

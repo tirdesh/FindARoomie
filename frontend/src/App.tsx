@@ -6,31 +6,16 @@ import RoomFiltersFetch from './pages/sample-apiconnector-fetch';
 import CreateListingForm from './pages/CreateListingPage/CreateListingForm';
 import SummaryPage from './pages/CreateListingPage/SummaryPage';
 
+import Navbar from './components/Navbar/navbar';
+// import Login from './pages/Login/login-page';
 function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/fetch">
-                <Button variant="contained" color="primary">Fetch API</Button>
-              </Link>
-            </li>
-            <li>
-              <Link to="/axios">
-                <Button variant="contained" color="primary">Axios</Button>
-              </Link>
-            </li>
-            <li>
-              <Link to="/test">
-                <Button variant="contained" color="primary">Damn</Button>
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <Navbar></Navbar>
 
         <Routes>
+          {/* <Route path='/login' element={<Login />}></Route> */}
           <Route path="/fetch" element={<RoomFiltersFetch />} />
           <Route path="/axios" element={<RoomFiltersAxios />} />
           <Route path="/test" element={<CreateListingForm />} />
