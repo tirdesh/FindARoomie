@@ -2,11 +2,12 @@ import {AppBar, Button, IconButton, Stack, Toolbar, Typography} from '@mui/mater
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './navbar.css'
 
 function ResponsiveAppBar() {
  
   return (
-    <AppBar>
+    <AppBar className='navbar-app'>
         <Toolbar>
             <IconButton sx={{margin: 2}} size='large' edge="start" color='inherit' aria-label='logo'>
                <Diversity3Icon/>
@@ -24,7 +25,7 @@ function ResponsiveAppBar() {
                 <Button sx={{color: 'whitesmoke'}}  color="secondary">Axios</Button>
               </Link>
               <Link to="/test">
-                <Button sx={{color: 'whitesmoke'}}  color="secondary">Damn</Button>
+                <Button sx={{color: 'whitesmoke'}}  color="secondary">Post</Button>
               </Link>
               <Link to="/login">
               <Button sx={{color: 'whitesmoke'}} color="secondary">Login / Sign Up</Button>
