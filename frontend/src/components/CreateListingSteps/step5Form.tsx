@@ -1,5 +1,5 @@
 // components/CreateListingSteps/Step5Form.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { updateForm } from '../../redux/slices/CreateListingFormSlice';
@@ -20,12 +20,44 @@ const Step5Form: React.FC = () => {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form.contactAndPresentation);
 
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  useEffect(() => {
+    const fetchImageUrls = async () => {
+      const urls = await Promise.all(
+        formState.photos.map(async (docId) => {
+          const existingImageUrl = imageUrls.find((url) => url.includes(docId));
+          if (existingImageUrl) {
+            return existingImageUrl;
+          }
+          try {
+            const response = await axios.get(`http://localhost:3002/upload/${docId}`, {
+              responseType: 'arraybuffer',
+            });
+            const base64Image = btoa(
+              new Uint8Array(response.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ''
+              )
+            );
+            return `data:${response.headers['content-type']};base64,${base64Image}`;
+          } catch (error: any) {
+            console.error('Error fetching image:', error.message);
+            return null;
+          }
+        })
+      );
+
+      // Filter out null values before setting the state
+      setImageUrls(urls.filter((url) => url !== null) as string[]);
+    };
+
+    fetchImageUrls();
+  }, [formState.photos]);
 
   const handleInputChange = (field: keyof typeof formState, value: string | string[]) => {
     dispatch(updateForm({ contactAndPresentation: { ...formState, [field]: value } }));
   };
-  
+
   const onDrop = async (acceptedFiles: File[]) => {
     // Assuming you have a function to upload images and get their document IDs from the server
     const uploadImagesAndGetIds = async (files: File[]): Promise<string[]> => {
@@ -33,50 +65,44 @@ const Step5Form: React.FC = () => {
       const uploadPromises = files.map(async (file) => {
         const formData = new FormData();
         formData.append('image', file);
-  
+
         try {
           const response = await axios.post('http://localhost:3002/upload', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
           });
-  
+
           return response.data.data._id;
         } catch (error: any) {
           console.error('Error uploading image:', error.message);
           return null;
         }
       });
-  
+
       return Promise.all(uploadPromises);
     };
-  
+
     try {
       const docIds = await uploadImagesAndGetIds(acceptedFiles);
-      
+
       // Update the Redux store with the new image document IDs
       handleInputChange('photos', [...formState.photos, ...docIds]);
-      setImageFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
     } catch (error: any) {
       console.error('Error uploading images:', error.message);
       alert('Error uploading images. Please try again.');
     }
   };
-  
-  
+
   const handleDeleteImage = async (index: number) => {
     try {
       // Get the document ID of the image to be deleted
       const deletedDocId = formState.photos[index];
-  
+
       // Make a request to your server to delete the image by ID
       await axios.delete(`http://localhost:3002/upload/${deletedDocId}`);
-  
+
       // Update the state in React
-      const newImages = [...imageFiles];
-      newImages.splice(index, 1);
-      setImageFiles(newImages);
-  
       const newPhotos = [...formState.photos];
       newPhotos.splice(index, 1);
       handleInputChange('photos', newPhotos);
@@ -85,8 +111,6 @@ const Step5Form: React.FC = () => {
       alert('Error deleting image. Please try again.');
     }
   };
-  
-  
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
@@ -120,10 +144,10 @@ const Step5Form: React.FC = () => {
           <Typography variant="body2">Drag and drop or click to select files</Typography>
         </div>
         <Box mt={2} display="flex" flexWrap="wrap">
-          {imageFiles.map((file, index) => (
+          {imageUrls.map((imageUrl, index) => (
             <Paper key={index} sx={{ position: 'relative', p: 1, m: 1 }}>
               <img
-                src={URL.createObjectURL(file)}
+                src={imageUrl}
                 alt={`uploaded-${index}`}
                 style={{ width: 50, height: 50, objectFit: 'cover' }}
               />
