@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDropzone } from 'react-dropzone';
+import axios from 'axios';
 
 const Step5Form: React.FC = () => {
   const dispatch = useDispatch();
@@ -25,21 +26,66 @@ const Step5Form: React.FC = () => {
     dispatch(updateForm({ contactAndPresentation: { ...formState, [field]: value } }));
   };
   
-  const onDrop = (acceptedFiles: File[]) => {
-    const newFiles = acceptedFiles.map(file => file.name);
-    handleInputChange('photos', [...formState.photos, ...newFiles]);
-    setImageFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
+  const onDrop = async (acceptedFiles: File[]) => {
+    // Assuming you have a function to upload images and get their document IDs from the server
+    const uploadImagesAndGetIds = async (files: File[]): Promise<string[]> => {
+      // Implement the logic to upload images and get document IDs from the server
+      const uploadPromises = files.map(async (file) => {
+        const formData = new FormData();
+        formData.append('image', file);
+  
+        try {
+          const response = await axios.post('http://localhost:3002/upload', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+  
+          return response.data.data._id;
+        } catch (error: any) {
+          console.error('Error uploading image:', error.message);
+          return null;
+        }
+      });
+  
+      return Promise.all(uploadPromises);
+    };
+  
+    try {
+      const docIds = await uploadImagesAndGetIds(acceptedFiles);
+      
+      // Update the Redux store with the new image document IDs
+      handleInputChange('photos', [...formState.photos, ...docIds]);
+      setImageFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
+    } catch (error: any) {
+      console.error('Error uploading images:', error.message);
+      alert('Error uploading images. Please try again.');
+    }
   };
   
-  const handleDeleteImage = (index: number) => {
-    const newImages = [...imageFiles];
-    newImages.splice(index, 1);
-    setImageFiles(newImages);
   
-    const newPhotos = [...formState.photos];
-    newPhotos.splice(index, 1);
-    handleInputChange('photos', newPhotos);
+  const handleDeleteImage = async (index: number) => {
+    try {
+      // Get the document ID of the image to be deleted
+      const deletedDocId = formState.photos[index];
+  
+      // Make a request to your server to delete the image by ID
+      await axios.delete(`http://localhost:3002/upload/${deletedDocId}`);
+  
+      // Update the state in React
+      const newImages = [...imageFiles];
+      newImages.splice(index, 1);
+      setImageFiles(newImages);
+  
+      const newPhotos = [...formState.photos];
+      newPhotos.splice(index, 1);
+      handleInputChange('photos', newPhotos);
+    } catch (error: any) {
+      console.error('Error deleting image:', error.message);
+      alert('Error deleting image. Please try again.');
+    }
   };
+  
   
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
