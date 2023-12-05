@@ -6,6 +6,7 @@ import RoomFiltersFetch from './pages/testPages/sample-apiconnector-fetch';
 import CreateListingForm from './pages/CreateListingPage/CreateListingForm';
 import SummaryPage from './pages/CreateListingPage/SummaryPage';
 import ImageUpload from './pages/testPages/imageUpload';
+import FilteredMap from './pages/testPages/mapViewer';
 
 import Navbar from './components/Navbar/navbar';
 import Login from './pages/Login/login-page';
@@ -22,6 +23,7 @@ function App() {
           <Route path="/test" element={<CreateListingForm />} />
           <Route path="/summary" element={<SummaryPage />} />
           <Route path="/upload" element={<ImageUpload />} />
+          <Route path="/map" element={<FilteredMap />} />
         </Routes>
       </div>
     </Router>

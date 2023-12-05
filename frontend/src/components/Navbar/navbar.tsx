@@ -33,6 +33,9 @@ function ResponsiveAppBar() {
               <Link to="/upload">
               <Button sx={{color: 'whitesmoke'}} color="secondary">Upload</Button>
               </Link>
+              <Link to="/map">
+              <Button sx={{color: 'whitesmoke'}} color="secondary">Map</Button>
+              </Link>
             </Stack>
 
             
