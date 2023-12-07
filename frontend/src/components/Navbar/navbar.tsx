@@ -36,6 +36,9 @@ function ResponsiveAppBar() {
               <Link to="/map">
               <Button sx={{color: 'whitesmoke'}} color="secondary">Map</Button>
               </Link>
+              <Link to="/chat">
+              <Button sx={{color: 'whitesmoke'}} color="secondary">Chat</Button>
+              </Link>
             </Stack>
 
             
