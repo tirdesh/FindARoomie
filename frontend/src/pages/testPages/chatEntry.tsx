@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Box, Typography } from '@mui/material';
+import ChatWindow from './chatWindow'; // Import ChatWindow component
 
 const ChatEntryPage: React.FC = () => {
   const [roomName, setRoomName] = useState<string>('');
   const [username, setUsername] = useState<string>('');
+  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleJoin = () => {
+  const handleJoinChatPage = () => {
     if (roomName && username) {
       navigate(`/chat/${roomName}/${username}`);
     }
+  };
+
+  const handleOpenPopupChat = () => {
+    if (roomName && username) {
+      setIsChatOpen(true);
+    }
+  };
+
+  const handleClosePopupChat = () => {
+    setIsChatOpen(false);
   };
 
   return (
@@ -32,7 +44,13 @@ const ChatEntryPage: React.FC = () => {
         onChange={(e) => setRoomName(e.target.value)}
         sx={{ mb: 2 }}
       />
-      <Button variant="contained" onClick={handleJoin} fullWidth>Join/Create Room</Button>
+      <Button variant="contained" onClick={handleJoinChatPage} fullWidth sx={{ mb: 1 }}>
+        Join Chat Page
+      </Button>
+      <Button variant="contained" onClick={handleOpenPopupChat} fullWidth>
+        Open Pop-up Chat
+      </Button>
+      <ChatWindow open={isChatOpen} onClose={handleClosePopupChat} roomName={roomName} username={username} />
     </Box>
   );
 };

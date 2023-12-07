@@ -13,8 +13,15 @@ interface User {
   name: string;
 }
 
-const ChatPage: React.FC = () => {
-  const { roomName, username } = useParams<{ roomName: string; username: string }>();
+interface ChatComponentProps {
+  roomName?: string;
+  username?: string;
+}
+
+const ChatComponent: React.FC<ChatComponentProps> = (props) => {
+  const params = useParams<{ roomName: string; username: string }>();
+  const roomName = props.roomName || params.roomName;
+  const username = props.username || params.username;
   const [socket, setSocket] = useState<Socket | null>(null);
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
@@ -91,4 +98,4 @@ const ChatPage: React.FC = () => {
   );
 };
 
-export default ChatPage;
+export default ChatComponent;
