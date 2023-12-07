@@ -105,10 +105,10 @@ const Step2Form: React.FC = () => {
       {/* Utilities Included */}
       <Grid item xs={12}>
         <Box display="flex" alignItems="center">
-          <Typography variant="h6" sx={{ marginRight: '8px' }}>
+          <Typography variant="subtitle1" sx={{ marginRight: '8px' }}>
             Utilities Included:
           </Typography>
-          <ButtonGroup variant="contained" color="primary">
+          <ButtonGroup variant="contained" color="primary" >
             <Button
               onClick={() => handleInputChange('utilitiesIncluded', true)}
               variant={formState.utilitiesIncluded ? 'contained' : 'outlined'}
@@ -125,7 +125,7 @@ const Step2Form: React.FC = () => {
         </Box>
       </Grid>
       {/* Start Date */}
-      <Grid item xs={12}>
+      <Grid item xs={3}>
         <TextField
           label="Start Date"
           type="date"
@@ -139,13 +139,11 @@ const Step2Form: React.FC = () => {
       </Grid>
       {/* Lease Duration Typography */}
       <Grid item xs={12}>
-        <Typography variant="h6" sx={{ marginBottom: '8px' }}>
-          Lease Duration:
+      <Box display="flex" alignItems="center">
+        <Typography variant="subtitle1" sx={{ marginBottom: '8px' }}>
+          Lease Duration: 
         </Typography>
-      </Grid>
-      {/* Length of Lease */}
-      <Grid item xs={12}>
-        <ButtonGroup>
+        <ButtonGroup  sx={{ marginLeft: '16px' }}>
           <Button
             onClick={() => handleLeaseDurationChange('3 months')}
             variant={selectedDuration === '3 months' ? 'contained' : 'outlined'}
@@ -171,14 +169,12 @@ const Step2Form: React.FC = () => {
             Custom
           </Button>
         </ButtonGroup>
+      </Box>
       </Grid>
       {/* Custom End Date (if 'Custom' is selected) */}
       {customLease && (
         <>
-          <Grid item xs={12}>
-            <Typography variant="subtitle1">Custom Lease Duration:</Typography>
-          </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             <TextField
               label="End Date"
               type="date"

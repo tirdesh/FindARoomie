@@ -7,11 +7,15 @@ import AboutUs from './pages/AboutUs/AboutUs'; // Import the AboutUs component
 import RoomFiltersAxios from './pages/sample-apiconnector-axios';
 import RoomFiltersFetch from './pages/sample-apiconnector-fetch';
 import CreateListingForm from './pages/CreateListingPage/CreateListingForm';
+import SummaryPage from './pages/CreateListingPage/SummaryPage';
 
+import Navbar from './components/Navbar/navbar';
+import Login from './pages/Login/login-page';
 function App() {
   return (
     <Router>
       <div className="App">
+<<<<<<< HEAD
         {/* AppBar for Navigation */}
         <AppBar position="static">
           <Toolbar>
@@ -50,6 +54,17 @@ function App() {
             <Route path="/" element={<LandingPage />} />
           </Routes>
         </Container>
+=======
+        <Navbar></Navbar>
+
+        <Routes>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path="/fetch" element={<RoomFiltersFetch />} />
+          <Route path="/axios" element={<RoomFiltersAxios />} />
+          <Route path="/test" element={<CreateListingForm />} />
+          <Route path="/summary" element={<SummaryPage />} />
+        </Routes>
+>>>>>>> 5ca6e1ee0b8a1bf13b18c99f110c6a3e90c909e8
       </div>
     </Router>
   );

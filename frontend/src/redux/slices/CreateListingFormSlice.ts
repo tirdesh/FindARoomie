@@ -18,11 +18,10 @@ interface PricingAndLeaseDetails {
 
 interface RoomAndPropertyDetails {
   roomSize: string;
-  furnished: boolean;
+  furnished: string;
   uniqueFeatures: string;
-  commonAreas: string;
+  propertyDescription: string;
   sharedAmenities: string;
-  propertySize: string;
 }
 
 interface HouseRulesAndTenantRequirements {
@@ -37,7 +36,6 @@ interface ContactAndPresentation {
   availability: string;
   contactInformation: string;
   photos: string[];
-  description: string;
   nearbyAttractions: string;
   communicationPreferences: string;
 }
@@ -53,9 +51,9 @@ interface FormState {
 const initialState: FormState = {
   listingTypeAndLocationInformation: { listingType: '', address: '', proximity: '', safetyFeatures: '' },
   pricingAndLeaseDetails: { rent: 0, utilitiesIncluded: false, leaseLength: '', upfrontFees: '' },
-  roomAndPropertyDetails: { roomSize: '', furnished: false, uniqueFeatures: '', commonAreas: '', sharedAmenities: '', propertySize: '' },
+  roomAndPropertyDetails: { roomSize: '', furnished: '', uniqueFeatures: '', propertyDescription: '', sharedAmenities: '' },
   houseRulesAndTenantRequirements: { houseRules: '', smokingAllowed: false, petFriendly: false, guestPolicy: '', tenantRequirements: '' },
-  contactAndPresentation: { availability: '', contactInformation: '', photos: [], description: '', nearbyAttractions: '', communicationPreferences: '' },
+  contactAndPresentation: { availability: '', contactInformation: '', photos: [], nearbyAttractions: '', communicationPreferences: '' },
 };
 
 // Assuming this is your API endpoint
