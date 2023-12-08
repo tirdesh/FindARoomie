@@ -21,6 +21,12 @@ function ResponsiveAppBar() {
               <Link to="/fetch">
                 <Button sx={{color: 'whitesmoke'}} color="secondary">Fetch API</Button>
               </Link>
+              <Link to="/">
+                <Button sx={{color: 'whitesmoke'}}  color="secondary">Home</Button>
+              </Link>
+              <Link to="/about">
+                <Button sx={{color: 'whitesmoke'}}  color="secondary">AboutUs</Button>
+              </Link>
               <Link to="/axios">
                 <Button sx={{color: 'whitesmoke'}}  color="secondary">Axios</Button>
               </Link>
@@ -29,6 +35,15 @@ function ResponsiveAppBar() {
               </Link>
               <Link to="/login">
               <Button sx={{color: 'whitesmoke'}} color="secondary">Login / Sign Up</Button>
+              </Link>
+              <Link to="/upload">
+              <Button sx={{color: 'whitesmoke'}} color="secondary">Upload</Button>
+              </Link>
+              <Link to="/map">
+              <Button sx={{color: 'whitesmoke'}} color="secondary">Map</Button>
+              </Link>
+              <Link to="/chat">
+              <Button sx={{color: 'whitesmoke'}} color="secondary">Chat</Button>
               </Link>
             </Stack>
 

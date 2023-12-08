@@ -1,0 +1,95 @@
+/* Reset and general styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  
+  body {
+    background-color: #151515;
+    color: #f0f8ff;
+    overflow-x: hidden;
+  }
+  
+  /* Canvas styles */
+  .canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  
+  /* Container for the text and buttons */
+  .hero-text {
+    position: relative;
+    padding-top: 10vh;
+    text-align: center;
+    z-index: 10;
+  }
+  
+  /* Heading styles */
+  .hero__header {
+    font-size: 3rem; /* Adjust the size as needed */
+    color: #ffffff;
+    margin-bottom: 1rem;
+    animation: fadeInUp 1s ease-out forwards;
+  }
+  
+  /* Button styles */
+  button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  button:hover {
+    transform: translateY(-3px);
+    background-color: #0c5db3;
+  }
+  
+  /* Keyframes for animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 20%, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translateZ(0);
+    }
+  }
+  
+  /* Additional container and panel styles */
+  .panel__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .text__wrap {
+    animation: comeIn 1s ease-out forwards;
+  }
+  
+  .text__wrap.active {
+    opacity: 1;
+  }
+  
+  @keyframes comeIn {
+    from { opacity: 0; transform: translate3d(0, 50%, 0); }
+    to { opacity: 1; transform: translateZ(0); }
+  }
+  
