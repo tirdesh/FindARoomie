@@ -6,6 +6,7 @@
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\""
   },
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "react-material-ui-carousel": "^3.4.2"
   }
 }

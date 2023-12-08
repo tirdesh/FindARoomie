@@ -5,6 +5,7 @@ import userRouter from './UserManagement-routes.js'; // Router for user manageme
 import profileRouter from './ProfileManagement-routes.js'; // Router for profile management-related routes.
 import roomFilterRouter from './roomfilters-routes.js'; // Router for room filter-related routes.
 import roomRouter from './RoomManagement-routes.js';
+import uploadRoutes from './image-routes.js';
 
 
 // Exporting a function that takes the express app object as an argument.
@@ -21,4 +22,5 @@ export default (app) => {
     // This will handle requests related to user profiles.
     app.use('/api', profileRouter); 
     app.use('/rooms', roomRouter);
+    app.use('/upload', uploadRoutes);
 };
