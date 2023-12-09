@@ -98,8 +98,8 @@ const LandingPage: React.FC = () => {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
-    <Container maxWidth="lg" disableGutters>
-      <CanvasBackground />
+    <Container className='landingBody' maxWidth="lg" disableGutters>
+      <CanvasBackground/>
       <Box className="hero-text">
         <Typography variant="h2" component="h1" gutterBottom className="hero__header">
           Find Your Perfect Space & Companion

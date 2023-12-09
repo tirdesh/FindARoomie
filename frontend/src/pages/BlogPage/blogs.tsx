@@ -2,7 +2,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import { ReactElement } from "react";
 import './blogPage.css'
-import BlogCard from "../../components/BlogComponents/blogCard";
+import BlogCard from "../../components/BLogComponents/blogCard";
 
 const BlogPage: React.FC = ():ReactElement=>(
     <div className="blogs-body">

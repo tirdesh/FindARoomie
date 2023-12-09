@@ -6,7 +6,7 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   
-  body {
+  .landingBody{
     background-color: #151515;
     color: #f0f8ff;
     overflow-x: hidden;
