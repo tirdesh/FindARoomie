@@ -11,7 +11,7 @@ import ImageUpload from './pages/testPages/imageUpload';
 import FilteredMap from './pages/testPages/mapViewer';
 import ChatPage from './pages/testPages/chatComponent';
 import ChatEntryPage from './pages/testPages/chatEntry';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar/navbar';
 import Login from './pages/Login/login-page';
 import BlogPage from './pages/BlogPage/blogs';
 
