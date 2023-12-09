@@ -1,36 +1,30 @@
 /* Reset and general styles */
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
-  
-  .landingBody-dark{
-    /* background-color: #151515; */
-    color: black;
-    overflow-x: hidden;
+   */
+  /* Light theme styles for landing page */
+  .landing.light {
+    background-color: #fff; /* Light theme background color */
+    color: #000; /* Light theme text color */
   }
-  .landingBody-light{
-    /* background-color: #151515; */
-    color: white;
-    overflow-x: hidden;
+  
+  /* Dark theme styles for landing page */
+  .landing.dark {
+    background-color: #151515; /* Dark theme background color */
+    color: #f0f8ff; /* Dark theme text color */
   }
   
   /* Canvas styles */
-  .canvas-dark{
-    background-color: #151515;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
+  .canvas.light {
+    background-color: #fff; /* Light theme canvas background color */
   }
-  .canvas-light{
-    background-color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
+  
+  .canvas.dark {
+    background-color: #151515; /* Dark theme canvas background color */
   }
   
   /* Container for the text and buttons */
@@ -49,6 +43,16 @@
     animation: fadeInUp 1s ease-out forwards;
   }
   
+  /* Light theme heading styles */
+  .landing.light .hero__header {
+    color: #000; /* Light theme header color */
+  }
+  
+  /* Dark theme heading styles */
+  .landing.dark .hero__header {
+    color: #f0f8ff; /* Dark theme header color */
+  }
+  
   /* Button styles */
   button {
     font-size: 1rem;
@@ -62,7 +66,16 @@
   
   button:hover {
     transform: translateY(-3px);
-    background-color: #0c5db3;
+  }
+  
+  /* Light theme button hover styles */
+  .landing.light button:hover {
+    background-color: #e0e0e0; /* Lighter shade for light theme button hover */
+  }
+  
+  /* Dark theme button hover styles */
+  .landing.dark button:hover {
+    background-color: #333; /* Darker shade for dark theme button hover */
   }
   
   /* Keyframes for animations */

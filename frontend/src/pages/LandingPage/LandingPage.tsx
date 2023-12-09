@@ -100,11 +100,15 @@ const CanvasBackground: React.FC<Props> = (props: Props) => {
   return <canvas ref={canvasRef} className={`canvas-${props.backgroundColor}`}/>;
 };
 
-const LandingPage: React.FC = () => {
-  const theme = useTheme();
+interface LandingPageProps {
+  theme: string;
+}
+
+const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
+  const themeHook = useTheme();
   const [changeCol,setThemeColor] = useState(true);
   const [textCol,setTextCol] = useState("light");
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const matches = useMediaQuery(themeHook.breakpoints.up('sm'));
 
   const changeTheme = (event: any) =>{
     if(changeCol){
@@ -136,7 +140,6 @@ const LandingPage: React.FC = () => {
           </Button>
         </Box>
       </Box>
-      {/* Additional content and layout goes here */}
     </Container>
   );
 };

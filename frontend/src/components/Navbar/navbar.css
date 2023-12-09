@@ -1,3 +1,18 @@
-.navbar-app{
-    margin: 0;
-}
+
+.navbar-app.dark {
+    background-color: #333; /* Dark theme background */
+    color: white; /* Dark theme text color */
+  }
+  
+  .navbar-app.light {
+    background-color: #eee; /* Light theme background */
+    color: black; /* Light theme text color */
+  }
+  
+  /* Style for links and buttons */
+  .navbar-app .MuiButton-root {
+    color: inherit; /* Inherits the color from the theme */
+  }
+  
+  /* More styles can be added as needed */
+  
