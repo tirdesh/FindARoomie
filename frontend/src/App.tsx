@@ -24,14 +24,13 @@ function App() {
     }else{
       setTheme('dark');
     }
-    
   }
   return (
     <Router>
       
       <div className={`App-${theme}`}>
       <Navbar></Navbar>
-      <Button size='large' variant='contained' color='secondary' onClick={changeTheme}>Theme</Button>
+      
         {/* Main Content Area */}
           <Routes>
 

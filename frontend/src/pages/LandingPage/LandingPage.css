@@ -6,14 +6,27 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   
-  .landingBody{
-    background-color: #151515;
-    color: #f0f8ff;
+  .landingBody-dark{
+    /* background-color: #151515; */
+    color: black;
+    overflow-x: hidden;
+  }
+  .landingBody-light{
+    /* background-color: #151515; */
+    color: white;
     overflow-x: hidden;
   }
   
   /* Canvas styles */
-  .canvas {
+  .canvas-dark{
+    background-color: #151515;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  .canvas-light{
+    background-color: white;
     position: fixed;
     top: 0;
     left: 0;
@@ -31,7 +44,7 @@
   /* Heading styles */
   .hero__header {
     font-size: 3rem; /* Adjust the size as needed */
-    color: #ffffff;
+    /* color: #ffffff; */
     margin-bottom: 1rem;
     animation: fadeInUp 1s ease-out forwards;
   }
