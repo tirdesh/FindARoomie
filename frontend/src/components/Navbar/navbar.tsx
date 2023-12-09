@@ -13,7 +13,7 @@ interface ResponsiveAppBarProps {
 
 function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
   return (
-    <AppBar position="static" className={`navbar-app ${theme}`}>
+    <AppBar position="sticky" className={`navbar-app ${theme}`}>
       <Toolbar>
         <IconButton sx={{margin: 2}} size='large' edge="start" color='inherit' aria-label='logo'>
           <Diversity3Icon />

@@ -93,14 +93,18 @@ const CanvasBackground: React.FC = () => {
   return <canvas ref={canvasRef} className="canvas" />;
 };
 
-const LandingPage: React.FC = () => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+interface LandingPageProps {
+  theme: string;
+}
+
+const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
+  const themeHook = useTheme();
+  const matches = useMediaQuery(themeHook.breakpoints.up('sm'));
 
   return (
-    <Container maxWidth="lg" disableGutters>
+    <Container maxWidth="lg" disableGutters className={`landing ${theme}`}>
       <CanvasBackground />
-      <Box className="hero-text">
+      <Box sx={{marginTop:10}} className="hero-text">
         <Typography variant="h2" component="h1" gutterBottom className="hero__header">
           Find Your Perfect Space & Companion
         </Typography>
@@ -116,7 +120,6 @@ const LandingPage: React.FC = () => {
           </Button>
         </Box>
       </Box>
-      {/* Additional content and layout goes here */}
     </Container>
   );
 };
