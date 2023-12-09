@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ResponsiveAppBar from './components/Navbar/navbar';
@@ -12,7 +13,9 @@ import FilteredMap from './pages/testPages/mapViewer';
 import ChatPage from './pages/testPages/chatComponent';
 import ChatEntryPage from './pages/testPages/chatEntry';
 import Login from './pages/Login/login-page';
+import BlogPage from './pages/BlogPage/blogs';
 import Footer from './components/Footer/Footer';
+
 import './App.css';
 
 function App() {
@@ -39,6 +42,7 @@ function App() {
           <Route path="/axios" element={<RoomFiltersAxios />} />
           <Route path="/create-listing" element={<CreateListingForm />} />
           <Route path="/summary" element={<SummaryPage />} />
+          <Route path='/blogs' element={<BlogPage />} />
           <Route path="/upload" element={<ImageUpload />} />
           <Route path="/map" element={<FilteredMap />} />
           <Route path="/chat" element={<ChatEntryPage />} />

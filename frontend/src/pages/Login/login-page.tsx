@@ -1,52 +1,43 @@
 import React, { useState } from "react";
 import { ReactElement } from "react";
 import './login.css';
-import { Button, Paper, TextField, Typography } from "@mui/material";
+import { Button, Link, Paper, TextField, Typography } from "@mui/material";
 import { stat } from "fs";
+import LoginCard from "../../components/Login/loginCard";
+import SignUpCard from "../../components/Login/signUpCard";
 
-const Login: React.FC = ():ReactElement => {
+const LoginPage: React.FC = ():ReactElement => {
     let loginState: Boolean = true;
-    const [loginS, setSignup] = useState(false);
-    const [btnText, setBtnText] = useState("SignUp");
+    const [loginS, setLoginS] = useState(true);
+    const [btnText, setBtnText] = useState("Don't Have An Account?, Click here to Sign UP");
     const handleSignUpBt = () =>{
         if(loginS){
-            setSignup(false);
+            setLoginS(false);
+            setBtnText("Already Have An Account?, Click Here to Sign In")
         }
         else{
-            setSignup(true);
+            setLoginS(true);
+            setBtnText("Don't Have An Account?, Click here to Sign Up")
         }
-        if(btnText==="SignUp"){ setBtnText("Login")}
-        else{setBtnText("SignUp")}
     }
     return(
-        <div>
             <div className="login-div">
-                    <h1>Login Page</h1>
-                    <div className="login-box">
-                    <Paper sx={{paddingY:2}} elevation={3}>
-                        <Typography variant="h4">
-                            Login
-                        </Typography>
-                        
-                        { loginS ? ( <h1>Login State</h1> ): (<h1>SignUp</h1>) }
-
-                        <TextField sx={{marginTop:2, marginBottom:2}} label="username/email" variant="outlined">
-                        </TextField>
-                        <br />
-                        <TextField sx={{marginTop:2, marginBottom:2}}   label="Password" variant="outlined">
-                        </TextField>
-                        <br />
-                        
-                        <Button onClick={handleSignUpBt} variant="contained" color="primary"> {btnText} </Button>
-                        
-                    </Paper>
-                    </div>
-                    
-                </div> 
-        </div>
+                <h1>Login Page</h1>
+                <div className="login-box">
+                <Paper sx={{padding:5, borderRadius: 4}} elevation={3}>
+                    { loginS ? ( 
+                        <LoginCard ></LoginCard>
+                        ): (
+                            <SignUpCard></SignUpCard>
+                            ) }
+                    <br />
+                    <Link className="hoverHand" onClick={handleSignUpBt} variant="body1">{btnText} </Link>
+                </Paper>
+                </div>
+            </div> 
         
 )
         
 }
 
-export default Login
+export default LoginPage;

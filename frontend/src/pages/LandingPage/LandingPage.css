@@ -38,6 +38,7 @@
   /* Heading styles */
   .hero__header {
     font-size: 3rem; /* Adjust the size as needed */
+    /* color: #ffffff; */
     margin-bottom: 1rem;
     animation: fadeInUp 1s ease-out forwards;
   }

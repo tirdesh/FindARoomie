@@ -24,3 +24,4 @@ export const setErrorResponse = (err, response, statusCode = 500) => {
     let code = 'Service Error';
     response.status(statusCode).json({ code, message });
 };
+    
