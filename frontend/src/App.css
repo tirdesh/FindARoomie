@@ -1,8 +1,33 @@
+/* App.css */
+
 .App {
   text-align: center;
 }
 
-.Routes{
+/* Dark theme styles */
+.App.dark {
+  background-color: #333;
+  color: white;
+}
+
+/* Dark theme button styles */
+.App.dark .MuiButton-root {
+  color: white; /* White text for buttons in dark theme */
+}
+
+/* Light theme styles */
+.App.light {
+  background-color: #fff;
+  color: black;
+}
+
+/* Light theme button styles */
+.App.light .MuiButton-root {
+  color: black; /* Black text for buttons in light theme */
+}
+
+/* Existing styles (unchanged) */
+.Routes {
   margin-top: 5em;
 }
 
