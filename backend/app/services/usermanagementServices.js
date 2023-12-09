@@ -18,7 +18,7 @@ export const createUser = async (userData) => {
 
 // Service to find user by ID
 export const findUserById = async (userId) => {
-    return await User.findById(userId).exec();
+    return await User.findOne({userId}).exec();
 };
 
 // Service to update user details

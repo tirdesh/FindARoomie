@@ -1,3 +1,4 @@
+import { response } from 'express';
 import * as userServices from '../services/usermanagementServices.js';
 import { setResponse, setConflictResponse, setUnauthorizedResponse, setErrorResponse } from './response-handler.js';
 
@@ -15,6 +16,8 @@ export const createUser = async (request, response) => {
         }
     }
 };
+
+
 
 // User Login
 export const loginUser = async (request, response) => {
@@ -43,4 +46,18 @@ export const resetPassword = async (request, response) => {
     }
 };
 
+export const getUser = async (request, response)=> {
+    try{
+        const {userId} = request.body;
+        const userData = await userServices.findUserById(userId);
+        if(userData){
+            setResponse(userData, response, 200, 'Found User');
+        }else{
+            setErrorResponse("User Not Found", response);
+        }
+        
+    } catch (err){
+        setErrorResponse(err, response);
+    }
+};
 
