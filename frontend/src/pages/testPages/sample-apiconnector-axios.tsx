@@ -35,7 +35,7 @@ const RoomFiltersAxios: React.FC = () => {
   }, []); // Empty dependency array ensures the effect runs once when the component mounts
 
   return (
-    <div>
+    <div className='testClass'>
       <h1>Room Filters Using Axios</h1>
       {Array.isArray(roomFilters) ? (
         roomFilters.map((filter) => (

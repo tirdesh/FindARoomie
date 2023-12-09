@@ -33,7 +33,7 @@ const profileSchema = new Schema({
         type: String,
         required: false,
         enum: ['Male', 'Female', 'Other']
-    },
+    }
    
 });
 

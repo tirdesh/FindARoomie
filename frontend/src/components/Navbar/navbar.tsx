@@ -40,6 +40,9 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
           <Link to="/test" style={{ textDecoration: 'none' }}>
             <Button color="inherit">Post</Button>
           </Link>
+          <Link to="/blogs">
+                <Button sx={{color: 'whitesmoke'}} color="secondary">Blogs</Button>
+          </Link>
           <Link to="/login" style={{ textDecoration: 'none' }}>
             <Button color="inherit">Login / Sign Up</Button>
           </Link>
