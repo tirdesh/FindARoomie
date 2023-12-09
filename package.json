@@ -6,6 +6,8 @@
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\""
   },
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "react-icons": "^4.12.0",
+    "react-material-ui-carousel": "^3.4.2"
   }
 }

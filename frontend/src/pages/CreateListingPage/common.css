@@ -2,7 +2,7 @@
 .formGrid{
     align-items: center;
     justify-content: center;
-    zoom: 1.25;
+    /* zoom: 1.25; */
 }
 .formPaper{
     margin: 3em;
