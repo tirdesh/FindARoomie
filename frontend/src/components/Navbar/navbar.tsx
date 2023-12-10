@@ -5,13 +5,23 @@ import Brightness7Icon from '@mui/icons-material/Brightness7'; // Icon for dark 
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './navbar.css';
+import { AppDispatch, RootState } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import  { setUser, userSlice } from '../../redux/slices/user-slice';
 
 interface ResponsiveAppBarProps {
   theme: string;
   toggleTheme: () => void;
 }
 
+
 function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
+  const sessionUser = useSelector((state:RootState)=>state.user)
+  const isLogged = Boolean(sessionUser.userId);
+  const dispatch = useDispatch<AppDispatch>();
+  const logoutUser =(event:any) =>{
+    dispatch(setUser(userSlice.getInitialState()))
+  }
   return (
     <AppBar position="sticky" className={`navbar-app ${theme}`}>
       <Toolbar>
@@ -24,37 +34,64 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
         </Typography>
 
         <Stack direction={'row'} spacing={3}>
+          
           {/* Navigation Links and Buttons */}
-          <Link to="/fetch" style={{ textDecoration: 'none' }}>
-            <Button color="inherit">Fetch API</Button>
-          </Link>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <Button color="inherit">Home</Button>
           </Link>
+
           <Link to="/about" style={{ textDecoration: 'none' }}>
             <Button color="inherit">About Us</Button>
           </Link>
-          <Link to="/axios" style={{ textDecoration: 'none' }}>
-            <Button color="inherit">Axios</Button>
-          </Link>
-          <Link to="/test" style={{ textDecoration: 'none' }}>
-            <Button color="inherit">Post</Button>
-          </Link>
-          <Link to="/blogs">
-                <Button sx={{color: 'whitesmoke'}} color="secondary">Blogs</Button>
-          </Link>
-          <Link to="/login" style={{ textDecoration: 'none' }}>
-            <Button color="inherit">Login / Sign Up</Button>
-          </Link>
-          <Link to="/upload" style={{ textDecoration: 'none' }}>
-            <Button color="inherit">Upload</Button>
-          </Link>
-          <Link to="/map" style={{ textDecoration: 'none' }}>
-            <Button color="inherit">Map</Button>
-          </Link>
-          <Link to="/chat" style={{ textDecoration: 'none' }}>
-            <Button color="inherit">Chat</Button>
-          </Link>
+
+          
+
+          {/* Links that need user to login */}
+          
+          {(isLogged)?
+            (
+              <Stack direction={'row'} spacing={3}>
+                <Link to="/fetch" style={{ textDecoration: 'none' }}>
+                    <Button color="inherit">Fetch API</Button>
+                </Link>
+                <Link to="/axios" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">Axios</Button>
+                </Link>
+                <Link to="/create-listing" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">Post</Button>
+                </Link>
+                <Link to="/blogs">
+                      <Button sx={{color: 'whitesmoke'}} color="secondary">Blogs</Button>
+                </Link>
+                <Link to="/upload" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">Upload</Button>
+                </Link>
+                <Link to="/map" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">Map</Button>
+                </Link>
+                <Link to="/chat" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">Chat</Button>
+                </Link>
+                <Link to="/" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit" onClick={logoutUser}>Logout</Button>
+                </Link>
+                </Stack>
+            ):(
+              <Link to="/login" style={{ textDecoration: 'none' }}>
+              <Button color="inherit">Login / Sign Up</Button>
+               </Link>
+                )}
+          
+          
+          
+
+
+          
+          
+          <Typography sx={{marginLeft:2, flexGrow:1}} variant='h6' component='div'>
+          {sessionUser.age}
+          {sessionUser.gender}
+        </Typography>
         </Stack>
 
         {/* Theme Toggle Button */}

@@ -14,7 +14,7 @@ const SummaryPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate('/test');  
+    navigate('/create-listing');  
   };
 
   const handleSubmit = async () => {
