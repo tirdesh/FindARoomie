@@ -3,7 +3,7 @@ import Diversity3Icon from '@mui/icons-material/Diversity3';
 import Brightness4Icon from '@mui/icons-material/Brightness4'; // Icon for light theme (moon)
 import Brightness7Icon from '@mui/icons-material/Brightness7'; // Icon for dark theme (sun)
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css';
 import { AppDispatch, RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,7 @@ interface ResponsiveAppBarProps {
 
 function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
   const sessionUser = useSelector((state:RootState)=>state.user)
+  const navigate = useNavigate();
   const isLogged = Boolean(sessionUser.userId);
   const dispatch = useDispatch<AppDispatch>();
   const logoutUser =(event:any) =>{
@@ -25,7 +26,7 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
   return (
     <AppBar position="sticky" className={`navbar-app ${theme}`}>
       <Toolbar>
-        <IconButton sx={{margin: 2}} size='large' edge="start" color='inherit' aria-label='logo'>
+        <IconButton sx={{margin: 2}} onClick={(e)=>{navigate("/")}} size='large' edge="start" color='inherit' aria-label='logo'>
           <Diversity3Icon />
         </IconButton>
 
@@ -89,8 +90,7 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
           
           
           <Typography sx={{marginLeft:2, flexGrow:1}} variant='h6' component='div'>
-          {sessionUser.age}
-          {sessionUser.gender}
+          {sessionUser.firstName}
         </Typography>
         </Stack>
 

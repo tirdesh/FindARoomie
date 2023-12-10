@@ -45,7 +45,6 @@ const LoginCard: React.FC = ():ReactElement =>{
     return(
         <div>
             <form onSubmit={handleSumbit}>
-                <Button size="large" variant="contained" color="primary" onClick={showUser}> Show User</Button> 
                 <Grid  container direction="column" alignItems="center" spacing={3}>
                 <Grid item>
                     <Typography variant="h4">Login </Typography>

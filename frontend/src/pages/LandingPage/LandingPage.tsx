@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Typography, Button, Box, Container, useMediaQuery, useTheme } from '@mui/material';
 import './LandingPage.css';
+import { useNavigate } from 'react-router-dom';
 
 interface Coordinates {
   x: number;
@@ -68,7 +69,6 @@ const CanvasBackground: React.FC<Props> = (props: Props) => {
       ctx.clearRect(0, 0, canvas!.width, canvas!.height);
       mouseCoords.x = lerp(mouseCoords.x, mouseCoords.targetX, 0.075);
       mouseCoords.y = lerp(mouseCoords.y, mouseCoords.targetY, 0.075);
-      console.log(props.lineColor);
       for (let i = 0; i < iteration; i++) {
         const { x, y } = circleArray[i];
         ctx.beginPath();
@@ -105,6 +105,7 @@ interface LandingPageProps {
 }
 
 const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
+  const navigate = useNavigate();
   const themeHook = useTheme();
   const [changeCol,setThemeColor] = useState(true);
   const [textCol,setTextCol] = useState("light");
@@ -132,10 +133,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
           Effortlessly with Find a Roomie!
         </Typography>
         <Box mt={4}>
-          <Button variant="contained" color="primary" size="large">
+          <Button variant="contained" color="primary" size="large" onClick={(e)=>navigate("/")}>
             Find Room
           </Button>
-          <Button variant="contained" color="secondary" size="large" sx={{ marginLeft: '1em' }}>
+          <Button variant="contained" color="secondary" size="large" onClick={(e)=>navigate("/create-listing")} sx={{ marginLeft: '1em' }}>
             Post a Room
           </Button>
         </Box>

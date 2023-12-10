@@ -72,7 +72,7 @@ function LoggedSession(props:any) {
   const sessionUser = useSelector((state: RootState) => state.user);
 
   if(!sessionUser._id){
-    return <Navigate to={'/'} />
+    return <Navigate to={'/login'} />
   }
   return props.element;
 }
