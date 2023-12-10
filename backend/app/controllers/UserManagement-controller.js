@@ -9,8 +9,8 @@ export const createUser = async (request, response) => {
         const newUser = await userServices.createUser(userData);
         setResponse(newUser, response, 201, 'User created successfully');
     } catch (err) {
-        if (err.message === 'Email already in use') {
-            setConflictResponse('Email already in use', response);
+        if (err.message === 'Email or Username already in use') {
+            setConflictResponse('Email or Username already in use', response);
         } else {
             setErrorResponse(err, response);
         }
@@ -29,7 +29,8 @@ export const loginUser = async (request, response) => {
     } catch (err) {
         if (err.message === 'Invalid login credentials') {
             setUnauthorizedResponse('Invalid login credentials', response);
-        } else {
+        }
+        else {
             setErrorResponse(err, response);
         }
     }
@@ -48,13 +49,9 @@ export const resetPassword = async (request, response) => {
 
 export const getUser = async (request, response)=> {
     try{
-        const {userId} = request.body;
+        const userId = request.params.loginId;
         const userData = await userServices.findUserById(userId);
-        if(userData){
-            setResponse(userData, response, 200, 'Found User');
-        }else{
-            setErrorResponse("User Not Found", response);
-        }
+        setResponse(userData, response, 200, 'Found User');
         
     } catch (err){
         setErrorResponse(err, response);

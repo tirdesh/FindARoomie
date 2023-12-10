@@ -1,20 +1,26 @@
 import { Numbers } from "@mui/icons-material";
-import { Button, Grid, Link, TextField, Typography } from "@mui/material";
+import { Button, FormControl, FormControlLabel, FormLabel, Grid, Link, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import axios from "axios";
 import { error } from "console";
 import React, { useState } from "react";
 import { ReactElement } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
 
 const SignUpCard: React.FC = ():ReactElement =>{
     // const [firstName, ]  
-    
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
     const [userNameError,setUsernameError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPassError] = useState("");
     const [changePassErr, setChangePassErr] = useState("");
-    const [ifUserName,setIfUserName] = useState(false);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [userAge, setUserAge] = useState("");
+    const [gender, setGender] = useState("");
     const [userPhone, setUserPhone] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -33,25 +39,14 @@ const SignUpCard: React.FC = ():ReactElement =>{
         
         if(event.target.value.length<5 && Boolean(event.target.value)){
             setUsernameError("Should be greater than 5 characters");
-            setIfUserName(false);
-        }else if(event.target.value.length>=5){
-            setUsernameError("");
-            setIfUserName(true);
         }else{
             setUsernameError("");
-            setIfUserName(false);
         }
-    }
-
-    const checkAvailablity = (event:any)=>{
-            alert(username+" Checks If this username is present in DB");
     }
 
     const handlePhoneChange = (event:any) => {
         setUserPhone(event.target.value);
-        // Remove any non-numeric and non-plus characters
         const sanitizedValue = event.target.value.replace(/[^0-9+]/g, '');
-        // Update the input field
         event.target.value = sanitizedValue;
         event.target.variant = "standard";
       };
@@ -75,13 +70,14 @@ const SignUpCard: React.FC = ():ReactElement =>{
     }
     const handleConfirmPasswordChange = (event:any) =>{
         setConfirmPassword(event.target.value);
-        if(event.target.value != password && Boolean(event.target.value)){
+        if(event.target.value !== password && Boolean(event.target.value)){
             setChangePassErr("Password Doesn't Match");
         }else{
             setChangePassErr("");
         }
     }
     const handleSubmit = (event:any) => {
+        event.preventDefault();
         if(!Boolean(firstName) 
             || !Boolean(lastName) 
             || !Boolean(username) 
@@ -91,13 +87,44 @@ const SignUpCard: React.FC = ():ReactElement =>{
             || !Boolean(confirmPassword) 
             || Boolean(userNameError)){
             alert("PLEASE ENTER ALL THE DETAILS");
-        } else{
-            
+        } else if(Boolean(emailError)){
+            alert("Enter a valid email");
+        } else if(Boolean(passwordError)){
+            alert("Enter a valid password")
+        } else if(password!==confirmPassword){
+            alert("Password doen't match")
+        }
+        else{
+            registerUser();
         }
     };
 
+    const registerUser = () =>{
+        const apiURL = "http://localhost:3002/api/users/api/signup";
+        axios
+            .post(apiURL,
+                {
+                    userId: username,
+                    firstName: firstName,
+                    lastName: lastName,
+                    gender: gender,
+                    age: userAge,
+                    email: email,
+                    phone: userPhone,
+                    password: password
+                })
+            .then((response)=>{
+                    alert("Account Created Successfully");
+                    window.location.reload();   
+                    console.log(response.data.message);
+                    
+                })
+            .catch((error)=>{alert(error.response.data.message)});
+    }
+
     return(
-        <form>
+        
+        <form  onSubmit={handleSubmit}>
         <Grid  container direction="column"  alignItems="center" spacing={3}>
             
             <Grid item alignSelf="center">
@@ -105,16 +132,30 @@ const SignUpCard: React.FC = ():ReactElement =>{
             </Grid>
             
             <Grid item>
-                <TextField label="First Name" type="text" variant="outlined" onChange={handleFirstName}></TextField>
+                <TextField label="First Name" type="text" variant="outlined" onChange={(e)=>setFirstName(e.target.value)}></TextField>
             </Grid>
             <Grid item>
-                <TextField label="Last Name" type="text" variant="outlined" onChange={handleLastName}></TextField>
+                <TextField label="Last Name" type="text" variant="outlined" onChange={(e)=>setLastName(e.target.value)}></TextField>
             </Grid>
             <Grid item>
-                <TextField error={Boolean(userNameError)}  helperText={userNameError} label="User Name" variant="outlined" onChange={handleUserNameTF} fullWidth></TextField><br />
-                {ifUserName?(
-                    <Button size="small" sx={{marginTop: 1}} onClick={checkAvailablity} variant="outlined" color="primary"> Check If Available</Button> 
-                ):(null)}
+                <TextField label="Age" type="number" variant="outlined" onChange={(e)=>setUserAge(e.target.value)}></TextField>
+            </Grid>
+            <Grid item>
+                <FormControl>
+                <FormLabel id="demo-controlled-radio-buttons-group">Gender</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="demo-controlled-radio-buttons-group"
+                    name="controlled-radio-buttons-group"
+                    onChange={(e)=>{setGender(e.target.value)}}
+                >
+                    <FormControlLabel value="female" control={<Radio />} label="Female" />
+                    <FormControlLabel value="male" control={<Radio />} label="Male" />
+                </RadioGroup>
+                </FormControl>
+            </Grid>
+            <Grid item>
+                <TextField error={Boolean(userNameError)}  helperText={userNameError} label="User Name" variant="outlined" onChange={handleUserNameTF}></TextField>
             </Grid>
             
             <Grid item>
@@ -131,7 +172,7 @@ const SignUpCard: React.FC = ():ReactElement =>{
             </Grid> 
             
             <Grid item>
-                <Button size="large" variant="contained" type="submit" onClick={handleSubmit} color="primary"> SignUp</Button> 
+                <Button size="large" variant="contained" type="submit"color="primary"> SignUp</Button> 
             </Grid>
             
             

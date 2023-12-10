@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState, useEffect, ReactElement } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import ResponsiveAppBar from './components/Navbar/navbar';
 import LandingPage from './pages/LandingPage/LandingPage';
 import AboutUs from './pages/AboutUs/AboutUs';
@@ -17,6 +17,8 @@ import Footer from './components/Footer/Footer';
 import RoommateSearchForm from './pages/RoommateSearch/RoommateSearchFormState';
 
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from './redux/store';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -37,18 +39,30 @@ function App() {
         <ResponsiveAppBar theme={theme} toggleTheme={toggleTheme} />
         <Routes>
           <Route path="/" element={<LandingPage theme={theme} />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/fetch" element={<RoomFiltersFetch />} />
-          <Route path="/axios" element={<RoomFiltersAxios />} />
-          <Route path="/create-listing" element={<CreateListingForm />} />
-          <Route path="/summary" element={<SummaryPage />} />
-          <Route path='/blogs' element={<BlogPage />} />
-          <Route path="/upload" element={<ImageUpload />} />
-          <Route path="/map" element={<FilteredMap />} />
-          <Route path="/chat" element={<ChatEntryPage />} />
-          <Route path="/chat/:roomName/:username" element={<ChatPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<AboutUs />} />
+
+          {/* Routes that need user to get logged in */}
+          <Route path="/fetch" element={<LoggedSession element={<RoomFiltersFetch/>} />} />
+
+          <Route path="/axios" element={<LoggedSession element={<RoomFiltersAxios/>} />} />
+
+          <Route path="/create-listing" element={<LoggedSession element={<CreateListingForm/>} />} />
+
+          <Route path="/summary" element={<LoggedSession element={<SummaryPage/>} />} />
+
+          <Route path='/blogs' element={<LoggedSession element={<BlogPage/>} />} />
+
+          <Route path="/upload" element={<LoggedSession element={<ImageUpload/>} />} />
+
+          <Route path="/map" element={<LoggedSession element={<FilteredMap/>} />} />
+
+          <Route path="/chat" element={<LoggedSession element={<ChatEntryPage/>} />} />
+
+          <Route path="/chat/:roomName/:username" element={<LoggedSession element={<ChatPage/>} />} />
+          
           <Route path="/roommate-search" element={<RoommateSearchForm />} /> 
+          
         </Routes>
         <Footer theme={theme} toggleTheme={toggleTheme} />
       </div>
@@ -56,4 +70,12 @@ function App() {
   );
 }
 
+function LoggedSession(props:any) {
+  const sessionUser = useSelector((state: RootState) => state.user);
+
+  if(!sessionUser._id){
+    return <Navigate to={'/login'} />
+  }
+  return props.element;
+}
 export default App;
