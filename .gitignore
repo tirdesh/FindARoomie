@@ -130,3 +130,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 frontend/src/components/Navbar/Navbar.tsx
+frontend/src/components/Navbar/Navbar.tsx
