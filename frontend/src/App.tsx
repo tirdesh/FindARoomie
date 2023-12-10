@@ -14,6 +14,7 @@ import ChatEntryPage from './pages/testPages/chatEntry';
 import Login from './pages/Login/login-page';
 import BlogPage from './pages/BlogPage/blogs';
 import Footer from './components/Footer/Footer';
+import RoommateSearchForm from './pages/RoommateSearch/RoommateSearchFormState';
 
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -59,7 +60,8 @@ function App() {
           <Route path="/chat" element={<LoggedSession element={<ChatEntryPage/>} />} />
 
           <Route path="/chat/:roomName/:username" element={<LoggedSession element={<ChatPage/>} />} />
-
+          
+          <Route path="/roommate-search" element={<RoommateSearchForm />} /> 
           
         </Routes>
         <Footer theme={theme} toggleTheme={toggleTheme} />

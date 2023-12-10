@@ -2,6 +2,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { ReactElement } from "react";
 import './blogPage.css'
+
 import BlogCard from "../../components/BLogComponents/blogCard";
 import { loginTrail } from "../../services/base-services";
 
