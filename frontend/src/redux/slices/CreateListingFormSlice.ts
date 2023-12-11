@@ -4,9 +4,10 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 interface ListingTypeAndLocationInformation {
   listingType: string;
+  PropertyName: string;
   address: string;
   proximity: string;
-  safetyFeatures: string;
+  locationDescription: string;
 }
 
 interface PricingAndLeaseDetails {
@@ -17,27 +18,25 @@ interface PricingAndLeaseDetails {
 }
 
 interface RoomAndPropertyDetails {
-  roomSize: string;
+  houseType: string,
+  beds: string;
+  baths: string,
   furnished: string;
-  uniqueFeatures: string;
-  propertyDescription: string;
+  utilities: string;
   sharedAmenities: string;
 }
 
 interface HouseRulesAndTenantRequirements {
-  houseRules: string;
-  smokingAllowed: boolean;
-  petFriendly: boolean;
-  guestPolicy: string;
-  tenantRequirements: string;
+  houseOrRoomieRulePreferences: string;
+  moreDescription: string;
 }
 
 interface ContactAndPresentation {
   availability: string;
-  contactInformation: string;
+  email: string;
+  phone: string;
   photos: string[];
-  nearbyAttractions: string;
-  communicationPreferences: string;
+  
 }
 
 interface FormState {
@@ -49,11 +48,11 @@ interface FormState {
 }
 
 const initialState: FormState = {
-  listingTypeAndLocationInformation: { listingType: '', address: '', proximity: '', safetyFeatures: '' },
+  listingTypeAndLocationInformation: { listingType: '',PropertyName:'', address: '', proximity: '', locationDescription: '' },
   pricingAndLeaseDetails: { rent: 0, utilitiesIncluded: false, leaseLength: '', upfrontFees: '' },
-  roomAndPropertyDetails: { roomSize: '', furnished: '', uniqueFeatures: '', propertyDescription: '', sharedAmenities: '' },
-  houseRulesAndTenantRequirements: { houseRules: '', smokingAllowed: false, petFriendly: false, guestPolicy: '', tenantRequirements: '' },
-  contactAndPresentation: { availability: '', contactInformation: '', photos: [], nearbyAttractions: '', communicationPreferences: '' },
+  roomAndPropertyDetails: { houseType:'', beds: '',baths:'', furnished: '', utilities: '',  sharedAmenities: '' },
+  houseRulesAndTenantRequirements: { houseOrRoomieRulePreferences:'', moreDescription: '' },
+  contactAndPresentation: { availability: '', email: '', photos: [],  phone: '' },
 };
 
 // Assuming this is your API endpoint
