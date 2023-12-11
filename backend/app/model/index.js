@@ -14,11 +14,7 @@ import RoomFilter from './room-filters.js';
 
 import Room from './roomManagement.js';
 
-<<<<<<< HEAD
-import RoomPost from './room.js'
-=======
 import RoomPost from './roomPost.js';
->>>>>>> bf41499732e4a799cb8b78fcfdf05b653a161dcc
 
 // Exporting an object that aggregates all these models.
 // This approach makes it easy to import and use these models elsewhere in the application.
