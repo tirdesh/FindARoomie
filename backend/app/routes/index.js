@@ -6,7 +6,11 @@ import profileRouter from './ProfileManagement-routes.js'; // Router for profile
 import roomFilterRouter from './roomfilters-routes.js'; // Router for room filter-related routes.
 import roomRouter from './RoomManagement-routes.js';
 import uploadRoutes from './image-routes.js';
+<<<<<<< HEAD
 import roomRoutes from './room-routes.js';
+=======
+import roomPostRoutes from './roomPost-routes.js'
+>>>>>>> bf41499732e4a799cb8b78fcfdf05b653a161dcc
 
 
 // Exporting a function that takes the express app object as an argument.
@@ -24,5 +28,11 @@ export default (app) => {
     app.use('/api', profileRouter); 
     app.use('/rooms', roomRouter);
     app.use('/upload', uploadRoutes);
+<<<<<<< HEAD
     app.use('/roomlisting', roomRoutes);
+=======
+
+    // Room Post Routes
+    app.use('/roomposts', roomPostRoutes);
+>>>>>>> bf41499732e4a799cb8b78fcfdf05b653a161dcc
 };

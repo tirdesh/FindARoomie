@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import RoomPost from '../../models/roomPost';
+import ImageViewer from './imageViewer';
 
 interface RoomFilter {
   _id: string;
@@ -19,13 +21,13 @@ interface RoomFilter {
 }
 
 const RoomFiltersAxios: React.FC = () => {
-  const [roomFilters, setRoomFilters] = useState<RoomFilter[]>([]);
+  const [roomPosts, setRoomPosts] = useState<RoomPost[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3002/roomlistings/filters');
-        setRoomFilters(response.data.data);
+        const response = await axios.get('http://localhost:3002/roomposts/');
+        setRoomPosts(response.data.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -37,22 +39,38 @@ const RoomFiltersAxios: React.FC = () => {
   return (
     <div className='testClass'>
       <h1>Room Filters Using Axios</h1>
-      {Array.isArray(roomFilters) ? (
-        roomFilters.map((filter) => (
-          <div key={filter._id} style={{ marginBottom: '20px' }}>
-            <h2>{filter.name}</h2>
-            <p>Location: {filter.filterParams[0].location}</p>
-            <p>Price Range: {filter.filterParams[0].price_range}</p>
-            <p>Amenities: {filter.filterParams[0].amenities.join(', ')}</p>
-            <p>Lease Duration: {filter.filterParams[0].lease_duration}</p>
-            <p>Room Size: {filter.filterParams[0].room_size}</p>
-            <p>Pet Policy: {filter.filterParams[0].pet_policy}</p>
-            <p>Available From: {filter.filterParams[0].available_from}</p>
-          </div>
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
+      {Array.isArray(roomPosts) ? (
+  <div style={{ display: 'flex', flexDirection: 'column-reverse' }}>
+    {roomPosts.map((room) => (
+      <div key={room.postId} style={{ marginBottom: '20px' }}>
+        <h2>{room.Posttype}</h2>
+        <p>Name: {room.lookingForRoom.name}</p>
+        <p>Location: {room.lookingForRoom.locationAddress}</p>
+        <p>Description: {room.lookingForRoom.description}</p>
+        {/* Add other properties as needed */}
+        <p>Monthly Rent: {room.pricingAndLeaseDetails.monthlyRent}</p>
+        <p>Utilities Included: {room.pricingAndLeaseDetails.utilitiesIncluded ? 'Yes' : 'No'}</p>
+        {/* Add other properties as needed */}
+        <p>House Types: {room.roomAndPropertyDetails.houseType.join(', ')}</p>
+        <p>Number of Beds: {room.roomAndPropertyDetails.numBeds}</p>
+        {/* Add other properties as needed */}
+        <p>Preferences: {room.preferences.preferences.join(', ')}</p>
+        <p>Contact Email: {room.contactInfo.email}</p>
+        <p>Contact Phone: {room.contactInfo.phone}</p>
+        {/* Add other properties as needed */}
+        <p >Room Photos: <br />
+          {room.photos.map((imageId) => (
+            <div style={{ height: 400, width: 400, margin: 'auto' }}>
+              <ImageViewer imageId={imageId} />
+            </div>
+          ))}
+        </p>
+      </div>
+    ))}
+  </div>
+) : (
+  <p>Loading...</p>
+)}
     </div>
   );
 };

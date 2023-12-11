@@ -52,6 +52,9 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
                 <Link to="/axios" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Axios</Button>
                 </Link>
+                <Link to="/listings" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">Listings</Button>
+                </Link>
                 <Link to="/create-listing" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Post</Button>
                 </Link>

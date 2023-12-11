@@ -1,5 +1,5 @@
 // components/CreateListingSteps/SummaryPage.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { Accordion, AccordionDetails, AccordionSummary, Typography, Grid, Paper, Button, Divider } from '@mui/material';
@@ -7,20 +7,111 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { submitForm } from '../../redux/slices/CreateListingFormSlice';
 import { useNavigate } from 'react-router-dom';
 import './summary.css';
+import axios from 'axios';
+import { error } from 'console';
 
 const SummaryPage: React.FC = () => {
   const formData = useSelector((state: RootState) => state.form);
+  const sessionUser = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const listingType = useSelector((state: RootState) => state.form.listingTypeAndLocationInformation.listingType);
+
 
   const handleBack = () => {
     navigate('/create-listing');  
   };
 
+  const checkFields = ():Boolean =>{
+    if(!formData.listingTypeAndLocationInformation.listingType ||
+      !formData.listingTypeAndLocationInformation.address ||
+      !formData.listingTypeAndLocationInformation.locationDescription||
+      !formData.pricingAndLeaseDetails.rent ||
+      !formData.pricingAndLeaseDetails.leaseLength ||
+      !formData.roomAndPropertyDetails.baths ||
+      !formData.roomAndPropertyDetails.beds ||
+      !formData.roomAndPropertyDetails.furnished ||
+      !formData.roomAndPropertyDetails.houseType ||
+      !formData.roomAndPropertyDetails.sharedAmenities ||
+      !formData.roomAndPropertyDetails.utilities ||
+      !formData.houseRulesAndTenantRequirements.houseOrRoomieRulePreferences  ||
+      !formData.contactAndPresentation.availability ||
+      !formData.contactAndPresentation.email ||
+      !formData.contactAndPresentation.phone ||
+      !formData.contactAndPresentation.photos){
+        return false;
+      }
+      return true;
+  }
+  const stringToList = (stringData: String):Array<String> =>{
+    const list = stringData.split("::");
+    return list;
+  }
+  const getData = ():any => {
+    const isRoom = formData.listingTypeAndLocationInformation.listingType==="Room";
+    let nameForData = `${sessionUser.firstName}`+" "+`${sessionUser.lastName}`;
+    if(isRoom){
+      nameForData = formData.listingTypeAndLocationInformation.PropertyName;
+    }
+    const data = {
+      Posttype: formData.listingTypeAndLocationInformation.listingType,
+      postId: `${formData.listingTypeAndLocationInformation.listingType}`+`${sessionUser.userId}`,
+      userId: sessionUser.userId,
+      lookingForRoom: {
+        name: nameForData,
+        locationAddress: formData.listingTypeAndLocationInformation.address,
+        proximity: formData.listingTypeAndLocationInformation.proximity,
+        description: formData.listingTypeAndLocationInformation.locationDescription
+      },
+      pricingAndLeaseDetails:{
+        monthlyRent: formData.pricingAndLeaseDetails.rent,
+        utilitiesIncluded: formData.pricingAndLeaseDetails.utilitiesIncluded,
+        leaseDuration: formData.pricingAndLeaseDetails.leaseLength
+        // securityDeposit: formData.pricingAndLeaseDetails.upfrontFees
+      },
+      roomAndPropertyDetails: {
+        houseType: stringToList(formData.roomAndPropertyDetails.houseType),
+        numBeds: formData.roomAndPropertyDetails.beds,
+        numBaths: formData.roomAndPropertyDetails.beds,
+        furnished: stringToList(formData.roomAndPropertyDetails.furnished),
+        utilities: stringToList(formData.roomAndPropertyDetails.utilities),
+        amenities: stringToList(formData.roomAndPropertyDetails.sharedAmenities)
+      },
+      preferences: {
+        preferences: stringToList(formData.houseRulesAndTenantRequirements.houseOrRoomieRulePreferences),
+        moreDescription: formData.houseRulesAndTenantRequirements.moreDescription
+      },
+      contactInfo: {
+        contactAvailability: formData.contactAndPresentation.availability,
+        email: formData.contactAndPresentation.email,
+        phone: formData.contactAndPresentation.phone
+      },
+      photos: formData.contactAndPresentation.photos
+    };
+    console.log(data);
+    // data.lookingForRoom
+    return data;
+  }
+
   const handleSubmit = async () => {
-    // Dispatch the submitForm action
-    // await dispatch(submitForm(formData));
-    // You can navigate to a success page or perform other actions after submission
+
+    if(checkFields()){
+        const apiPostData = getData();
+        const apiURL = "http://localhost:3002/roomposts/";
+        axios
+          .post(apiURL, apiPostData)
+          .then((response)=>{
+              alert("Post Added Successfully");
+              console.log(response.data.message);
+            })
+          .catch((error)=>{
+            alert(error.response.data.message);
+            console.log(error.response);
+          })
+    }else{
+      alert("Please enter all the fields");
+    }
   };
 
   const renderAccordion = (title: string, content: React.ReactNode) => (
@@ -37,14 +128,17 @@ const SummaryPage: React.FC = () => {
   return (
     <Grid className='summaryGrid' container spacing={2}>
       <Grid item xs={12}>
-        <Paper className='formPaper' elevation={3} style={{ padding: '16px' }}>
+        <Paper sx={{textAlign:'left'}} className='formPaper' elevation={3} style={{ padding: '16px' }}>
           <Typography textAlign={'center'} variant="h4">Summary</Typography>
 
           {renderAccordion("Location Information", (
             <Typography>
+              {(listingType==="Room")?(
+                 `Property Name: ${formData.listingTypeAndLocationInformation.PropertyName}`
+              ):(null)}
               Address: {formData.listingTypeAndLocationInformation.address}<br />
               Proximity: {formData.listingTypeAndLocationInformation.proximity}<br />
-              Safety Features: {formData.listingTypeAndLocationInformation.safetyFeatures}
+              Safety Features: {formData.listingTypeAndLocationInformation.locationDescription}
             </Typography>
           ))}
 
@@ -59,30 +153,28 @@ const SummaryPage: React.FC = () => {
 
           {renderAccordion("Room and Property Details", (
             <Typography>
-              Room Size: {formData.roomAndPropertyDetails.roomSize}<br />
+              {(listingType==="Roomie")?(`Preffered Room:`):(null)} <br />
+              House Type: {formData.roomAndPropertyDetails.houseType}
+              Total Beds: {formData.roomAndPropertyDetails.beds}<br />
+              Total Baths: {formData.roomAndPropertyDetails.baths}<br />
               Furnished: {formData.roomAndPropertyDetails.furnished}<br />
-              Unique Features: {formData.roomAndPropertyDetails.uniqueFeatures}<br />
-              Property Description: {formData.roomAndPropertyDetails.propertyDescription}<br />
+              Unique Features: {formData.roomAndPropertyDetails.utilities}<br />
               Shared Amenities: {formData.roomAndPropertyDetails.sharedAmenities}
             </Typography>
           ))}
 
           {renderAccordion("House Rules and Tenant Requirements", (
             <Typography>
-              House Rules: {formData.houseRulesAndTenantRequirements.houseRules}<br />
-              Smoking Allowed: {formData.houseRulesAndTenantRequirements.smokingAllowed ? 'Yes' : 'No'}<br />
-              Pet Friendly: {formData.houseRulesAndTenantRequirements.petFriendly ? 'Yes' : 'No'}<br />
-              Guest Policy: {formData.houseRulesAndTenantRequirements.guestPolicy}<br />
-              Tenant Requirements: {formData.houseRulesAndTenantRequirements.tenantRequirements}
+              Roommate or House Preferences: {formData.houseRulesAndTenantRequirements.houseOrRoomieRulePreferences}<br />
+              More Description : {formData.houseRulesAndTenantRequirements. moreDescription}<br />
             </Typography>
           ))}
 
           {renderAccordion("Contact and Presentation", (
             <Typography>
               Availability: {formData.contactAndPresentation.availability}<br />
-              Contact Information: {formData.contactAndPresentation.contactInformation}<br />
-              Nearby Attractions: {formData.contactAndPresentation.nearbyAttractions}<br />
-              Communication Preferences: {formData.contactAndPresentation.communicationPreferences}
+              Email: {formData.contactAndPresentation.email}<br />
+              Phone: {formData.contactAndPresentation.phone}
             </Typography>
           ))}
 
