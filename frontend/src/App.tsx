@@ -14,7 +14,7 @@ import ChatPage from './pages/testPages/chatComponent';
 import ChatEntryPage from './pages/testPages/chatEntry';
 import Login from './pages/Login/login-page';
 import BlogPage from './pages/BlogPage/blogs';
-import Footer from './components/Footer/Footer';
+import Footer from './components/Footer/Footer1';
 import RoommateSearchForm from './pages/RoommateSearch/RoommateSearchFormState';
 
 import './App.css';
