@@ -30,7 +30,8 @@ const roomSchema = new Schema({
     amenities: [{
         type: String,
         description: "Amenities provided with apartment"
-    }]
+    }],
+    
 
 });
 
