@@ -126,16 +126,29 @@ const Step5Form: React.FC = () => {
           fullWidth
         />
       </Grid>
+
       {/* Contact Information */}
+      {/* Email */}
       <Grid item xs={12}>
         <TextField
-          label="Contact Information"
+          label="Email"
           type="text"
-          value={formState.contactInformation}
-          onChange={(e) => handleInputChange('contactInformation', e.target.value)}
+          value={formState.email}
+          onChange={(e) => handleInputChange('email', e.target.value)}
           fullWidth
         />
       </Grid>
+      {/* Phone */}
+      <Grid item xs={12}>
+        <TextField
+          label="Phone"
+          type="tel"
+          value={formState.phone}
+          onChange={(e) => handleInputChange('phone', e.target.value)}
+          fullWidth
+        />
+      </Grid>
+
       {/* Photos */}
       <Grid item xs={12}>
         <InputLabel>Photos</InputLabel>
@@ -166,28 +179,7 @@ const Step5Form: React.FC = () => {
           ))}
         </Box>
       </Grid>
-      {/* Nearby Attractions */}
-      <Grid item xs={12}>
-        <TextField
-          label="Nearby Attractions"
-          type="text"
-          multiline
-          rows={2}
-          value={formState.nearbyAttractions}
-          onChange={(e) => handleInputChange('nearbyAttractions', e.target.value)}
-          fullWidth
-        />
-      </Grid>
-      {/* Communication Preferences */}
-      <Grid item xs={12}>
-        <TextField
-          label="Communication Preferences"
-          type="text"
-          value={formState.communicationPreferences}
-          onChange={(e) => handleInputChange('communicationPreferences', e.target.value)}
-          fullWidth
-        />
-      </Grid>
+      
     </Grid>
   );
 };

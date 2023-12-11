@@ -9,6 +9,9 @@ const Step2Form: React.FC = () => {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form.pricingAndLeaseDetails);
 
+  
+  const listingType = useSelector((state: RootState) => state.form.listingTypeAndLocationInformation.listingType);
+
   const getDefaultEndDate = (): string => {
     const defaultEndDate = new Date();
     defaultEndDate.setFullYear(defaultEndDate.getFullYear() + 2);
@@ -95,39 +98,44 @@ const Step2Form: React.FC = () => {
       {/* Monthly Rent or Price */}
       <Grid item xs={12}>
         <TextField
-          label="Monthly Rent or Price"
+          label={(listingType==="Room")?("Monthly Rent"):("Preferred Per Month Rent")}
           type="text"
           value={formState.rent.toString()}
           onChange={(e) => handleInputChange('rent', e.target.value)}
           fullWidth
         />
       </Grid>
+
+      
       {/* Utilities Included */}
+      {(listingType==="Room")?(
       <Grid item xs={12}>
-        <Box display="flex" alignItems="center">
-          <Typography variant="subtitle1" sx={{ marginRight: '8px' }}>
-            Utilities Included:
-          </Typography>
-          <ButtonGroup variant="contained" color="primary" >
-            <Button
-              onClick={() => handleInputChange('utilitiesIncluded', true)}
-              variant={formState.utilitiesIncluded ? 'contained' : 'outlined'}
-            >
-              Yes
-            </Button>
-            <Button
-              onClick={() => handleInputChange('utilitiesIncluded', false)}
-              variant={!formState.utilitiesIncluded ? 'contained' : 'outlined'}
-            >
-              No
-            </Button>
-          </ButtonGroup>
-        </Box>
-      </Grid>
+      <Box display="flex" alignItems="center">
+        <Typography variant="subtitle1" sx={{ marginRight: '8px' }}>
+          Utilities Included:
+        </Typography>
+        <ButtonGroup variant="contained" color="primary" >
+          <Button
+            onClick={() => handleInputChange('utilitiesIncluded', true)}
+            variant={formState.utilitiesIncluded ? 'contained' : 'outlined'}
+          >
+            Yes
+          </Button>
+          <Button
+            onClick={() => handleInputChange('utilitiesIncluded', false)}
+            variant={!formState.utilitiesIncluded ? 'contained' : 'outlined'}
+          >
+            No
+          </Button>
+        </ButtonGroup>
+      </Box>
+    </Grid>
+      ):(null)}
+      
       {/* Start Date */}
       <Grid item xs={3}>
         <TextField
-          label="Start Date"
+          label="Ready to move in from?"
           type="date"
           InputLabelProps={{
             shrink: true,
@@ -189,7 +197,8 @@ const Step2Form: React.FC = () => {
         </>
       )}
       {/* Security Deposit or Upfront Fees */}
-      <Grid item xs={12}>
+      {(listingType==="Room")?(
+        <Grid item xs={12}>
         <TextField
           label="Security Deposit or Upfront Fees"
           type="text"
@@ -198,6 +207,8 @@ const Step2Form: React.FC = () => {
           fullWidth
         />
       </Grid>
+      ):(null)}
+      
     </Grid>
   );
 };

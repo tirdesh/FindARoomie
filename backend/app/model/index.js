@@ -12,7 +12,9 @@ import Profile from './ProfileManagement.js';
 // Importing the RoomFilter model from room-filters.js. This model might be used for managing room filters in an application, possibly for room booking or searching features.
 import RoomFilter from './room-filters.js';
 
-import Room from './roomManagement.js'
+import Room from './roomManagement.js';
+
+import RoomPost from './roomPost.js';
 
 // Exporting an object that aggregates all these models.
 // This approach makes it easy to import and use these models elsewhere in the application.
@@ -21,5 +23,6 @@ export default {
     Blog,       // Exporting the Blog model.
     Profile,    // Exporting the Profile model.
     RoomFilter,  // Exporting the RoomFilter model.
-    Room
+    Room,
+    RoomPost
 };

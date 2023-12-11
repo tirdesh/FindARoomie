@@ -22,7 +22,7 @@ const StepForm: React.FC = () => {
   const step = useSelector((state: RootState) => state.step.currentStep);
   const formData = useSelector((state: RootState) => state.form); // Assuming `form` is the slice holding your form data
   const navigate = useNavigate(); // Use useNavigate instead of useHistory
-
+  
   const handleNext = () => {
     if (step < steps.length) {
         dispatch(incrementStep());
