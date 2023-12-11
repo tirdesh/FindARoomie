@@ -52,8 +52,14 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
                 <Link to="/axios" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Axios</Button>
                 </Link>
+                <Link to="/listings" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">Listings</Button>
+                </Link>
                 <Link to="/create-listing" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Post</Button>
+                </Link>
+                <Link to="/roommate-search" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">Room Search</Button>
                 </Link>
                 <Link to="/blogs">
                       <Button sx={{color: 'whitesmoke'}} color="secondary">Blogs</Button>
@@ -79,6 +85,7 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
           <Typography sx={{marginLeft:2, flexGrow:1}} variant='h6' component='div'>
           {sessionUser.firstName}
         </Typography>
+
         </Stack>
 
         {/* Theme Toggle Button */}
