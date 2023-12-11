@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import AboutUs from './pages/AboutUs/AboutUs';
 import RoomFiltersAxios from './pages/testPages/sample-apiconnector-axios';
 import RoomFiltersFetch from './pages/testPages/sample-apiconnector-fetch';
+import ListOfPosts from './pages/Listing Page/listing';
 import CreateListingForm from './pages/CreateListingPage/CreateListingForm';
 import SummaryPage from './pages/CreateListingPage/SummaryPage';
 import ImageUpload from './pages/testPages/imageUpload';
@@ -18,6 +19,7 @@ import Footer from './components/Footer/Footer';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './redux/store';
+
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -45,6 +47,8 @@ function App() {
           <Route path="/fetch" element={<LoggedSession element={<RoomFiltersFetch/>} />} />
 
           <Route path="/axios" element={<LoggedSession element={<RoomFiltersAxios/>} />} />
+
+          <Route path="/listings" element={<LoggedSession element={<ListOfPosts/>} />} />
 
           <Route path="/create-listing" element={<LoggedSession element={<CreateListingForm/>} />} />
 
