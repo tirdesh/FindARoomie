@@ -8,12 +8,17 @@ import './navbar.css';
 import { AppDispatch, RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import  { setUser, userSlice } from '../../redux/slices/user-slice';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useTranslation } from 'react-i18next';
+
 interface ResponsiveAppBarProps {
   theme: string;
   toggleTheme: () => void;
 }
 
 function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
+  const { t, i18n } = useTranslation(); // Hook to access translations and i18n methods
   const sessionUser = useSelector((state:RootState)=>state.user)
   const navigate = useNavigate();
   const isLogged = Boolean(sessionUser.userId);
@@ -22,6 +27,11 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
     dispatch(setUser(userSlice.getInitialState()));
     localStorage.removeItem("loggedUser");
   }
+  const changeLanguage = (event: SelectChangeEvent<string>) => {
+    const selectedLanguage = event.target.value as string;
+    i18n.changeLanguage(selectedLanguage);
+  };
+
   return (
     <AppBar position="sticky" className={`navbar-app ${theme}`}>
       <Toolbar>
@@ -88,6 +98,17 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
         </Typography>
 
         </Stack>
+
+        {/* Language Dropdown */}
+        <Select
+          value={i18n.language}
+          onChange={changeLanguage}
+          sx={{ color: 'inherit', marginLeft: 2, '&:before': { borderBottom: 'none' } }}
+        >
+          <MenuItem value="en">English</MenuItem>
+          <MenuItem value="tel">Telugu</MenuItem>
+          <MenuItem value="es">Spanish</MenuItem>
+        </Select>
 
         {/* Theme Toggle Button */}
         <IconButton

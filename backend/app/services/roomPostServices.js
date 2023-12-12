@@ -2,7 +2,7 @@ import Room from '../model/roomPost.js';
 
 export const create = async (newRoom) => {
     try {
-        console.log('Checking the database for ', newRoom.postId);
+        //console.log('Checking the database for ', newRoom.postId);
         const postExists = await Room.findOne({ postId: newRoom.postId }).exec();
 
         if (postExists) {

@@ -19,7 +19,7 @@ const Step4Form: React.FC = () => {
     // Join the selected values into a single string separated by '::'
     const joinedValues = values.join('::');
     handleInputChange('houseOrRoomieRulePreferences', joinedValues);
-    console.log(formState.houseOrRoomieRulePreferences);
+    //console.log(formState.houseOrRoomieRulePreferences);
   };
 
   return (
