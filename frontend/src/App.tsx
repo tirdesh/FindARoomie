@@ -6,6 +6,7 @@ import AboutUs from './pages/AboutUs/AboutUs';
 import RoomFiltersAxios from './pages/testPages/sample-apiconnector-axios';
 import RoomFiltersFetch from './pages/testPages/sample-apiconnector-fetch';
 import ListOfPosts from './pages/Listing Page/listing';
+import RoomDisplay from './pages/postDisplay/roomPost';
 import CreateListingForm from './pages/CreateListingPage/CreateListingForm';
 import SummaryPage from './pages/CreateListingPage/SummaryPage';
 import ImageUpload from './pages/testPages/imageUpload';
@@ -50,6 +51,8 @@ function App() {
           <Route path="/axios" element={<LoggedSession element={<RoomFiltersAxios/>} />} />
 
           <Route path="/listings" element={<LoggedSession element={<ListOfPosts/>} />} />
+
+          <Route path="/listings/:postId" element={<LoggedSession element={<RoomDisplay/>} />} />
 
           <Route path="/create-listing" element={<LoggedSession element={<CreateListingForm/>} />} />
 
