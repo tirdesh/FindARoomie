@@ -17,8 +17,9 @@ export const createRoom = async (req, res) => {
 
 export const getAllRooms = async (req, res) => {
     try {
-        const filters = req.query;
-        const rooms = await roomServices.filterRooms(filters);
+        //const filters = req.query;
+        const rooms = await roomServices.getAll();
+        //const rooms = await roomServices.filterRooms(filters);
         setResponse(rooms, res);
     } catch (err) {
         setErrorResponse(err, res);
