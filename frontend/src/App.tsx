@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer1';
 import './App.css';
 import AuthRoutes from './routes/AuthRoutes';
 import HomeRoutes from './routes/HomeRoutes';
+import LandingPage from './pages/LandingPage/LandingPage';
 
 
 function App() {
@@ -25,6 +26,9 @@ function App() {
     <Router>
       <div className={`App ${theme}`}>
         <ResponsiveAppBar theme={theme} toggleTheme={toggleTheme} />
+        <Routes>
+        <Route path="/" element={<LandingPage theme={theme} />} />
+        </Routes>
         <HomeRoutes />
         <AuthRoutes />
         <Footer theme={theme} toggleTheme={toggleTheme} />
