@@ -1,3 +1,5 @@
 .onHover:hover{
+    transition: 0.5s;
     cursor: pointer;
+    filter: drop-shadow(5px 5px);
 }

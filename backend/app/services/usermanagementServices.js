@@ -50,3 +50,26 @@ export const resetUserPassword = async (userId, newPassword) => {
     return await user.save();
 };
 
+export const addPostId = async (userId, postId) =>{
+    const user = await User.findOneAndUpdate(
+        { userId },
+        { $push: { postedList: postId } },
+        { new: true } // To return the modified document
+      ).exec();
+    if(!user){
+        throw new Error('User not found');
+    }   
+    return user; 
+}
+
+export const addWishlistId = async (userId, postId) =>{
+    const user = await User.findOneAndUpdate(
+        { userId },
+        { $push: { wishList: postId } },
+        { new: true } // To return the modified document
+      ).exec();
+    if(!user){
+        throw new Error('User not found');
+    }
+    return  user; 
+}

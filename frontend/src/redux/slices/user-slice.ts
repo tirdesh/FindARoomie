@@ -14,6 +14,8 @@ const intitalState: UserState = {
     phone: "",
     password: "",
     createdDate: new Date(),
+    postedList: [],
+    wishList: []
 };
 export const userSlice = createSlice({
     name: 'User',

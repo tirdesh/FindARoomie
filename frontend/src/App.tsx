@@ -4,6 +4,7 @@ import ResponsiveAppBar from './components/Navbar/navbar';
 import Footer from './components/Footer/Footer1';
 
 import './App.css';
+import checkLoggedUser from './utils/utils';
 import AuthRoutes from './routes/AuthRoutes';
 import HomeRoutes from './routes/HomeRoutes';
 import LandingPage from './pages/LandingPage/LandingPage';
@@ -11,8 +12,8 @@ import LandingPage from './pages/LandingPage/LandingPage';
 
 function App() {
   const [theme, setTheme] = useState('light');
-
   useEffect(() => {
+    
     // Update theme on body element
     document.body.className = `theme-${theme}`;
   }, [theme]);

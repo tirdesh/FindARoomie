@@ -111,23 +111,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
   const [textCol,setTextCol] = useState("light");
   const matches = useMediaQuery(themeHook.breakpoints.up('sm'));
 
-  const changeTheme = (event: any) =>{
-    if(changeCol){
-      setThemeColor(false);
-      setTextCol("dark");
-    }else{
-      setThemeColor(true);
-      setTextCol("light");
-    }
-  }
+  
   return (
-    <Container className={`landingBody-${textCol}`} maxWidth="lg" disableGutters>
-      <Button size='large' variant='contained' color='secondary' onClick={changeTheme}>Theme</Button>
-      {changeCol?(<CanvasBackground lineColor ={"rgba(171, 171, 171, 0.118)"} backgroundColor={'dark'}/>):(<CanvasBackground lineColor ={"rgba(51, 51, 51, 0.18 )"} backgroundColor={'light'}/>)}
-        {/* <CanvasBackground themeColor ={themeColor}/> */}
+    <div className={`landingBody-${textCol}`}>
+      {(theme==="dark")?(<CanvasBackground lineColor ={"rgba(171, 171, 171, 0.118)"} backgroundColor={'dark'}/>):(<CanvasBackground lineColor ={"rgba(51, 51, 51, 0.18 )"} backgroundColor={'light'}/>)}
       <Box className="hero-text">
         <Typography variant="h2" component="h1" gutterBottom className="hero__header">
-          Find Your Perfect Space & Companion
+          Find Your Perfect Space & Companion 
         </Typography>
         <Typography variant="h5" component="h2" gutterBottom className="hero__header">
           Effortlessly with Find a Roomie!
@@ -141,7 +131,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
           </Button>
         </Box>
       </Box>
-    </Container>
+    </div>
   );
 };
 
