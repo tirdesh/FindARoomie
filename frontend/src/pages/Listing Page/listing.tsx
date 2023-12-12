@@ -3,15 +3,24 @@ import axios from 'axios';
 import RoomPost from '../../models/roomPost';
 import ImageViewer from '../testPages/imageViewer';
 import { Button } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/store';
+import { loadPostList } from '../../redux/slices/PostList';
+import { useNavigate } from 'react-router-dom';
 
 const ListOfPosts: React.FC = () => {
-  const [roomPosts, setRoomPosts] = useState<RoomPost[]>([]);
+  const [roomPosts, setRoomPosts] = useState<RoomPost[]>([]); 
+  const getData = useSelector((state:RootState)=>state.postlist);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:3002/roomposts/');
         setRoomPosts(response.data.data);
+        dispatch(loadPostList(response.data.data));
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -20,18 +29,20 @@ const ListOfPosts: React.FC = () => {
     fetchData();
   }, []); // Empty dependency array ensures the effect runs once when the component mounts
 
-    function handlePostDisplay(postId: string): React.MouseEventHandler<HTMLButtonElement> | undefined {
-        throw new Error('Function not implemented.');
-    }
+  const handlePostOpen = (post: RoomPost) =>{
+    navigate(`/listings/${post.postId}`, { state: { roomPost: post }});
+    console.log(post.postId);
+  } 
 
   return (
     <div className='Listings'>
       <h1>Room Filters Using Axios</h1>
-      {Array.isArray(roomPosts) ? (
+      {Array.isArray(getData) ? (
+        
         <div style={{ display: 'flex', flexDirection: 'column-reverse' }}>
-        {roomPosts.map((room) => (
+        {getData.map((room) => (
         <div key={room.postId} style={{ marginBottom: '20px' }}>
-            <Button variant="contained" color="secondary" size="medium" onClick={handlePostDisplay(room.postId)}  sx={{ marginLeft: '1em' }}>
+            <Button variant="contained" color="secondary" size="medium" onClick={() => handlePostOpen(room)}  sx={{ marginLeft: '1em' }}>
                     {room.Posttype}
             </Button>
             <h2>{room.Posttype}</h2>

@@ -5,12 +5,16 @@ import createListingFormReducer from './slices/CreateListingFormSlice';
 import createListingStepReducer from './slices/CreateListingStepSlice';
 import ListingOptionsSliceReducer from './slices/ListingOptionsSlice';
 import { userSlice } from './slices/user-slice';
+import { PostListSlice } from './slices/PostList';
 
 const rootReducer = {
   form: createListingFormReducer,
   step: createListingStepReducer,
   listOptions: ListingOptionsSliceReducer,
-  user: userSlice.reducer
+  user: userSlice.reducer,
+  postlist: PostListSlice.reducer
+
+
   // Add more reducers if needed
 };
 
