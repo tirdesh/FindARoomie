@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Brightness4Icon from '@mui/icons-material/Brightness4'; // Moon icon
-import Brightness5Icon from '@mui/icons-material/Brightness5'; // Sun icon
-import HomeIcon from '@mui/icons-material/Home';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import InfoIcon from '@mui/icons-material/Info';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
-import EmailIcon from '@mui/icons-material/Email';
-import ChatIcon from '@mui/icons-material/Chat';
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
-import CloseIcon from '@mui/icons-material/Close'; // Make sure to import CloseIcon
-import './Footer.css';
+import CloseIcon from '@mui/icons-material/Close';
+import './footer.css';
 
 interface FooterProps {
   theme: string;
@@ -28,7 +19,7 @@ const Footer = ({ theme, toggleTheme }: FooterProps) => {
 
   return (
     <footer className={`footer-app ${theme}`}>
-      <div className="footer-main">
+      <div className="footer-left">
         <IconButton size='large' color='inherit' aria-label='logo'>
           {/* Your logo icon */}
         </IconButton>
@@ -36,18 +27,7 @@ const Footer = ({ theme, toggleTheme }: FooterProps) => {
           Roomies
         </Typography>
       </div>
-      <div className="footer-section">
-        <Typography variant="subtitle1" gutterBottom>PRODUCT</Typography>
-        <Link to="/"><HomeIcon /> Home</Link>
-        <Link to="/login"><AccountCircleIcon /> My Account</Link>
-        </div>
-      <div className="footer-section">
-        <Typography variant="subtitle1" gutterBottom>RESOURCES</Typography>
-        <Link to="/about-us"><InfoIcon /> About Us</Link>
-        <Link to="/blog"><LibraryBooksIcon /> Blog</Link>
-        <Link to="/chat"><ChatIcon /> Chat</Link>
-      </div>
-      <div className="footer-section">
+      <div className="footer-right">
         <Typography variant="subtitle1" gutterBottom>CONTACT</Typography>
         <IconButton component="a" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebookF /></IconButton>
         <IconButton component="a" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></IconButton>
@@ -58,19 +38,22 @@ const Footer = ({ theme, toggleTheme }: FooterProps) => {
       </div>
       {isContactFormVisible && (
         <div className="footer-contact-form">
-          <form action={`mailto:your-email@example.com`} onSubmit={() => setIsContactFormVisible(false)}>
-            <input type="text" placeholder="Name" name="name" />
-            <input type="email" placeholder="Email" name="email" />
-            <input type="text" placeholder="Phone (optional)" name="phone" />
-            <textarea placeholder="Message" name="message"></textarea>
-            <IconButton type="submit" color='inherit' aria-label='submit'>
-              <EmailIcon />
-            </IconButton>
-            <IconButton color='inherit' aria-label='close' onClick={handleToggleContactForm}>
-              <CloseIcon />
-            </IconButton>
-          </form>
-        </div>
+  <form action={`mailto:kotla.s@northeastern.edu`} onSubmit={() => setIsContactFormVisible(false)}>
+    <input type="text" placeholder="Name" name="name" />
+    <input type="email" placeholder="Email" name="email" />
+    <input type="text" placeholder="Phone (optional)" name="phone" />
+    <textarea placeholder="Message" name="message"></textarea>
+    <div className="submit-buttons">
+      <button type="submit" className="submit-button">
+        Send
+      </button>
+      <IconButton color='inherit' aria-label='close' onClick={handleToggleContactForm}>
+        <CloseIcon />
+      </IconButton>
+    </div>
+  </form>
+</div>
+
       )}
     </footer>
   );

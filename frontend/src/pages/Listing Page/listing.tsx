@@ -3,10 +3,12 @@ import axios from 'axios';
 import RoomPost from '../../models/roomPost';
 import ImageViewer from '../testPages/imageViewer';
 import { Button } from '@mui/material';
+import RoomieCard from '../../components/RoomiePosting/RoomieCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 import { loadPostList } from '../../redux/slices/PostList';
 import { useNavigate } from 'react-router-dom';
+
 
 const ListOfPosts: React.FC = () => {
   const [roomPosts, setRoomPosts] = useState<RoomPost[]>([]); 
@@ -25,7 +27,6 @@ const ListOfPosts: React.FC = () => {
         console.error('Error fetching data:', error);
       }
     };
-
     fetchData();
   }, []); // Empty dependency array ensures the effect runs once when the component mounts
 
@@ -37,6 +38,21 @@ const ListOfPosts: React.FC = () => {
   return (
     <div className='Listings'>
       <h1>Room Filters Using Axios</h1>
+
+      {Array.isArray(roomPosts) ? (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', // This creates a responsive grid layout
+          gap: '20px', // This is the space between grid items
+          padding: '20px' // Optional: adds some padding around the grid
+        }}>
+          {roomPosts.map((room) => (
+            <div key={room.postId} style={{ marginBottom: '20px' }}>
+              <RoomieCard roommate={room}/>
+              {/* ...rest of the code for displaying room details... */}
+            </div>
+          ))}
+
       {Array.isArray(getData) ? (
         
         <div style={{ display: 'flex', flexDirection: 'column-reverse' }}>
@@ -67,14 +83,13 @@ const ListOfPosts: React.FC = () => {
                 </div>
             ))}
             </p>
+
         </div>
-        ))}
-        </div>
-    ) : (
-    <p>Loading...</p>
-    )}
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
-    );
-    };
+  );
+};
 
 export default ListOfPosts;

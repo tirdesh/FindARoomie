@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ReactElement } from "react";
 import './blogPage.css'
 
-import BlogCard from "../../components/BLogComponents/blogCard";
+import BlogCard from "../../components/BlogComponents/blogCard";
 import { loginTrail } from "../../services/base-services";
 
 const BlogPage: React.FC = ():ReactElement=>{
