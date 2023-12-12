@@ -8,6 +8,8 @@ interface User{
     email: string,
     phone: string,
     password: string,
+    postedList: string[],
+    wishList: string[],
     createdDate: Date
 }
 

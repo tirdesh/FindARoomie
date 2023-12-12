@@ -8,7 +8,6 @@ export const create = async (newRoom) => {
         if (postExists) {
             throw new Error('PostId Already Exists');
         }
-
         const room = new Room(newRoom);
         return await room.save();
     } catch (error) {

@@ -44,6 +44,14 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    postedList:{
+        type: [String],
+        required: false
+    },
+    wishList:{
+        type: [String],
+        required: false
+    },
     createdDate: {
         type: Date,
         default: Date.now
@@ -77,6 +85,7 @@ userSchema.methods.generateAuthToken = function () {
 userSchema.methods.resetPassword = async function (newPassword) {
     this.password  = newPassword;
 };
+
 
 const userModel = mongoose.model('User', userSchema);
 
