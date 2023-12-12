@@ -3,6 +3,7 @@ import axios from 'axios';
 import RoomPost from '../../models/roomPost';
 import ImageViewer from '../testPages/imageViewer';
 import { Button } from '@mui/material';
+import FiltersBar from '../testPages/FiltersBar';
 import RoomieCard from '../../components/RoomiePosting/RoomieCard';
 
 const ListOfPosts: React.FC = () => {
@@ -21,6 +22,8 @@ const ListOfPosts: React.FC = () => {
   }, []);
 
   return (
+    <div>
+    <FiltersBar applyFilters={(filters) => console.log(filters)} />
     <div className='Listings'>
       <h1>Room Filters Using Axios</h1>
       {Array.isArray(roomPosts) ? (
@@ -40,6 +43,7 @@ const ListOfPosts: React.FC = () => {
       ) : (
         <p>Loading...</p>
       )}
+    </div>
     </div>
   );
 };

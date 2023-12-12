@@ -20,6 +20,7 @@ import RoommateSearchForm from './pages/RoommateSearch/RoommateSearchFormState';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './redux/store';
+import FiltersBar from './pages/testPages/FiltersBar';
 
 
 function App() {
@@ -77,9 +78,9 @@ function App() {
 function LoggedSession(props:any) {
   const sessionUser = useSelector((state: RootState) => state.user);
 
-  if(!sessionUser._id){
-    return <Navigate to={'/login'} />
-  }
+  //if(!sessionUser._id){
+    //return <Navigate to={'/login'} />
+  //}
   return props.element;
 }
 export default App;
