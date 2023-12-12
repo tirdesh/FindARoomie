@@ -41,7 +41,7 @@ const AuthRoutes: React.FC = () => (
 function LoggedSession(props:any) {
   const sessionUser = useSelector((state: RootState) => state.user);
   if(!sessionUser._id){
-    return <Navigate to="/login" />;
+    //return <Navigate to="/login" />;
   }
   return props.element;
 }
