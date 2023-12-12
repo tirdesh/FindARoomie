@@ -53,7 +53,7 @@ const Step3Form: React.FC = () => {
     // Join the selected values into a single string separated by '::'
     const joinedValues = values.join('::');
     handleInputChange('utilities', joinedValues);
-    console.log(formState.utilities);
+    //console.log(formState.utilities);
   };
   
   const handleAmenitiesChange = (_event: React.ChangeEvent<{}>, values: string[]) => {

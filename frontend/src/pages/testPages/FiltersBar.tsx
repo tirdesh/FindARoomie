@@ -32,7 +32,7 @@ interface Filters {
   amenities: string[];
   preferences: string[];
   priceRange: number[];
-  moveInDate: string | null;
+  moveInDate: Date | null;
 }
 
 interface PriceRangeProps {
@@ -129,13 +129,11 @@ const FiltersBar: React.FC<FiltersBarProps> = ({ applyFilters }) => {
     utilities: [],
     amenities: [],
     preferences: [],
-    priceRange: [0, 1000],
-    moveInDate: new Date().toISOString().split('T')[0], // Set default moveInDate to today
-});
+    priceRange: [0, 1500],
+    moveInDate: null, // Set default moveInDate to today
+  });
 
-  // Add state for selected date
-  const [selectedDate, setSelectedDate] = useState(new Date());
-
+  const [selectedDate, setSelectedDate] = useState<Date | null> (null);
   const [priceRangeOpen, setPriceRangeOpen] = useState(false);
 
   const handleFilterChange = (filterType: keyof Filters, value: string | string[] | number | number[] | Date | null) => {
@@ -146,17 +144,15 @@ const FiltersBar: React.FC<FiltersBarProps> = ({ applyFilters }) => {
   };
 
   const handleDateChange = (newDate: string) => {
-  // Format the date to match your desired format "YYYY-MM-DD"
-  const formattedDate = selectedDate.toISOString().split('T')[0];
-
-  setSelectedDate(selectedDate);
-
-  // Update the moveInDate filter
-  handleFilterChange('moveInDate', formattedDate);
+    const formattedDate = newDate ? new Date(newDate) : null;
+  
+    setSelectedDate(formattedDate);
+    handleFilterChange('moveInDate', formattedDate);
   };
+  
 
   const handleApplyFilters = () => {
-    console.log('Applying filters:', filters); // Log the filter data
+    console.log('Applying filters:', filters);
     applyFilters(filters);
   };
 
@@ -232,7 +228,7 @@ const FiltersBar: React.FC<FiltersBarProps> = ({ applyFilters }) => {
               InputLabelProps={{
                 shrink: true,
               }}
-              value={selectedDate.toISOString().split('T')[0]}
+              value={selectedDate ? selectedDate.toISOString().split('T')[0] : ''}
               onChange={(e) => handleDateChange(e.target.value)}
               fullWidth
             />

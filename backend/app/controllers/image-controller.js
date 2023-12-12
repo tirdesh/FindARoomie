@@ -10,8 +10,8 @@ export const handleImageUpload = upload.single('image');
 
 export const uploadImage = async (req, res) => {
   try {
-    console.log("upload");
-    console.log(req.file);
+    //console.log("upload");
+    //console.log(req.file);
     const { originalname, mimetype, buffer } = req.file;
     const size = buffer.length;
 
@@ -43,8 +43,8 @@ export const getImageByIdController = async (req, res) => {
   
       res.set('Content-Type', image.mimetype); // Set the content type based on the saved mimetype
       res.send(image.buffer);
-      console.log("imagecontroller");
-      console.log(image);
+      //console.log("imagecontroller");
+      //console.log(image);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
