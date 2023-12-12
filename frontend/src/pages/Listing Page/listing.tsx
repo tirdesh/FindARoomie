@@ -11,7 +11,10 @@ import { useNavigate } from "react-router-dom";
 import { loadPostList } from '../../redux/slices/PostList';
 import './listing.css'
 import { error } from 'console';
- 
+import ListPosts from './ListPosts';
+import GridPosts from './GridPosts';
+import MapPosts from './MapPosts';
+
 const ListOfPosts: React.FC = () => {
   const [roomPosts, setRoomPosts] = useState<RoomPost[]>([]); 
   const getData = useSelector((state:RootState)=>state.postlist);
@@ -20,6 +23,7 @@ const ListOfPosts: React.FC = () => {
   const [filter, setFilter] = useState({});
   const [filteredRoomPosts, setFilteredRoomPosts] = useState<RoomPost[]>([]); // Added filteredRoomPosts state
   const [finalPosts, setFinalPosts] = useState<RoomPost[]>(getData); // Use finalPosts state
+  const [viewType, setViewType] = useState<'list' | 'map' | 'grid'>('list'); // Added viewType state
 
  
   useEffect(() => {
@@ -123,28 +127,28 @@ const ListOfPosts: React.FC = () => {
     setFinalPosts(filteredPosts); // Update finalPosts with the filtered data
     console.log(filteredPosts.length);
   };
+
+  const handleViewTypeChange = (type: 'list' | 'map' | 'grid') => {
+    setViewType(type);
+  };
  
   return (
     <div className='Listings'>
       <FiltersBar applyFilters={(filters) => {handlePostFilters(filters)}} />
-      <h1>Room Filters Using Axios</h1>
-      {Array.isArray(finalPosts) ? (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', // This creates a responsive grid layout
-          gap: '20px', // This is the space between grid items
-          padding: '20px' // Optional: adds some padding around the grid
-        }}>
-          {finalPosts.map((room) => (
-            <div key={room.postId} style={{ marginBottom: '20px' }}>
-              <a className='onHover' onClick={()=>handlePostOpen(room)}><RoomieCard roommate={room}/></a>
-              {/* ...rest of the code for displaying room details... */}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <div className="view-options" style={{ padding: '20px' }}>
+        <Button onClick={() => handleViewTypeChange('list')} variant={viewType === 'list' ? 'contained' : 'outlined'}>
+          List View
+        </Button>
+        <Button onClick={() => handleViewTypeChange('grid')} variant={viewType === 'grid' ? 'contained' : 'outlined'}>
+          Grid View
+        </Button>
+        <Button onClick={() => handleViewTypeChange('map')} variant={viewType === 'map' ? 'contained' : 'outlined'}>
+          Map View
+        </Button>
+      </div>
+      {viewType === "list" && <ListPosts posts={finalPosts} handlePostOpen={handlePostOpen} />}
+      {viewType == "grid" && <GridPosts posts={finalPosts} handlePostOpen={handlePostOpen}/>}
+      {/*{viewType == "map" && <MapPosts posts={finalPosts} handlePostOpen={handlePostOpen}/>*/}
     </div>
   );
 };
