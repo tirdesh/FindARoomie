@@ -19,7 +19,8 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
   const isLogged = Boolean(sessionUser.userId);
   const dispatch = useDispatch<AppDispatch>();
   const logoutUser =(event:any) =>{
-    dispatch(setUser(userSlice.getInitialState()))
+    dispatch(setUser(userSlice.getInitialState()));
+    localStorage.removeItem("loggedUser");
   }
   return (
     <AppBar position="sticky" className={`navbar-app ${theme}`}>

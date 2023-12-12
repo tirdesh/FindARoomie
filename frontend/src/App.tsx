@@ -22,12 +22,13 @@ import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './redux/store';
 import FiltersBar from './pages/testPages/FiltersBar';
+import checkLoggedUser from './utils/utils';
 
 
 function App() {
   const [theme, setTheme] = useState('light');
-
   useEffect(() => {
+    
     // Update theme on body element
     document.body.className = `theme-${theme}`;
   }, [theme]);
@@ -80,10 +81,9 @@ function App() {
 
 function LoggedSession(props:any) {
   const sessionUser = useSelector((state: RootState) => state.user);
-
-  //if(!sessionUser._id){
-    //return <Navigate to={'/login'} />
-  //}
+  if(!sessionUser._id){
+    return <Navigate to={'/login'} />
+  }
   return props.element;
 }
 export default App;
