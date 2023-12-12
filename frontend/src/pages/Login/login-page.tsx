@@ -22,7 +22,6 @@ const LoginPage: React.FC = ():ReactElement => {
     }
     return(
             <div className="login-div">
-                <h1>Login Page</h1>
                 <div className="login-box">
                 <Paper sx={{padding:5, borderRadius: 4}} elevation={3}>
                     { loginS ? ( 
