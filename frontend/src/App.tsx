@@ -22,6 +22,8 @@ import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './redux/store';
 import FiltersBar from './pages/testPages/FiltersBar';
+import ModifyListingForm from './pages/CreateListingPage/ModifyListingForm';
+import EditSummaryPage from './pages/CreateListingPage/EditSummaryPage';
 
 
 function App() {
@@ -58,6 +60,7 @@ function App() {
           <Route path="/create-listing" element={<LoggedSession element={<CreateListingForm/>} />} />
 
           <Route path="/summary" element={<LoggedSession element={<SummaryPage/>} />} />
+          <Route path="/editsummary" element={<LoggedSession element={<EditSummaryPage/>} />} />
 
           <Route path='/blogs' element={<LoggedSession element={<BlogPage/>} />} />
 
@@ -70,6 +73,8 @@ function App() {
           <Route path="/chat/:roomName/:username" element={<LoggedSession element={<ChatPage/>} />} />
           
           <Route path="/roommate-search" element={<RoommateSearchForm />} /> 
+          <Route path="/modify-listing-form" element={<LoggedSession element={<ModifyListingForm/>} />} />
+          
           
         </Routes>
         <Footer theme={theme} toggleTheme={toggleTheme} />
