@@ -7,9 +7,8 @@ export const listUsers = async (params = {}) => {
 
 // Service to create a new user
 export const createUser = async (userData) => {
-    const userExists = await User.findOne({ email: userData.email }).exec();
-    if (userExists) {
-        throw new Error('Email already in use');
+    if (await User.findOne({ email: userData.email }).exec() || await User.findOne({ userId: userData.userId }).exec()) {
+        throw new Error('Email or Username already in use');
     }
 
     const user = new User(userData);
@@ -18,7 +17,11 @@ export const createUser = async (userData) => {
 
 // Service to find user by ID
 export const findUserById = async (userId) => {
-    return await User.findById(userId).exec();
+    const user = await User.findOne({userId}).exec();
+    if(!user){
+        throw new Error('User does not exists');
+    }
+    return user;
 };
 
 // Service to update user details
@@ -33,7 +36,7 @@ export const loginUser = async (email, password) => {
         throw new Error('Invalid email or password');
     }
 
-    return user.generateAuthToken();
+    return user;
 };
 
 // Service to reset user password

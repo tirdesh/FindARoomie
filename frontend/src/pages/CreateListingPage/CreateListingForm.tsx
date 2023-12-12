@@ -17,11 +17,12 @@ import Step5 from '../../components/CreateListingSteps/step5Form';
 const steps = ["Location Information", "Pricing and Lease Details", "Room and Property Details", "House Rules and Tenant Requirements", "Contact Info"]; // Update the step labels
 
 const StepForm: React.FC = () => {
+  const sessionUser = useSelector((state: RootState)=> state.user);
   const dispatch = useDispatch();
   const step = useSelector((state: RootState) => state.step.currentStep);
   const formData = useSelector((state: RootState) => state.form); // Assuming `form` is the slice holding your form data
   const navigate = useNavigate(); // Use useNavigate instead of useHistory
-
+  
   const handleNext = () => {
     if (step < steps.length) {
         dispatch(incrementStep());
@@ -39,8 +40,9 @@ const StepForm: React.FC = () => {
   return (
       <Paper className='formPaper' elevation={3}>
         <Typography sx={{textAlign: 'center', marginBottom: 5}} variant='h3'>
-          Post your listing
+          Post your listing 
         </Typography>
+        
       <Grid className='formGrid'  container spacing={3}>
       <Grid item xs={3}>
       <Stepper activeStep={step - 1} orientation="vertical" sx={{ minWidth: '200px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>

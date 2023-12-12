@@ -1,10 +1,13 @@
 import express from 'express';
+import http from 'http';
 import initialize from './app/app.js';
+import initializeSocket from './app/socket.js'; // import the Socket.IO initializer
 
 const app = express();
-const port = 3002;
+const server = http.createServer(app);
 
 initialize(app);
+initializeSocket(server); // Initialize Socket.IO with the server
 
-
-app.listen(port, () => console.log("Server is Listening to port 3002"));
+const port = 3002;
+server.listen(port, () => console.log(`Server is listening on port ${port}`));

@@ -13,4 +13,6 @@ router.post('/api/login', userController.loginUser);
 // Reset password
 router.post('/api/password-reset', userController.resetPassword);
 
+router.get('/api/:loginId', userController.getUser);
+
 export default router;

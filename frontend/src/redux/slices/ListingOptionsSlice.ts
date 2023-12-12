@@ -2,13 +2,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ListingOptionsState {
-  uniqueFeatures: string[];
+  utilities: string[];
   amenities: string[];
+  preferences: string[];
 }
 
 const initialState: ListingOptionsState = {
-  uniqueFeatures: ['Hardwood Floors', 'Granite Countertops', 'Walk-in Closet'],
+  utilities: ['Laundry', 'Heater', 'Hot Water'],
   amenities: ['Swimming Pool', 'Gym', 'Pet-Friendly'],
+  preferences: ['No Smoking','No Alcohol', 'Occasional Parties','Indians Preferred', 
+                  'All Girl Apartment','All Guys Apartment', 'Mixed Gender Apartment']
 };
 
 const listingOptionsSlice = createSlice({
@@ -16,13 +19,16 @@ const listingOptionsSlice = createSlice({
   initialState,
   reducers: {
     addUniqueFeature: (state, action: PayloadAction<string>) => {
-      state.uniqueFeatures.push(action.payload);
+      state.utilities.push(action.payload);
     },
     addAmenity: (state, action: PayloadAction<string>) => {
       state.amenities.push(action.payload);
     },
+    addPreferences:(state, action: PayloadAction<string>) => {
+      state.preferences.push(action.payload);
+    }
   },
 });
 
-export const { addUniqueFeature, addAmenity } = listingOptionsSlice.actions;
+export const { addUniqueFeature, addAmenity, addPreferences } = listingOptionsSlice.actions;
 export default listingOptionsSlice.reducer;
