@@ -147,8 +147,8 @@ const ListOfPosts: React.FC = () => {
         </Button>
       </div>
       {viewType === "list" && <ListPosts posts={finalPosts} handlePostOpen={handlePostOpen} />}
-      {viewType == "grid" && <GridPosts posts={finalPosts} handlePostOpen={handlePostOpen}/>}
-      {/*{viewType == "map" && <MapPosts posts={finalPosts} handlePostOpen={handlePostOpen}/>*/}
+      {viewType === "grid" && <GridPosts posts={finalPosts} handlePostOpen={handlePostOpen}/>}
+      {viewType === "map" && <MapPosts posts={finalPosts} handlePostOpen={handlePostOpen}/>}
     </div>
   );
 };
