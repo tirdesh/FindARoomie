@@ -23,7 +23,7 @@ export const createUser = async (request, response) => {
 export const loginUser = async (request, response) => {
     try {
         const { email, password } = request.body;
-        console.log(email,password);
+        //console.log(email,password);
         const token = await userServices.loginUser(email, password);
         setResponse({ token }, response, 200, 'Login successful');
     } catch (err) {
