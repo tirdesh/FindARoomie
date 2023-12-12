@@ -1,5 +1,7 @@
 // RoomListings.tsx
 import React, { useState, useEffect } from 'react';
+import { Button } from '@mui/material';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 
 interface RoomFilter {
   _id: string;
@@ -20,6 +22,7 @@ interface RoomFilter {
 
 const RoomFiltersFetch: React.FC = () => {
   const [roomFilters, setRoomFilters] = useState<RoomFilter[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch data from the API
@@ -29,8 +32,17 @@ const RoomFiltersFetch: React.FC = () => {
       .catch((error) => console.error('Error fetching data:', error));
   }, []); // Empty dependency array ensures the effect runs once when the component mounts
 
+  const handleButtonClick = () =>{
+    const propsToSend = {
+      id: "6577acc6a9b55feb776ba473"
+    };
+    navigate('/modify-listing-form', { state: propsToSend });
+  };
+
   return (
     <div>
+      <div><Button onClick={handleButtonClick}>Test</Button></div>
+
       <h1>Room Filters Using Fetch</h1>
       {Array.isArray(roomFilters) ? (
         roomFilters.map((filter) => (

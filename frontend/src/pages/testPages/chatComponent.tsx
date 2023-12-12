@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Socket, io } from 'socket.io-client';
-import { TextField, Button, Box, Typography, List, ListItem, ListItemText, Paper, Divider } from '@mui/material';
+import { TextField, Button, Box, Typography, List, ListItem, ListItemText, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface Message {
   user: string;
   text: string;
+  timestamp: number;
 }
 
 interface User {
@@ -18,6 +20,87 @@ interface ChatComponentProps {
   username?: string;
 }
 
+// MessageBubble component
+const MessageBubble: React.FC<{ message: Message; isCurrentUser: boolean }> = ({
+  message,
+  isCurrentUser,
+}) => {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
+
+  return (
+    <Box
+      sx={{
+        marginBottom: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: isCurrentUser ? 'flex-end' : 'flex-start',
+        paddingBottom:1
+      }}
+    >
+
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          sx={{
+            textAlign: isCurrentUser ? 'right' : 'left',
+            paddingRight: isCurrentUser ? 2 : 0,
+            paddingLeft: isCurrentUser ? 0 : 2,
+            marginBottom: 0
+          }}
+        >
+          {message.user}
+        </Typography>
+      <ListItem
+        sx={{
+          marginTop: 0,
+          textAlign: isCurrentUser ? 'right' : 'left',
+          paddingTop:0,
+          paddingBottom:0,
+          paddingRight: isCurrentUser ? 0 : 5,
+          paddingLeft: isCurrentUser ? 5 : 0,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: isCurrentUser ? 'flex-end' : 'flex-start',
+        }}
+      >
+        <ListItemText
+          primary={message.text}
+          sx={{
+            borderRadius: 9,
+            padding: 1,
+            border: '1px solid',
+            borderColor: isCurrentUser ? '#007bff' : '#e0e0e0',
+            backgroundColor: isCurrentUser ? '#007bff' : '#e0e0e0',
+            color: isCurrentUser ? 'white' : 'black',
+            cursor: 'pointer',
+            maxWidth: '70%', // Limit the width of the message bubble
+          }}
+          onClick={handleClick}
+        />
+      </ListItem>
+      {isClicked && (
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          sx={{
+            textAlign: isCurrentUser ? 'right' : 'left',
+            paddingRight: isCurrentUser ? 0 : 5,
+            paddingLeft: isCurrentUser ? 5 : 0,
+            marginTop: 0,
+          }}
+        >
+          {new Date(message.timestamp).toLocaleTimeString()}
+        </Typography>
+      )}
+    </Box>
+  );
+};
+
+
 const ChatComponent: React.FC<ChatComponentProps> = (props) => {
   const params = useParams<{ roomName: string; username: string }>();
   const roomName = props.roomName || params.roomName;
@@ -26,7 +109,9 @@ const ChatComponent: React.FC<ChatComponentProps> = (props) => {
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [users, setUsers] = useState<User[]>([]);
+  const [notification, setNotification] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const newSocket = io('http://localhost:3002');
@@ -40,6 +125,14 @@ const ChatComponent: React.FC<ChatComponentProps> = (props) => {
       setUsers(users);
     });
 
+    newSocket.on('userConnected', (data: { userId: string; username: string }) => {
+      setNotification(`${data.username} joined the chat`);
+    });
+
+    newSocket.on('userDisconnected', (data: { userId: string; username: string }) => {
+      setNotification(`${data.username} left the chat`);
+    });
+
     setSocket(newSocket);
     return () => {
       newSocket.disconnect();
@@ -50,6 +143,15 @@ const ChatComponent: React.FC<ChatComponentProps> = (props) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  useEffect(() => {
+    // Clear notification after a delay (e.g., 3 seconds)
+    const notificationTimeout = setTimeout(() => {
+      setNotification(null);
+    }, 3000);
+
+    return () => clearTimeout(notificationTimeout);
+  }, [notification]);
+
   const handleSendMessage = (event: React.FormEvent) => {
     event.preventDefault();
     if (socket && message) {
@@ -59,14 +161,33 @@ const ChatComponent: React.FC<ChatComponentProps> = (props) => {
     }
   };
 
+  const handleExitChat = () => {
+    if (socket) {
+      socket.emit('leaveRoom', { roomName });
+      socket.disconnect();
+    }
+    navigate('/chat');
+  };
+
   return (
-    <Box sx={{ display: 'flex', maxWidth: 1000, mx: 'auto', my: 4 }}>
+    <Paper sx={{ padding:2}}>
+          <Button
+        variant="outlined"
+        onClick={handleExitChat}
+        sx={{
+          alignContent: 'flex-end',
+          float: 'right'
+        }}
+      >
+        X
+      </Button>
+   <Box sx={{ display: 'flex', maxWidth: 1000, mx: 'auto', my: 4 }}>
       <Box sx={{ width: '30%', borderRight: 1, borderColor: 'divider' }}>
         <Typography variant="h6" gutterBottom>Online Users</Typography>
         <List>
           {users.map((user, index) => (
             <ListItem key={index}>
-              <ListItemText primary={user.name} />
+              <ListItemText primary={user.name || ''} />
             </ListItem>
           ))}
         </List>
@@ -74,15 +195,22 @@ const ChatComponent: React.FC<ChatComponentProps> = (props) => {
       <Box sx={{ width: '70%', pl: 2 }}>
         <Typography variant="h4" gutterBottom>Chat Room: {roomName}</Typography>
         <Paper style={{ maxHeight: 300, overflow: 'auto', marginTop: 2 }}>
-          <List>
+        <List>
             {messages.map((msg, index) => (
-              <ListItem key={index}>
-                <ListItemText primary={`${msg.user}: ${msg.text}`} />
-              </ListItem>
+              <MessageBubble
+                key={index}
+                message={msg}
+                isCurrentUser={msg.user === username}
+              />
             ))}
             <div ref={messagesEndRef} />
           </List>
         </Paper>
+        <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
+          {notification && (
+            <Typography variant="body2" color="textSecondary">{`${notification}`}</Typography>
+          )}
+        </Box>
         <Box component="form" onSubmit={handleSendMessage} sx={{ mt: 2, display: 'flex', gap: 1 }}>
           <TextField
             fullWidth
@@ -95,6 +223,7 @@ const ChatComponent: React.FC<ChatComponentProps> = (props) => {
         </Box>
       </Box>
     </Box>
+    </Paper>
   );
 };
 

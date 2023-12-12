@@ -47,10 +47,10 @@ const ChatEntryPage: React.FC = () => {
       <Button variant="contained" onClick={handleJoinChatPage} fullWidth sx={{ mb: 1 }}>
         Join Chat Page
       </Button>
-      <Button variant="contained" onClick={handleOpenPopupChat} fullWidth>
+      {/**<Button variant="contained" onClick={handleOpenPopupChat} fullWidth>
         Open Pop-up Chat
       </Button>
-      <ChatWindow open={isChatOpen} onClose={handleClosePopupChat} roomName={roomName} username={username} />
+      <ChatWindow open={isChatOpen} onClose={handleClosePopupChat} roomName={roomName} username={username} />**/}
     </Box>
   );
 };

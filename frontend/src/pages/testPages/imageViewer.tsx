@@ -11,11 +11,11 @@ const ImageViewer: React.FC<{ imageId: string }> = ({ imageId }) => {
         const response = await axios.get(`http://localhost:3002/upload/${imageId}`, {
           responseType: 'arraybuffer',
         });
-        console.log(response);
+        //console.log(response);
         const base64Image = btoa(
           new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
         );
-        console.log('base64Image:', base64Image);
+        //console.log('base64Image:', base64Image);
 
         const url = `data:${response.headers['content-type']};base64,${base64Image}`;
         setImageUrl(url);
@@ -37,9 +37,7 @@ const ImageViewer: React.FC<{ imageId: string }> = ({ imageId }) => {
   }
 
   return (
-    <div>
-      <img src={imageUrl} alt="Uploaded" style={{ maxWidth: '100%', maxHeight: '500px' }} />
-    </div>
+      <img src={imageUrl} alt="Uploaded" style={{ height:'400px', width: '500px', maxHeight: '500px' }} />
   );
 };
 
