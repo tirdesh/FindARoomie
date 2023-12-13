@@ -56,19 +56,27 @@ const RoomieCard: React.FC<Props> = ({ roommate, style }) => {
     return (
         <Grid item xs={12} sm={6} md={4} style={{}}>
             <Card sx={cardStyle}>
-                <a className='onHover' onClick={(e)=>handlePostOpen(roommate)}>
-                    <CardHeader
-                        avatar={
-                            <Avatar aria-label="roomie">
-                                {roommate.lookingForRoom.name.charAt(0)}
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon />
-                            </IconButton>
-                        }
-                        title={roommate.lookingForRoom.name}
+
+             <a className='onHover' onClick={(e)=>handlePostOpen(roommate)}>
+                <CardHeader
+                     
+                    avatar={
+                        <Avatar aria-label="roomie">
+                            {roommate.lookingForRoom.name.charAt(0)}
+                        </Avatar>
+                    }
+                    action={
+                        <IconButton aria-label="settings">
+                            <MoreVertIcon />
+                        </IconButton>
+                    }
+                    title={roommate.lookingForRoom.name}
+                    titleTypographyProps={{ className: 'card-header-title' }}
+                />
+                    <div className="image-container">
+                    <ImageViewer
+                        imageId={roommate.photos[0]}
+
                     />
                     <div className="image-container" style={{ height: '200px', width: '100%' }}>
                         <ImageViewer 
@@ -76,11 +84,13 @@ const RoomieCard: React.FC<Props> = ({ roommate, style }) => {
                         />
                     </div>
                 
-                    <CardContent>
-                        <Typography variant="body2" color="text.secondary">
-                            {roommate.lookingForRoom.locationAddress}
-                        </Typography>
-                    </CardContent>
+
+                <CardContent>
+                    <Typography variant="body2" color="text.secondary" className="typography-body2">
+                        {roommate.lookingForRoom.locationAddress}
+                    </Typography>
+                </CardContent>
+
                 </a>
                
                 <CardActions disableSpacing>
