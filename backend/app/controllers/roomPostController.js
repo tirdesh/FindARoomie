@@ -30,7 +30,7 @@ export const getRoomById = async (req, res) => {
     try {
         const id = req.params.roomId;
         const room = await roomServices.getById(id);
-        setResponse(room, res, 'Retrieved room successfully');
+        setResponse(room, res);
     } catch (err) {
         setErrorResponse(err, res);
     }

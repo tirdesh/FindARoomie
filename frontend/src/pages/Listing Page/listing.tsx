@@ -40,11 +40,6 @@ const ListOfPosts: React.FC = () => {
     fetchData();
   }, []);
 
-  const handlePostOpen = (post: RoomPost) =>{
-    navigate(`/listings/${post.postId}`, { state: { roomPost: post }});
-    console.log(post.postId);
-  } 
-
   const handlePostFilters = (filters: any) => {
     //console.log('Applying filters:', filters);
     //console.log('roomPosts:', roomPosts);
@@ -131,6 +126,11 @@ const ListOfPosts: React.FC = () => {
   const handleViewTypeChange = (type: 'list' | 'map' | 'grid') => {
     setViewType(type);
   };
+
+  const handlePostOpen = (post: RoomPost) =>{
+    navigate(`/listings/${post.postId}`, { state: { roomPost: post }});
+    console.log(post.postId);
+  } 
  
   return (
     <div className='Listings'>

@@ -22,4 +22,8 @@ export const selectPostById = (postId: string) => (state: RootState) => {
     return state.postlist.find(post => post.postId === postId);
   };
 
+export const selectPostsByUserId = (userId: string) => (state: RootState): RoomPost[] => {
+return state.postlist.filter(post => post.userId === userId);
+};
+
 export default PostListSlice;

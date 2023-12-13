@@ -32,7 +32,7 @@ const GridPosts: React.FC<GridPostsProps> = ({ posts, handlePostOpen }) => {
           }}>
             {currentPosts.map((room) => (
               <div key={room.postId} style={{ marginBottom: '20px' }}>
-                <a className='onHover' onClick={() => handlePostOpen(room)}><RoomieCard roommate={room} /></a>
+                <RoomieCard roommate={room} />
                 {/* ...rest of the code for displaying room details... */}
               </div>
             ))}

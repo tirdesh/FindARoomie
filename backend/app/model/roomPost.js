@@ -116,7 +116,11 @@ const roomSchema = new Schema({
   photos: {
     type: [String],
     required: true, // Photos are required.
-  }
+  },
+  createdDate: {
+    type: Date,
+    default: Date.now
+}
 });
 
 // Create a Mongoose model named 'Room' based on the defined schema
