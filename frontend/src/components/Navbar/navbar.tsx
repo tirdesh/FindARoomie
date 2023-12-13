@@ -15,13 +15,13 @@ import {
   Toolbar,
   Select,
   SelectChangeEvent,
+  Grid,
 } from '@mui/material';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './navbar.css';
-import AccountMenu from './AccountMenu';
 
 interface ResponsiveAppBarProps {
   theme: string;
@@ -51,6 +51,9 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
     navigate('/login');
   };
 
+  const changeLanguage = (event: SelectChangeEvent<string>) => {
+    i18n.changeLanguage(event.target.value as string);
+  };
 
   return (
     <AppBar position="sticky" className={`navbar-app ${theme}`}>
@@ -73,6 +76,13 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
 
         <Stack direction={'row'} spacing={3}>
           {/* Navigation Links and Buttons */}
+          <Grid
+           container
+           direction={'row'}
+           alignItems={'center'}
+           justifyContent={'flex-end'}
+           gap={2}
+          >
           <Link to="/" style={{ textDecoration: 'none' }}>
             <Button color="inherit">Home</Button>
           </Link>
@@ -82,12 +92,16 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
           
           {isLogged ? (
             <>
+              
               {/* Logged in user navigation and profile menu */}
+              <Link to="/fetch" style={{ textDecoration: 'none' }}>
+                <Button color="inherit" sx={{verticalAlign:'middle'}}>Fetch API</Button>
+              </Link>
               <Link to="/listings" style={{ textDecoration: 'none' }}>
-                <Button color="inherit">Find Listing</Button>
+                <Button color="inherit">Listings</Button>
               </Link>
               <Link to="/create-listing" style={{ textDecoration: 'none' }}>
-                <Button color="inherit">Post Listing</Button>
+                <Button color="inherit">Post</Button>
               </Link>
               <Link to="/blogs" style={{ textDecoration: 'none' }}>
                 <Button color="inherit">Blogs</Button>
@@ -95,13 +109,49 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
               <Link to="/chat" style={{ textDecoration: 'none' }}>
                 <Button color="inherit">Chat</Button>
               </Link>
-              <AccountMenu logout={logoutUser} profileName={sessionUser.firstName} />
+
+              <Button
+                sx={{ color: 'inherit', textTransform: 'none' }}
+                onClick={handleProfileMenu}
+              >
+                {sessionUser.firstName}
+              </Button>
+              <Menu
+                id="profile-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleCloseProfileMenu}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <MenuItem onClick={handleCloseProfileMenu} component={Link} to="/profile">Profile</MenuItem>
+                <MenuItem onClick={handleCloseProfileMenu} component={Link} to="/mylistings">My Listings</MenuItem>
+                <MenuItem onClick={logoutUser}>Logout</MenuItem>
+              </Menu>
             </>
           ) : (
             <Link to="/login" style={{ textDecoration: 'none' }}>
               <Button color="inherit">Login / Sign Up</Button>
             </Link>
           )}
+
+          {/* Language Dropdown */}
+          <Select
+            value={i18n.language}
+            defaultValue='en'
+            onChange={changeLanguage}
+            sx={{ color: 'inherit', '&:before': { borderBottom: 'none' } }}
+          >
+            <MenuItem value="en">English</MenuItem>
+            <MenuItem value="tel">Telugu</MenuItem>
+            <MenuItem value="es">Spanish</MenuItem>
+          </Select>
 
           {/* Theme Toggle Button */}
           <IconButton
@@ -110,6 +160,8 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
           >
             {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
           </IconButton>
+
+          </Grid>
         </Stack>
       </Toolbar>
     </AppBar>
