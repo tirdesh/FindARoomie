@@ -103,9 +103,6 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
               <Link to="/create-listing" style={{ textDecoration: 'none' }}>
                 <Button color="inherit">Post</Button>
               </Link>
-              <Link to="/mylistings" style={{ textDecoration: 'none' }}>
-                <Button color="inherit">My Listings</Button>
-              </Link>
               <Link to="/blogs" style={{ textDecoration: 'none' }}>
                 <Button color="inherit">Blogs</Button>
               </Link>
