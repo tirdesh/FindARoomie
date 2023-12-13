@@ -4,11 +4,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import RoommatePost from '../../models/roomPost';
 import ImageViewer from '../../pages/testPages/imageViewer';
-import RoomPost from '../../models/roomPost';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import './ImageCard.css';
 
 type Props = {
     roommate: RoommatePost;
@@ -55,7 +55,7 @@ const RoomieCard: React.FC<Props> = ({ roommate }) => {
             <Card sx={cardStyle}>
              <a className='onHover' onClick={(e)=>handlePostOpen(roommate)}>
                 <CardHeader
-                    
+                     
                     avatar={
                         <Avatar aria-label="roomie">
                             {roommate.lookingForRoom.name.charAt(0)}
@@ -68,7 +68,7 @@ const RoomieCard: React.FC<Props> = ({ roommate }) => {
                     }
                     title={roommate.lookingForRoom.name}
                 />
-                <div style={{ height: '194px' }}>
+                    <div className="image-container">
                     <ImageViewer
                         imageId={roommate.photos[0]}
                     />

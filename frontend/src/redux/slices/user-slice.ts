@@ -1,9 +1,8 @@
-
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import User from "../../models/user";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import User from '../../models/user';
 
 export type UserState = User;
-const intitalState: UserState = {
+const initialState: UserState = {
     _id: "",
     userId: "",
     firstName: "",
@@ -13,19 +12,23 @@ const intitalState: UserState = {
     email: "",
     phone: "",
     password: "",
-    createdDate: new Date(),
     postedList: [],
-    wishList: []
+    wishList: [],
+    createdDate: new Date(),
 };
+
 export const userSlice = createSlice({
-    name: 'User',
-    initialState: intitalState,
-    reducers:{
-        setUser:(state, action: PayloadAction<UserState>) =>{
-            return action.payload;
-        }
-    }
+  name: 'user',
+  initialState,
+  reducers: {
+    setUser: (state, action: PayloadAction<UserState>) => {
+      return action.payload;
+    },
+    resetUser: () => initialState, // Return a new state object
+    // other reducers can be added here
+  },
 });
 
-export const {setUser} = userSlice.actions;
+export const { setUser, resetUser } = userSlice.actions;
+
 export default userSlice.reducer;

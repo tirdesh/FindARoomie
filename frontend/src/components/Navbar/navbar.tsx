@@ -2,6 +2,7 @@ import { AppBar, Button, IconButton, Stack, Toolbar, Typography } from '@mui/mat
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import Brightness4Icon from '@mui/icons-material/Brightness4'; // Icon for light theme (moon)
 import Brightness7Icon from '@mui/icons-material/Brightness7'; // Icon for dark theme (sun)
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css';
@@ -35,13 +36,22 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
   return (
     <AppBar position="sticky" className={`navbar-app ${theme}`}>
       <Toolbar>
-        <IconButton sx={{margin: 2}} onClick={(e)=>{navigate("/")}} size='large' edge="start" color='inherit' aria-label='logo'>
+        <IconButton 
+          sx={{margin: 2}} 
+          onClick={(e)=>{navigate("/")}} 
+          size='large' 
+          edge="start" 
+          color='inherit' 
+          aria-label='logo'>
           <Diversity3Icon />
         </IconButton>
-
-        <Typography sx={{marginLeft:2, flexGrow:1}} variant='h6' component='div'>
+        <Typography 
+          variant='h6' 
+          component='div' 
+          sx={{ marginRight: 'auto' }}> {/* Changed marginLeft to marginRight and removed flexGrow */}
           Roomies
         </Typography>
+
         <Stack direction={'row'} spacing={3}>
           
           {/* Navigation Links and Buttons */}
@@ -60,9 +70,9 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
                 <Link to="/fetch" style={{ textDecoration: 'none' }}>
                     <Button color="inherit">Fetch API</Button>
                 </Link>
-                <Link to="/axios" style={{ textDecoration: 'none' }}>
+                {/* <Link to="/axios" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Axios</Button>
-                </Link>
+                </Link> */}
                 <Link to="/listings" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Listings</Button>
                 </Link>
@@ -72,21 +82,46 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
                 <Link to="/mylistings" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">My Listings</Button>
                 </Link>
+                {/* <Link to="/roommate-search" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">Room Search</Button>
+                </Link> */}
                 <Link to="/blogs">
                       <Button sx={{color: 'whitesmoke'}} color="secondary">Blogs</Button>
                 </Link>
-                <Link to="/upload" style={{ textDecoration: 'none' }}>
+                {/* <Link to="/upload" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Upload</Button>
-                </Link>
-                <Link to="/map" style={{ textDecoration: 'none' }}>
+                </Link> */}
+                {/* <Link to="/map" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Map</Button>
-                </Link>
+                </Link> */}
                 <Link to="/chat" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Chat</Button>
                 </Link>
-                <Link to="/" style={{ textDecoration: 'none' }}>
-                  <Button color="inherit" onClick={logoutUser}>Logout</Button>
+                <Link to="/profile" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">Profile</Button>
                 </Link>
+                {/* <Link to="/" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit" onClick={logoutUser}>Logout</Button>
+                </Link> */}
+                {/* <Link to="/" style={{ textDecoration: 'none' }}>
+                <IconButton color="inherit" onClick={logoutUser} aria-label="logout">
+                  <ExitToAppIcon />
+                </IconButton>
+              </Link> */}
+              <IconButton
+                sx={{
+                  color: 'inherit', // Inherit the text color from the parent
+                  backgroundColor: 'transparent', // Ensure the background is transparent
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)', // Similar hover effect as other buttons
+                  }
+                }}
+                onClick={logoutUser}
+                aria-label="logout"
+              >
+                <ExitToAppIcon />
+              </IconButton>
+
                 </Stack>
             ):(
               <Link to="/login" style={{ textDecoration: 'none' }}>
