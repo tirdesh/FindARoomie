@@ -1,28 +1,54 @@
+/* navbar.css */
 
-.navbar-app.dark {
-    background-color: #333; /* Dark theme background */
-    color: white; /* Dark theme text color */
-  }
-  
-  .navbar-app.light {
-    background-color: #eee; /* Light theme background */
-    color: black; /* Light theme text color */
-  }
-  
-  /* Style for links and buttons */
-  .navbar-app .MuiButton-root {
-    color: inherit; /* Inherits the color from the theme */
-  }
-  
-  /* More styles can be added as needed */
-  
-/* Style for buttons and icon buttons */
-.navbar-app .MuiButton-root,
-.navbar-app .MuiIconButton-root { /* Apply the same style to IconButton */
-  color: inherit; /* Inherits the color from the theme */
+/* Ensures that the AppBar doesn't apply additional margins or padding */
+.navbar-app .MuiToolbar-root {
+  justify-content: space-between; /* Aligns logo/title to the left and navigation to the right */
 }
 
-/* You might want to add specific hover effects for icon buttons if needed */
-.navbar-app .MuiIconButton-root:hover {
-  background-color: rgba(255, 255, 255, 0.25); /* Example hover effect */
+/* Ensures the logo and title are aligned and spaced correctly */
+.navbar-app .MuiIconButton-root {
+  padding: 8px; /* Adjust padding as needed */
+}
+
+/* Style for links and buttons */
+.navbar-app .MuiButton-root {
+  color: inherit; /* Inherits the color from the theme */
+  font-size: 1rem; /* Set font size here as needed */
+}
+
+/* Additional styles to handle spacing and alignment */
+.navbar-app .MuiStack-root {
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* Style to remove the underline from the Select input component */
+.navbar-app .MuiSelect-select {
+  &:before {
+    border-bottom: none;
+  }
+  &:hover:not(.Mui-disabled):before {
+    border-bottom: none;
+  }
+}
+
+/* Adjust the size of the logo if needed */
+.navbar-app .MuiIconButton-edgeStart {
+  margin-right: 12px; /* Adjust the spacing between logo and title */
+}
+
+/* Align the title text vertically */
+.navbar-app .MuiTypography-root {
+  align-self: center;
+}
+
+/* Dark and Light theme styles */
+.navbar-app.dark {
+  background-color: #333;
+  color: white;
+}
+
+.navbar-app.light {
+  background-color: #eee;
+  color: black;
 }
