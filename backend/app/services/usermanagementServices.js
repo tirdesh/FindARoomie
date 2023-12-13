@@ -26,7 +26,8 @@ export const findUserById = async (userId) => {
 
 // Service to update user details
 export const updateUser = async (userId, updatedData) => {
-    return await User.findByIdAndUpdate(userId, updatedData, { new: true }).exec();
+    const user =  await User.findOneAndUpdate({userId: userId},  updatedData , { new: true }).exec();
+    return user;
 };
 
 // Service for user login
@@ -35,7 +36,6 @@ export const loginUser = async (email, password) => {
     if (!user || !(await user.comparePassword(password))) {
         throw new Error('Invalid email or password');
     }
-
     return user;
 };
 

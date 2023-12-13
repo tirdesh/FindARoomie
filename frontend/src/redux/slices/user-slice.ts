@@ -3,18 +3,18 @@ import User from '../../models/user';
 
 export type UserState = User;
 const initialState: UserState = {
-    _id: "",
-    userId: "",
-    firstName: "",
-    lastName: "",
-    age: "",
-    gender: "",
-    email: "",
-    phone: "",
-    password: "",
-    postedList: [],
-    wishList: [],
-    createdDate: new Date(),
+  _id: "",
+  userId: "",
+  firstName: "",
+  lastName: "",
+  age: "",
+  gender: "",
+  email: "",
+  phone: "",
+  password: "",
+  postedList: [],
+  wishList: [],
+  createdDate: new Date()
 };
 
 export const userSlice = createSlice({

@@ -4,7 +4,7 @@ const initializeSocket = (server) => {
   const io = new Server(server, {
     cors: {
       origin: "*", // Adjust according to your needs
-      methods: ["GET", "POST"],
+      methods: ["GET", "POST","PUT","DELETE"],
     },
   });
 

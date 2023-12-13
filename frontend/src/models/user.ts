@@ -10,7 +10,6 @@ interface User{
     password: string,
     postedList: string[],
     wishList: string[],
-    photo: string,
     createdDate: Date
 }
 
