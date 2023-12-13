@@ -120,7 +120,7 @@ const Step5Form: React.FC = () => {
       {/* Availability */}
       <Grid item xs={12}>
         <TextField
-          label="Availability"
+          label="Contact Availability"
           type="text"
           value={formState.availability}
           onChange={(e) => handleInputChange('availability', e.target.value)}
