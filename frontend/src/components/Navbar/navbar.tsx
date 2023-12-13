@@ -15,6 +15,7 @@ import {
   Toolbar,
   Select,
   SelectChangeEvent,
+  Grid,
 } from '@mui/material';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -75,6 +76,13 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
 
         <Stack direction={'row'} spacing={3}>
           {/* Navigation Links and Buttons */}
+          <Grid
+           container
+           direction={'row'}
+           alignItems={'center'}
+           justifyContent={'flex-end'}
+           gap={2}
+          >
           <Link to="/" style={{ textDecoration: 'none' }}>
             <Button color="inherit">Home</Button>
           </Link>
@@ -84,9 +92,10 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
           
           {isLogged ? (
             <>
+              
               {/* Logged in user navigation and profile menu */}
               <Link to="/fetch" style={{ textDecoration: 'none' }}>
-                <Button color="inherit">Fetch API</Button>
+                <Button color="inherit" sx={{verticalAlign:'middle'}}>Fetch API</Button>
               </Link>
               <Link to="/listings" style={{ textDecoration: 'none' }}>
                 <Button color="inherit">Listings</Button>
@@ -138,6 +147,7 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
           {/* Language Dropdown */}
           <Select
             value={i18n.language}
+            defaultValue='en'
             onChange={changeLanguage}
             sx={{ color: 'inherit', '&:before': { borderBottom: 'none' } }}
           >
@@ -153,6 +163,8 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
           >
             {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
           </IconButton>
+
+          </Grid>
         </Stack>
       </Toolbar>
     </AppBar>

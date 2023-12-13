@@ -46,30 +46,15 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
           {(isLogged)?
             (
               <Stack direction={'row'} spacing={3}>
-                {/* <Link to="/fetch" style={{ textDecoration: 'none' }}>
-                    <Button color="inherit">Fetch API</Button>
-                </Link> */}
-                {/* <Link to="/axios" style={{ textDecoration: 'none' }}>
-                  <Button color="inherit">Axios</Button>
-                </Link> */}
                 <Link to="/listings" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Listings</Button>
                 </Link>
                 <Link to="/create-listing" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Post</Button>
                 </Link>
-                {/* <Link to="/roommate-search" style={{ textDecoration: 'none' }}>
-                  <Button color="inherit">Room Search</Button>
-                </Link> */}
                 <Link to="/blogs">
                       <Button sx={{color: 'whitesmoke'}} color="secondary">Blogs</Button>
                 </Link>
-                {/* <Link to="/upload" style={{ textDecoration: 'none' }}>
-                  <Button color="inherit">Upload</Button>
-                </Link> */}
-                {/* <Link to="/map" style={{ textDecoration: 'none' }}>
-                  <Button color="inherit">Map</Button>
-                </Link> */}
                 <Link to="/chat" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Chat</Button>
                 </Link>
