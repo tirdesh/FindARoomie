@@ -36,8 +36,6 @@ const MyListings: React.FC = () => {
   }, []);
   const finalPosts = useSelector(selectPostsByUserId(sessionUser.userId)); // Use finalPosts state
 
-
-
   const handlePostOpen = (post: RoomPost) =>{
     navigate(`/listings/${post.postId}`, { state: { roomPost: post }});
     console.log(post.postId);

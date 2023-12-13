@@ -7,6 +7,7 @@ import { ReactElement } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "../../handlers/AlertProvider";
 
 const SignUpCard: React.FC = ():ReactElement =>{
     // const [firstName, ]  
@@ -26,6 +27,7 @@ const SignUpCard: React.FC = ():ReactElement =>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    const { showAlert } = useAlert(); // Get showAlert function from useAlert
 
     const handleFirstName = (event: any)=>{
         setFirstName(event.target.value);
@@ -86,13 +88,13 @@ const SignUpCard: React.FC = ():ReactElement =>{
             || !Boolean(password) 
             || !Boolean(confirmPassword) 
             || Boolean(userNameError)){
-            alert("PLEASE ENTER ALL THE DETAILS");
+            showAlert("error","PLEASE ENTER ALL THE DETAILS");
         } else if(Boolean(emailError)){
-            alert("Enter a valid email");
+            showAlert("error", "Enter a valid email");
         } else if(Boolean(passwordError)){
-            alert("Enter a valid password")
+            showAlert("error", "Enter a valid password")
         } else if(password!==confirmPassword){
-            alert("Password doen't match")
+            showAlert("error", "Password doen't match")
         }
         else{
             registerUser();
@@ -114,12 +116,12 @@ const SignUpCard: React.FC = ():ReactElement =>{
                     password: password
                 })
             .then((response)=>{
-                    alert("Account Created Successfully");
+                    showAlert("success", "Account Created Successfully");
                     window.location.reload();   
                     console.log(response.data.message);
                     
                 })
-            .catch((error)=>{alert(error.response.data.message)});
+            .catch((error)=>{showAlert("error",(error.response.data.message as string))});
     }
 
     return(
