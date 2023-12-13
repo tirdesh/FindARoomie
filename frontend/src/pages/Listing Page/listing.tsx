@@ -114,13 +114,43 @@ const ListOfPosts: React.FC = () => {
           return false;
         }
       }
+      
   
       // If none of the filters excluded the post, include it in the filtered list
       return true;
     });
-  
-    setFinalPosts(filteredPosts); // Update finalPosts with the filtered data
-    console.log(filteredPosts.length);
+    console.log(filteredPosts);
+
+
+    const sortedPostsByPrice = filteredPosts.slice().sort((a, b) => {
+      const rentA = parseInt(a.pricingAndLeaseDetails.monthlyRent);
+      const rentB = parseInt(b.pricingAndLeaseDetails.monthlyRent);
+    
+      return filters.sortBy === 'costly' ?
+        (filters.sortOrder === 'asc' ? rentB - rentA : rentA - rentB) :
+        (filters.sortOrder === 'asc' ? rentA - rentB : rentB - rentA);
+    });
+    console.log(sortedPostsByPrice);
+    const sortedPostsByName = sortedPostsByPrice.slice().sort((a, b) => {
+      // Sorting logic based on filters.sortBy
+      if (filters.sortBy === 'alphabetical') {
+        const nameA = a.lookingForRoom.name.toUpperCase();
+        const nameB = b.lookingForRoom.name.toUpperCase();
+    
+        return filters.sortOrder === 'asc' ?
+          nameA.localeCompare(nameB) :
+          nameB.localeCompare(nameA);
+      }
+    
+      // Default case, no sorting
+      return 0;
+    });
+    
+    
+    setFinalPosts(sortedPostsByName); // Update finalPosts with the filtered and sorted data
+    console.log(sortedPostsByName);
+    console.log(sortedPostsByName.length);
+    
   };
 
   const handleViewTypeChange = (type: 'list' | 'map' | 'grid') => {

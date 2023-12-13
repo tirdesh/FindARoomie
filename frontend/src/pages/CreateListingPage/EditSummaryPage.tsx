@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './summary.css';
 import axios from 'axios';
 import { error } from 'console';
+import { useAlert } from '../../handlers/AlertProvider';
 
 const EditSummaryPage: React.FC = () => {
   const formData = useSelector((state: RootState) => state.form);
@@ -17,7 +18,7 @@ const EditSummaryPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const receivedProps = location.state; // Replace YourPropsType with the actual type/interface of your props
-  
+  const {showAlert} = useAlert();
 
   const listingType = useSelector((state: RootState) => state.form.listingTypeAndLocationInformation.listingType);
 
@@ -98,7 +99,7 @@ const EditSummaryPage: React.FC = () => {
   }
 
   const handleSubmit = async () => {
-    alert("Id will be "+receivedProps._id);
+    showAlert("info", "Id will be "+receivedProps._id);
 
     if(checkFields()){
         const apiPostData = getData();
@@ -106,15 +107,15 @@ const EditSummaryPage: React.FC = () => {
         axios
           .put(apiURL, apiPostData)
           .then((response)=>{
-              alert("Post Added Successfully");
+              showAlert('success', "Post Added Successfully");
               console.log(response.data.message);
             })
           .catch((error)=>{
-            alert(error.response.data.message);
+            showAlert('error', error.response.data.message);
             console.log(error.response);
           })
     }else{
-      alert("Please enter all the fields");
+      showAlert('warning', "Please enter all the fields");
     }
   };
 

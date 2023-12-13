@@ -9,13 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import './summary.css';
 import axios from 'axios';
 import { error } from 'console';
+import { useAlert } from '../../handlers/AlertProvider';
 
 const SummaryPage: React.FC = () => {
   const formData = useSelector((state: RootState) => state.form);
   const sessionUser = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const {showAlert} = useAlert();
   const listingType = useSelector((state: RootState) => state.form.listingTypeAndLocationInformation.listingType);
 
 
@@ -118,16 +119,16 @@ const SummaryPage: React.FC = () => {
         axios
           .post(apiURL, apiPostData)
           .then((response)=>{
-              alert("Post Added Successfully");
+              showAlert('success', "Post Added Successfully");
               addPostToUserDB(apiPostData.postId);
               console.log(response.data.message);
             })
           .catch((error)=>{
-            alert(error.response.data.message);
+            showAlert('error', error.response.data.message);
             console.log(error.response);
           })
     }else{
-      alert("Please enter all the fields");
+      showAlert('warning', "Please enter all the fields");
     }
   };
 
