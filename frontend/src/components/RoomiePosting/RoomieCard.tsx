@@ -67,6 +67,7 @@ const RoomieCard: React.FC<Props> = ({ roommate }) => {
                         </IconButton>
                     }
                     title={roommate.lookingForRoom.name}
+                    titleTypographyProps={{ className: 'card-header-title' }}
                 />
                     <div className="image-container">
                     <ImageViewer
@@ -75,7 +76,7 @@ const RoomieCard: React.FC<Props> = ({ roommate }) => {
                 </div>
                 
                 <CardContent>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" className="typography-body2">
                         {roommate.lookingForRoom.locationAddress}
                     </Typography>
                 </CardContent>
