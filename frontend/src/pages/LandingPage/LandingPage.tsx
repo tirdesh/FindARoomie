@@ -129,7 +129,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
         </Grid>
 
         <Box mt={4}>
-          <Button variant="contained" color="primary" size="large" onClick={(e)=>navigate("/")}>
+          <Button variant="contained" color="primary" size="large" onClick={(e)=>navigate("/listings")}>
             Find Room
           </Button>
           <Button variant="contained" color="secondary" size="large" onClick={(e)=>navigate("/create-listing")} sx={{ marginLeft: '1em' }}>
