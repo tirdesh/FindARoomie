@@ -114,7 +114,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
   const [textCol,setTextCol] = useState("light");
   const matches = useMediaQuery(themeHook.breakpoints.up('sm'));
   const sessionUser = useSelector((state: RootState) => state.user);
-  const a = sessionUser._id ? `Hi ${sessionUser.firstName} !!` : "";
+  const a = sessionUser._id ? `Hi ${sessionUser.firstName.charAt(0).toUpperCase() + sessionUser.firstName.slice(1)} !!` : "";
   const translations = {
     telugu: 'స్నేహితులు',
     hindi: 'दोस्त',

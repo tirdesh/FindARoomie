@@ -24,7 +24,6 @@ import { AppDispatch, RootState } from "../../redux/store";
 import ShareIcon from "@mui/icons-material/Share";
 import PreviewIcon from '@mui/icons-material/Preview';
 
-import "./ImageCard.css";
 import { addWishListId } from "../../redux/slices/user-slice";
 import DirectionsIcon from '@mui/icons-material/Directions';
 

@@ -5,13 +5,14 @@ import './AboutUs.css'; // Ensure this CSS file is in your project
 
 // Import images
 import teamImage from './friends.png';
+import TestimonialCarousel from './TestimonialCarousel';
 
 const AboutUs: React.FC = () => {
   const { t } = useTranslation(); // Hook to access translations
-
+  
   return (
     <Container maxWidth="lg">
-      <Paper elevation={3} style={{ padding: '2em', marginTop: '3vh' }}>
+      <Paper elevation={3} style={{ padding: '2em', marginTop: '2vh' , marginBottom: '2vh' }}>
         <Typography variant="h4" component="h1" gutterBottom>
           {t('aboutUs.title')}
         </Typography>
@@ -26,7 +27,7 @@ const AboutUs: React.FC = () => {
         </Typography>
         {/* ... More paragraphs for each section ... */}
         <Typography paragraph>
-          {t('closing')}
+          {t ('closing')}
         </Typography>
 
         {/* Image and animation section */}
@@ -36,6 +37,9 @@ const AboutUs: React.FC = () => {
           </Grid>
         </Grid>
       </Paper>
+      <Typography variant="h4"> {"Testimonials"} </Typography>
+      <TestimonialCarousel />
+      <div style={{margin:'10px'}}></div>
     </Container>
   );
 };
