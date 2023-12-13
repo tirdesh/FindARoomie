@@ -43,6 +43,8 @@ const UserProfile: React.FC = () => {
       .put(apiURL, userData)
       .then((response)=>{
         console.log(response.data);
+        dispatch(setUser(response.data));
+        console.log(sessionUser);
         alert(response.data.message);
       })
       .catch((error)=>{
@@ -73,6 +75,7 @@ const UserProfile: React.FC = () => {
   const DisplayData = (props:Props) =>{
       const [toggleTF, setToggler] = useState(false);
       const [TFData, setTFData] = useState("");
+      
       const handleSave = () =>{
         if(TFData){
           setUserData((prevData) => ({
