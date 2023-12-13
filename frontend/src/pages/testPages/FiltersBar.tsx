@@ -203,7 +203,7 @@ const FiltersBar: React.FC<FiltersBarProps> = ({ applyFilters }) => {
   ];
 
   return (
-    <Container style={{ maxWidth: '90vw' }} className="filters-bar">
+    <Container style={{ maxWidth: '90vw', marginTop:'20px', padding: '20px'}} className="filters-bar">
       <Paper elevation={3} style={{ padding: 20 }}>
         <Grid container spacing={2}>
           {filterOptions.map((filter) => (

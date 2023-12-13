@@ -12,6 +12,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import ChatIcon from '@mui/icons-material/Chat';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 interface ListPostsProps {
   posts: RoomPost[];
   handlePostOpen: (post: RoomPost) => void;
@@ -108,14 +110,20 @@ const ListPosts: React.FC<ListPostsProps> = ({ posts, handlePostOpen }) => {
       }}
     >
             <Button
-        variant="contained"
+        variant="outlined"
         onClick={() => handleOpenChat(room)}
+        startIcon={<ChatIcon />}
+        style={{
+          color: "black",
+          borderColor: "black",
+        }}
       >
         Live Connect
       </Button>
       <Button
         variant="contained"
         onClick={() => handlePostOpen(room)}
+        endIcon={<VisibilityIcon  />}
       >
         View Details
       </Button>
@@ -141,7 +149,7 @@ const ListPosts: React.FC<ListPostsProps> = ({ posts, handlePostOpen }) => {
         variant="h3"
         textAlign={"left"}
       >
-        <b>Looking For a: {room.Posttype}</b>
+        <b>Looking For A {room.Posttype}</b>
       </Typography>
       <Typography
         sx={{ paddingBottom: 1, textAlign: "justify" }}
@@ -155,7 +163,7 @@ const ListPosts: React.FC<ListPostsProps> = ({ posts, handlePostOpen }) => {
         </i>
         , Address: {room.lookingForRoom.locationAddress}
       </Typography>
-      <Typography
+      {/*<Typography
         sx={{ paddingBottom: 1, textAlign: "justify" }}
         variant="h3"
         textAlign={"left"}
@@ -168,10 +176,10 @@ const ListPosts: React.FC<ListPostsProps> = ({ posts, handlePostOpen }) => {
         textAlign={"left"}
       >
         {room.lookingForRoom.description}
-      </Typography>
+        </Typography>*/}
       <Typography
         sx={{ paddingBottom: 1, textAlign: "justify" }}
-        variant="h3"
+        variant="h4"
         textAlign={"left"}
       >
         <b>House Features:</b>
