@@ -24,7 +24,8 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
   const isLogged = Boolean(sessionUser.userId);
   const dispatch = useDispatch<AppDispatch>();
   const logoutUser =(event:any) =>{
-    dispatch(setUser(userSlice.getInitialState()))
+    dispatch(setUser(userSlice.getInitialState()));
+    localStorage.removeItem("loggedUser");
   }
   const changeLanguage = (event: SelectChangeEvent<string>) => {
     const selectedLanguage = event.target.value as string;
@@ -68,8 +69,8 @@ function ResponsiveAppBar({ theme, toggleTheme }: ResponsiveAppBarProps) {
                 <Link to="/create-listing" style={{ textDecoration: 'none' }}>
                   <Button color="inherit">Post</Button>
                 </Link>
-                <Link to="/roommate-search" style={{ textDecoration: 'none' }}>
-                  <Button color="inherit">Room Search</Button>
+                <Link to="/mylistings" style={{ textDecoration: 'none' }}>
+                  <Button color="inherit">My Listings</Button>
                 </Link>
                 <Link to="/blogs">
                       <Button sx={{color: 'whitesmoke'}} color="secondary">Blogs</Button>

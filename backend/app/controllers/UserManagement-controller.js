@@ -47,6 +47,24 @@ export const resetPassword = async (request, response) => {
     }
 };
 
+export const addWishlist = async (request, response) =>{
+    try{
+        const {userId, postId} = {...request.body};
+        await userServices.addWishlistId(userId, postId);
+        setResponse({}, response, 200, "Post added to wishlist successfully");
+    } catch (err){
+        setErrorResponse(err, response);
+    }
+}
+export const addPostedList = async (request, response) =>{
+    try{
+        const {userId, postId} = {...request.body};
+        await userServices.addPostId(userId, postId);
+        setResponse({}, response, 200, "Post added to user's posted list successfully");
+    } catch (err){
+        setErrorResponse(err, response);
+    }
+}
 export const getUser = async (request, response)=> {
     try{
         const userId = request.params.loginId;

@@ -5,7 +5,7 @@ import { RootState } from '../../redux/store';
 import { Accordion, AccordionDetails, AccordionSummary, Typography, Grid, Paper, Button, Divider } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { submitForm } from '../../redux/slices/CreateListingFormSlice';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './summary.css';
 import axios from 'axios';
 import { error } from 'console';
@@ -15,6 +15,9 @@ const EditSummaryPage: React.FC = () => {
   const sessionUser = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const receivedProps = location.state; // Replace YourPropsType with the actual type/interface of your props
+  
 
   const listingType = useSelector((state: RootState) => state.form.listingTypeAndLocationInformation.listingType);
 
@@ -95,12 +98,13 @@ const EditSummaryPage: React.FC = () => {
   }
 
   const handleSubmit = async () => {
+    alert("Id will be "+receivedProps._id);
 
     if(checkFields()){
         const apiPostData = getData();
-        const apiURL = "http://localhost:3002/roomposts/";
+        const apiURL = "http://localhost:3002/roomposts/"+`${apiPostData.postId}`
         axios
-          .post(apiURL, apiPostData)
+          .put(apiURL, apiPostData)
           .then((response)=>{
               alert("Post Added Successfully");
               console.log(response.data.message);

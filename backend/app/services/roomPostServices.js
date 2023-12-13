@@ -8,7 +8,6 @@ export const create = async (newRoom) => {
         if (postExists) {
             throw new Error('PostId Already Exists');
         }
-
         const room = new Room(newRoom);
         return await room.save();
     } catch (error) {
@@ -28,24 +27,20 @@ export const getAll = async () => {
 };
 
 export const getById = async (id) => {
-    try {
-        const room = await Room.findById(id).exec();
-        return room;
-    } catch (error) {
-        console.error('Error in getById service:', error);
-        throw error;
-    }
-};
+    // Retrieving a blog by its ID from the database.
+    const room = await Room.findById(id).exec();
+    // Returning the found blog.
+    return room;
+}
 
 export const update = async (id, updatedRoom) => {
     try {
-        const existingRoom = await Room.findById(id).exec();
+        const existingRoom = await Room.findOne({ postId:id}).exec();
 
         if (!existingRoom) {
             throw new Error('Room not found');
         }
-
-        const room = await Room.findByIdAndUpdate(id, updatedRoom, { new: true }).exec();
+        const room = await Room.findOneAndUpdate({postId:id}, updatedRoom, { new: true }).exec();
         return room;
     } catch (error) {
         console.error('Error in update service:', error);

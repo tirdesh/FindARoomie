@@ -13,6 +13,13 @@ router.post('/api/login', userController.loginUser);
 // Reset password
 router.post('/api/password-reset', userController.resetPassword);
 
+// Add posted List
+router.put('/api/addPost', userController.addPostedList);
+
+// add wishList To post 
+router.put('/api/wishlist', userController.addWishlist);
+
+
 router.get('/api/:loginId', userController.getUser);
 
 export default router;

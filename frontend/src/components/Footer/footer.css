@@ -8,6 +8,7 @@
     border-top: 1px solid #ccc;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     font-family: sans-serif;
+    width: 100%;
   }
   
   .footer-main {

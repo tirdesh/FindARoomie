@@ -56,7 +56,7 @@ const SummaryPage: React.FC = () => {
     }
     const data = {
       Posttype: formData.listingTypeAndLocationInformation.listingType,
-      postId: `${formData.listingTypeAndLocationInformation.listingType}`+`${sessionUser.userId}`,
+      postId: `${formData.listingTypeAndLocationInformation.listingType}`+`${sessionUser.userId}`+`${sessionUser.postedList.length+1}`,
       userId: sessionUser.userId,
       lookingForRoom: {
         name: nameForData,
@@ -94,6 +94,22 @@ const SummaryPage: React.FC = () => {
     return data;
   }
 
+  const addPostToUserDB = (postId: string) =>{
+    const apiPutData = {
+      userId: sessionUser.userId,
+      postId: postId
+    };
+    const apiURL = "http://localhost:3002/api/users/api/addPost";
+    axios.put(apiURL, apiPutData)
+      .then((response)=>{
+        console.log(response.data.message);
+        sessionUser.postedList.push(postId);
+      })
+      .catch((error)=>{
+        console.log(error.response);
+      })
+  }
+
   const handleSubmit = async () => {
 
     if(checkFields()){
@@ -103,6 +119,7 @@ const SummaryPage: React.FC = () => {
           .post(apiURL, apiPostData)
           .then((response)=>{
               alert("Post Added Successfully");
+              addPostToUserDB(apiPostData.postId);
               console.log(response.data.message);
             })
           .catch((error)=>{

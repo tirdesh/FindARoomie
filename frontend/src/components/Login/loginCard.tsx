@@ -27,6 +27,7 @@ const LoginCard: React.FC = ():ReactElement =>{
             .post(apiURL,{email: email, password: password})
             .then((response)=>{
                     dispatch(setUser(response.data.data.token))
+                    localStorage.setItem("loggedUser", response.data.data.token.userId);
                     navigate("/");
                 })
             .catch((error)=>{
