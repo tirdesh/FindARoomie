@@ -23,6 +23,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import './UserProfile.css'; 
 import axios from 'axios';
+import { useAlert } from '../../handlers/AlertProvider';
 
 const UserProfile: React.FC = () => {
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
@@ -31,6 +32,7 @@ const UserProfile: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userData, setUserData] = useState(sessionUser);
+  const {showAlert} = useAlert();
 
   // Function to handle profile update
   const handleUpdate = () => {
@@ -43,9 +45,7 @@ const UserProfile: React.FC = () => {
       .put(apiURL, userData)
       .then((response)=>{
         console.log(response.data);
-        dispatch(setUser(response.data));
-        console.log(sessionUser);
-        alert(response.data.message);
+        showAlert('success', response.data.message);
       })
       .catch((error)=>{
         console.log(error);
@@ -75,7 +75,6 @@ const UserProfile: React.FC = () => {
   const DisplayData = (props:Props) =>{
       const [toggleTF, setToggler] = useState(false);
       const [TFData, setTFData] = useState("");
-      
       const handleSave = () =>{
         if(TFData){
           setUserData((prevData) => ({
