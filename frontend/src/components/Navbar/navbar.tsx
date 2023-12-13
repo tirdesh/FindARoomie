@@ -92,9 +92,6 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
               <Link to="/blogs" style={{ textDecoration: 'none' }}>
                 <Button color="inherit">Blogs</Button>
               </Link>
-              <Link to="/chat" style={{ textDecoration: 'none' }}>
-                <Button color="inherit">Chat</Button>
-              </Link>
               <AccountMenu logout={logoutUser} profileName={sessionUser.firstName} />
             </>
           ) : (

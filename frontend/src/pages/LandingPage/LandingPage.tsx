@@ -3,6 +3,8 @@ import { Typography, Button, Box, Container, useMediaQuery, useTheme,Grid } from
 import './LandingPage.css';
 import { useNavigate } from 'react-router-dom';
 import landingImage from './friends.png';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 interface Coordinates {
   x: number;
@@ -111,12 +113,29 @@ const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
   const [changeCol,setThemeColor] = useState(true);
   const [textCol,setTextCol] = useState("light");
   const matches = useMediaQuery(themeHook.breakpoints.up('sm'));
+  const sessionUser = useSelector((state: RootState) => state.user);
+  const a = sessionUser._id ? `Hi ${sessionUser.firstName} !!` : "";
+  const translations = {
+    telugu: 'స్నేహితులు',
+    hindi: 'दोस्त',
+    english: 'Friends',
+    tamil: 'நண்பர்கள்',
+    kannada: 'ಸ್ನೇಹಿತರು',
+    spanish: 'Amigos',
+  };
+
 
   
   return (
     <div className={`landingBody-${textCol}`}>
       {(theme==="dark")?(<CanvasBackground lineColor ={"rgba(171, 171, 171, 0.118)"} backgroundColor={'dark'}/>):(<CanvasBackground lineColor ={"rgba(51, 51, 51, 0.18 )"} backgroundColor={'light'}/>)}
       <Box className="hero-text">
+        <Typography variant="h3">
+        Welcome {translations['telugu']}, {translations['hindi']}, {translations['english']}, {translations['tamil']}, {translations['kannada']}, {translations['spanish']}
+        </Typography>
+        <Typography variant="h4" component="h1" gutterBottom className="hero__header">
+          {a}
+        </Typography>
         <Typography variant="h2" component="h1" gutterBottom className="hero__header">
           Find Your Perfect Space & Companion 
         </Typography>
