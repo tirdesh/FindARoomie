@@ -9,6 +9,7 @@ import AuthRoutes from './routes/AuthRoutes';
 import HomeRoutes from './routes/HomeRoutes';
 import LandingPage from './pages/LandingPage/LandingPage';
 import UserProfile from './pages/Profile/Profile';
+import Breadcrumb from './components/Navbar/BreadCrumb';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
 <Router>
   <div className={`App ${theme}`}>
     <ResponsiveAppBar theme={theme} toggleTheme={toggleTheme} />
+    <Breadcrumb />
     <main style={{ flex: 1 }}> {/* This allows the content to grow */}
       <Routes>
         <Route path="/" element={<LandingPage theme={theme} />} />
