@@ -34,9 +34,7 @@ const LoginPage: React.FC = ():ReactElement => {
                 </Paper>
                 </div>
             </div> 
-        
-)
-        
-}
+        )
+};
 
 export default LoginPage;

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { setUser, resetUser } from '../../redux/slices/user-slice';
 import { useNavigate } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
+import ReplayIcon from '@mui/icons-material/Replay';
 import {
   Avatar,
   Button,
@@ -15,25 +17,41 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  IconButton
+  IconButton,
+  Fab
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './UserProfile.css'; 
+import axios from 'axios';
 
 const UserProfile: React.FC = () => {
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
   const sessionUser = useSelector((state: RootState) => state.user);
-  const isLogged = Boolean(sessionUser.userId);
+  const isLogged = Boolean(sessionUser.userId); 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(sessionUser);
 
   // Function to handle profile update
   const handleUpdate = () => {
-    // Dispatch update profile action or API call
+    console.log("Changed Data structer");
+    console.log(userData);
+    console.log("Session Data structer");
+    console.log(sessionUser);
+    const apiURL = "http://localhost:3002/api/users/api/update/";
+    axios
+      .put(apiURL, userData)
+      .then((response)=>{
+        console.log(response.data);
+        alert(response.data.message);
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
   };
 
   // Function to confirm deletion
-  const handleDeleteClick = () => {
+  const handleDelete = () => {
     setOpenDeleteConfirm(true);
   };
 
@@ -45,40 +63,83 @@ const UserProfile: React.FC = () => {
     navigate('/login');
   };
 
+  
+  type Props={
+    dataField: string;
+    value: string;
+    label: string
+  }
+  
+  const DisplayData = (props:Props) =>{
+      const [toggleTF, setToggler] = useState(false);
+      const [TFData, setTFData] = useState("");
+      const handleSave = () =>{
+        if(TFData){
+          setUserData((prevData) => ({
+            ...prevData,
+            [props.dataField]: TFData,
+          }));
+        }
+      }
+      const handleBack =() =>{
+        setToggler(!toggleTF);
+      }
+      return (
+        <Typography variant="h6" className='textData'>
+          {props.label} {": "}  
+          {(toggleTF)?
+            (
+              <div style={{display: 'inline'}}>
+                <TextField label={props.label} name={props.dataField} type="text" variant="outlined" onChange={(e)=>{setTFData(e.target.value)}}></TextField>
+                  <Button size='small' sx={{marginLeft:2}} variant="contained" onClick={handleSave}> Save</Button>
+                  <Button size='small' sx={{marginLeft:2}} variant="contained" onClick={handleBack}> Back</Button>
+              </div>
+              ):(
+                <p style={{display: 'inline'}}>
+                  {props.value}
+                  <Fab onClick={(e)=>{setToggler(!toggleTF)}} color="inherit" sx={{zoom:0.7, marginLeft:3}} aria-label="edit">
+                    <EditIcon />
+                  </Fab>
+                  
+                </p>
+            )} 
+        </Typography>
+      )
+  }
+
+  const handleReset = () =>{
+    setUserData(sessionUser);
+  }
+
   return (
     <Paper className="userProfilePaper">
-      <Grid container spacing={2} justifyContent="center">
-      <Grid item xs={12}>
+      <Grid container spacing={2} alignItems={"center"} justifyContent="center">
+      <Grid item xs={12} className='user-details'>
         {isLogged ? (
           <>
-            <Typography variant="h6">User ID: {sessionUser.userId}</Typography>
-            <Typography variant="h6">First Name: {sessionUser.firstName}</Typography>
-            <Typography variant="h6">Last Name: {sessionUser.lastName}</Typography>
-            <Typography variant="h6">Age: {sessionUser.age}</Typography>
-            <Typography variant="h6">Gender: {sessionUser.gender}</Typography>
-            <Typography variant="h6">Email: {sessionUser.email}</Typography>
-            <Typography variant="h6">Phone: {sessionUser.phone}</Typography>
+            <Typography variant="h6" className='textData'>User Id: {userData.userId}</Typography>
+            <DisplayData label='First Name' dataField='firstName' value={userData.firstName}></DisplayData>
+            
+            <DisplayData label='Last Name' dataField='lastName' value={userData.lastName} ></DisplayData>
+            <Typography variant="h6" className='textData'>Age: {sessionUser.age}</Typography>
+            <Typography variant="h6" className='textData'>Gender: {userData.gender}</Typography>
+            <DisplayData label='Email' dataField='email' value={userData.email}></DisplayData>
+            <DisplayData label='Phone' dataField='phone' value={userData.phone}></DisplayData>
           </>
         ) : (
           <Typography variant="body1">Please log in to view your profile details.</Typography>
         )}
       </Grid>
-        
         <Grid item xs={12}>
-          <Avatar src="/broken-image.jpg" /> 
-          <Button variant="contained" component="label">
-            Upload
-            <input type="file" hidden />
+          <Button sx={{marginRight: 3}} variant="contained" color="primary" onClick={handleUpdate}>
+            Save Changes
           </Button>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Button variant="contained" color="primary" onClick={handleUpdate}>
-            Save
+          <Button sx={{marginRight: 3}} variant="contained" color="primary" onClick={handleReset}>
+            Reset Changes
           </Button>
-          <IconButton color="error" onClick={handleDeleteClick}>
-            <DeleteIcon />
-          </IconButton>
+          <Button variant="contained" color="error" onClick={handleDelete}>
+            Delete Account
+          </Button>
         </Grid>
       </Grid>
       <Dialog

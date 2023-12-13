@@ -6,9 +6,11 @@ import RoommatePost from '../../models/roomPost';
 import ImageViewer from '../../pages/testPages/imageViewer';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/store';
+
 import './ImageCard.css';
+import { addWishListId } from '../../redux/slices/user-slice';
 
 type Props = {
     roommate: RoommatePost;
@@ -17,6 +19,7 @@ type Props = {
 // Assuming that Posttype is the correct property name and it's of type string
 const RoomieCard: React.FC<Props> = ({ roommate }) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch<AppDispatch> ();
     const sessionUser = useSelector((state:RootState)=>state.user);
     // Update the function to use the correct property name
     const getCardBackgroundColor = (postType: string) => {
@@ -28,7 +31,6 @@ const RoomieCard: React.FC<Props> = ({ roommate }) => {
 
         }
     };
-
     // Use the correct property name from your RoomPost type
     const cardStyle = {
         maxWidth: 345,
@@ -41,12 +43,12 @@ const RoomieCard: React.FC<Props> = ({ roommate }) => {
       } 
 
       const [isClicked, setIsClicked] = useState(false);
-
       
       const handleWishlishClick = () => {
         setIsClicked(!isClicked);
-        if(isClicked){
-            sessionUser.wishList.push(roommate.postId);
+
+        if(isClicked){ 
+            dispatch(addWishListId(roommate.postId));
         }
       };
 
@@ -55,7 +57,6 @@ const RoomieCard: React.FC<Props> = ({ roommate }) => {
             <Card sx={cardStyle}>
              <a className='onHover' onClick={(e)=>handlePostOpen(roommate)}>
                 <CardHeader
-                     
                     avatar={
                         <Avatar aria-label="roomie">
                             {roommate.lookingForRoom.name.charAt(0)}

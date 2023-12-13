@@ -76,3 +76,13 @@ export const getUser = async (request, response)=> {
     }
 };
 
+export const updateUserData = async (req, res) => {
+    try {
+        const updatedData = req.body;
+        console.log(updatedData);
+        const user = await userServices.updateUser(updatedData.userId, updatedData);
+        setResponse(user, res, 201, 'Updated User successfully');
+    } catch (err) {
+        setErrorResponse(err, res);
+    }
+};
