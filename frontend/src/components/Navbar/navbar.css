@@ -16,3 +16,13 @@
   
   /* More styles can be added as needed */
   
+/* Style for buttons and icon buttons */
+.navbar-app .MuiButton-root,
+.navbar-app .MuiIconButton-root { /* Apply the same style to IconButton */
+  color: inherit; /* Inherits the color from the theme */
+}
+
+/* You might want to add specific hover effects for icon buttons if needed */
+.navbar-app .MuiIconButton-root:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Example hover effect */
+}

@@ -8,7 +8,7 @@ import checkLoggedUser from './utils/utils';
 import AuthRoutes from './routes/AuthRoutes';
 import HomeRoutes from './routes/HomeRoutes';
 import LandingPage from './pages/LandingPage/LandingPage';
-
+import UserProfile from './pages/Profile/Profile';
 
 function App() {
   const [theme, setTheme] = useState('light');

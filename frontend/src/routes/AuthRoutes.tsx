@@ -17,6 +17,7 @@ import ModifyListingForm from '../pages/CreateListingPage/ModifyListingForm';
 import MyListings from '../pages/MyListingPage/MyListings';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import UserProfile from '../pages/Profile/Profile';
 
 
 const AuthRoutes: React.FC = () => (
@@ -36,7 +37,7 @@ const AuthRoutes: React.FC = () => (
           <Route path="/chat" element={<LoggedSession element={<ChatEntryPage/>} />} />
           <Route path="/chat/:roomName/:username" element={<LoggedSession element={<ChatPage/>} />} />
           <Route path="/modify-listing-form" element={<LoggedSession element={<ModifyListingForm/>} />} />
-          
+          <Route path="/profile" element={<LoggedSession element={<UserProfile/>} />} />
           
   </Routes>
 );
