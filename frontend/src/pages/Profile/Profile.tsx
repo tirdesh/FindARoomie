@@ -38,11 +38,12 @@ const UserProfile: React.FC = () => {
     console.log(userData);
     console.log("Session Data structer");
     console.log(sessionUser);
-    const apiURL = "http://localhost:3002/api/users/api/update/"+`${userData.userId}`;
+    const apiURL = "http://localhost:3002/api/users/api/update/";
     axios
       .put(apiURL, userData)
       .then((response)=>{
         console.log(response.data);
+        alert(response.data.message);
       })
       .catch((error)=>{
         console.log(error);
@@ -164,7 +165,5 @@ const UserProfile: React.FC = () => {
     </Paper>
   );
 };
-
-
 
 export default UserProfile;

@@ -26,6 +26,7 @@ export const findUserById = async (userId) => {
 
 // Service to update user details
 export const updateUser = async (userId, updatedData) => {
+    console.log(userId);
     const user =  await User.findOneAndUpdate({userId: userId},  updatedData , { new: true }).exec();
     return user;
 };
