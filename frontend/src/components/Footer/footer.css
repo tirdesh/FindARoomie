@@ -9,11 +9,13 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     font-family: sans-serif;
     width: 100%;
+    z-index: 2;
   }
   
   .footer-main {
     display: flex;
     align-items: center;
+    
   }
   
   .footer-main .MuiIconButton-root {
