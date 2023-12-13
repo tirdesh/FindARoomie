@@ -1,7 +1,10 @@
-// src/pages/AboutUs.tsx
 import React from 'react';
-import { Typography, Box, Container, Paper } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Typography, Container, Paper, Grid } from '@mui/material';
+import './AboutUs.css'; // Ensure this CSS file is in your project
+
+// Import images
+import teamImage from './friends.png';
 
 const AboutUs: React.FC = () => {
   const { t } = useTranslation(); // Hook to access translations
@@ -25,7 +28,13 @@ const AboutUs: React.FC = () => {
         <Typography paragraph>
           {t('closing')}
         </Typography>
-        {/* You can add more visual elements such as images, icons, or animations here */}
+
+        {/* Image and animation section */}
+        <Grid container spacing={4} justifyContent="center" className="teamContainer">
+          <Grid item xs={12} sm={6} md={4} className="teamItem">
+            <img src={teamImage} alt="Our Team" className="teamImage"/>
+          </Grid>
+        </Grid>
       </Paper>
     </Container>
   );

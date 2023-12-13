@@ -1,31 +1,40 @@
-
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import User from "../../models/user";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import User from '../../models/user';
 
 export type UserState = User;
-const intitalState: UserState = {
-    _id: "",
-    userId: "",
-    firstName: "",
-    lastName: "",
-    age: "",
-    gender: "",
-    email: "",
-    phone: "",
-    password: "",
-    createdDate: new Date(),
-    postedList: [],
-    wishList: []
+const initialState: UserState = {
+  _id: "",
+  userId: "",
+  firstName: "",
+  lastName: "",
+  age: "",
+  gender: "",
+  email: "",
+  phone: "",
+  password: "",
+  postedList: [],
+  wishList: [],
+  createdDate: new Date()
 };
+
 export const userSlice = createSlice({
-    name: 'User',
-    initialState: intitalState,
-    reducers:{
-        setUser:(state, action: PayloadAction<UserState>) =>{
-            return action.payload;
-        }
-    }
+  name: 'user',
+  initialState,
+  reducers: {
+    setUser: (state, action: PayloadAction<UserState>) => {
+      return action.payload;
+    },
+    resetUser: () => initialState, // Return a new state object
+    addPostId: (state, action: PayloadAction<string>) => {
+      state.postedList.push(action.payload);
+    },
+    addWishListId: (state, action: PayloadAction<string>) => {
+      state.wishList.push(action.payload);
+    },
+    // other reducers can be added here
+  },
 });
 
-export const {setUser} = userSlice.actions;
+export const { setUser, resetUser, addPostId, addWishListId } = userSlice.actions;
+
 export default userSlice.reducer;

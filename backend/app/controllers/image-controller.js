@@ -22,7 +22,6 @@ export const uploadImage = async (req, res) => {
       size,
       buffer
     };
-
     const savedImage = await saveImage(imageData);
 
     res.json({ message: 'Image uploaded successfully', data: savedImage });

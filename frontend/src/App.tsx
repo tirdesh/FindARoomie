@@ -8,9 +8,10 @@ import checkLoggedUser from './utils/utils';
 import AuthRoutes from './routes/AuthRoutes';
 import HomeRoutes from './routes/HomeRoutes';
 import LandingPage from './pages/LandingPage/LandingPage';
-
+import UserProfile from './pages/Profile/Profile';
 
 function App() {
+
   const [theme, setTheme] = useState('light');
   useEffect(() => {
     
@@ -23,18 +24,21 @@ function App() {
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
+
   return (
-    <Router>
-      <div className={`App ${theme}`}>
-        <ResponsiveAppBar theme={theme} toggleTheme={toggleTheme} />
-        <Routes>
+<Router>
+  <div className={`App ${theme}`}>
+    <ResponsiveAppBar theme={theme} toggleTheme={toggleTheme} />
+    <main style={{ flex: 1 }}> {/* This allows the content to grow */}
+      <Routes>
         <Route path="/" element={<LandingPage theme={theme} />} />
-        </Routes>
-        <HomeRoutes />
-        <AuthRoutes />
-        <Footer theme={theme} toggleTheme={toggleTheme} />
-      </div>
-    </Router>
+      </Routes>
+      <HomeRoutes />
+      <AuthRoutes />
+    </main>
+    <Footer theme={theme} toggleTheme={toggleTheme} />
+  </div>
+</Router>
   );
 }
 

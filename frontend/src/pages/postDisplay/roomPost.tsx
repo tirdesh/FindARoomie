@@ -5,9 +5,9 @@ import ImageViewer from '../testPages/imageViewer';
 import { Button, Container, Grid, ImageList, ImageListItem, Paper, Typography } from '@mui/material';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import "./post.css"
+import MapComponent from '../../components/Maps/MapComponent';
 
 const RoomDisplay: React.FC = ():ReactElement =>{
-    const { postId } = useParams();
     const location = useLocation();
     const { roomPost } = location.state || { roomPost: null };
     const navigate = useNavigate();
@@ -101,9 +101,16 @@ const RoomDisplay: React.FC = ():ReactElement =>{
                     <Grid item>
                     
                     {(isRoom)?(
-                    <Typography sx={{paddingBottom:1}} variant='h3' textAlign={'left'}>
-                        {"Property Description: "}
-                    </Typography>
+                    <div>
+                        <Typography sx={{paddingBottom:3}} variant='h3' textAlign={'left'}>
+                            {"Property Description: "}
+                        </Typography>
+                        <Typography sx={{paddingBottom:1}} variant='h5' textAlign={'left'}>
+                            {"Address: "} <br /> <i>{roomPost.lookingForRoom.locationAddress}</i>
+                        </Typography>
+                        
+                    </div>
+                    
                     ):(
                     <Typography sx={{paddingBottom:1}} variant='h4' textAlign={'left'}>
                         {"Would prefer a localitiy like: "}
@@ -233,10 +240,16 @@ const RoomDisplay: React.FC = ():ReactElement =>{
                             {(roomPost.Posttype ==="Roomie")?(roomPost.lookingForRoom.name):("He/She")}{" is available during : "} <i>{(roomPost.contactInfo.contactAvailability)}</i>
                         </Typography>
                 </Grid>
+
+                <Grid container
+                direction={'column'}
+                 sx={{backgroundColor: '#EEE7DA'}} className='parentGrid'  >
+
+                       <MapComponent address={roomPost.lookingForRoom.locationAddress} ></MapComponent>
+                </Grid>
                 
             </Grid>
         </Paper>
     );
 }
-
 export default RoomDisplay;

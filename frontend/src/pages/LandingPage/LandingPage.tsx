@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Typography, Button, Box, Container, useMediaQuery, useTheme } from '@mui/material';
+import { Typography, Button, Box, Container, useMediaQuery, useTheme,Grid } from '@mui/material';
 import './LandingPage.css';
 import { useNavigate } from 'react-router-dom';
+import landingImage from './friends.png';
 
 interface Coordinates {
   x: number;
@@ -122,6 +123,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
         <Typography variant="h5" component="h2" gutterBottom className="hero__header">
           Effortlessly with Find a Roomie!
         </Typography>
+
+        <Grid item xs={12}>
+      <img src={landingImage} alt="Landing Image" className="landingImage"/>
+        </Grid>
+
         <Box mt={4}>
           <Button variant="contained" color="primary" size="large" onClick={(e)=>navigate("/")}>
             Find Room
@@ -133,6 +139,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
       </Box>
     </div>
   );
+  
 };
 
 export default LandingPage;
