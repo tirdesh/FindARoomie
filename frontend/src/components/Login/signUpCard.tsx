@@ -11,8 +11,6 @@ import { useAlert } from "../../handlers/AlertProvider";
 
 const SignUpCard: React.FC = ():ReactElement =>{
     // const [firstName, ]  
-    const dispatch = useDispatch<AppDispatch>();
-    const navigate = useNavigate();
     const [userNameError,setUsernameError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPassError] = useState("");
