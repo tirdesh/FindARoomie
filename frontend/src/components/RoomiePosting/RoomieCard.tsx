@@ -4,6 +4,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import RoommatePost from '../../models/roomPost';
 import ImageViewer from '../../pages/testPages/imageViewer';
+import RoomPost from '../../models/roomPost';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 type Props = {
     roommate: RoommatePost;
@@ -11,6 +16,8 @@ type Props = {
 
 // Assuming that Posttype is the correct property name and it's of type string
 const RoomieCard: React.FC<Props> = ({ roommate }) => {
+    const navigate = useNavigate();
+    const sessionUser = useSelector((state:RootState)=>state.user);
     // Update the function to use the correct property name
     const getCardBackgroundColor = (postType: string) => {
         switch (postType) {
@@ -28,11 +35,27 @@ const RoomieCard: React.FC<Props> = ({ roommate }) => {
         mb: 2,
         backgroundColor: getCardBackgroundColor(roommate.Posttype), // Use Posttype here
     };
+    const handlePostOpen = (post: RoommatePost) =>{
+        navigate(`/listings/${post.postId}`, { state: { roomPost: post }});
+        console.log(post.postId);
+      } 
+
+      const [isClicked, setIsClicked] = useState(false);
+
+      
+      const handleWishlishClick = () => {
+        setIsClicked(!isClicked);
+        if(isClicked){
+            sessionUser.wishList.push(roommate.postId);
+        }
+      };
 
     return (
         <Grid item xs={12} sm={6} md={4}>
             <Card sx={cardStyle}>
+             <a className='onHover' onClick={(e)=>handlePostOpen(roommate)}>
                 <CardHeader
+                    
                     avatar={
                         <Avatar aria-label="roomie">
                             {roommate.lookingForRoom.name.charAt(0)}
@@ -50,13 +73,18 @@ const RoomieCard: React.FC<Props> = ({ roommate }) => {
                         imageId={roommate.photos[0]}
                     />
                 </div>
+                
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
                         {roommate.lookingForRoom.locationAddress}
                     </Typography>
                 </CardContent>
+                </a>
+               
                 <CardActions disableSpacing>
-                    <IconButton aria-label="add to wishlist">
+                    <IconButton aria-label="add to wishlist"
+                    onClick={handleWishlishClick}
+                    style={{ color: isClicked ? 'red' : 'black' }}>
                         <FavoriteIcon />
                     </IconButton>
                 </CardActions>

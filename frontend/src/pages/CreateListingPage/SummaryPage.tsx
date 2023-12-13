@@ -103,6 +103,7 @@ const SummaryPage: React.FC = () => {
     axios.put(apiURL, apiPutData)
       .then((response)=>{
         console.log(response.data.message);
+        sessionUser.postedList.push(postId);
       })
       .catch((error)=>{
         console.log(error.response);

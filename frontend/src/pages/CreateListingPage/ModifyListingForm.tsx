@@ -93,8 +93,11 @@ const StepForm: React.FC = () => {
     if (step < steps.length) {
         dispatch(incrementStep());
       } else {
+        const propsToSend = {
+          id: receivedProps._id
+        };
         // If it's the last step, navigate to the summary page
-        navigate('/editSummary');
+        navigate('/editSummary', {state: propsToSend});
       }
     console.log(formData)
   };

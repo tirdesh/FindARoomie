@@ -14,8 +14,10 @@ import FilteredMap from '../pages/testPages/mapViewer';
 import ChatEntryPage from '../pages/testPages/chatEntry';
 import ChatPage from '../pages/testPages/chatComponent';
 import ModifyListingForm from '../pages/CreateListingPage/ModifyListingForm';
+import MyListings from '../pages/MyListingPage/MyListings';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+
 
 const AuthRoutes: React.FC = () => (
   <Routes>
@@ -24,6 +26,7 @@ const AuthRoutes: React.FC = () => (
           <Route path="/axios" element={<LoggedSession element={<RoomFiltersAxios/>} />} />
           <Route path="/listings" element={<LoggedSession element={<ListOfPosts/>} />} />
           <Route path="/listings/:postId" element={<LoggedSession element={<RoomDisplay/>} />} />
+          <Route path="/mylistings" element={<LoggedSession element={<MyListings/>} />} />
           <Route path="/create-listing" element={<LoggedSession element={<CreateListingForm/>} />} />
           <Route path="/summary" element={<LoggedSession element={<SummaryPage/>} />} />
           <Route path="/editsummary" element={<LoggedSession element={<EditSummaryPage/>} />} />

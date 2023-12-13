@@ -38,7 +38,8 @@ interface RoomPost {
       phone: string;
     };
   
-    photos: string[];
+    photos: string[],
+    createdDate: Date
   }
 
   export default RoomPost;
