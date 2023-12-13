@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Socket, io } from 'socket.io-client';
 import { TextField, Button, Box, Typography, List, ListItem, ListItemText, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useAlert } from '../../handlers/AlertProvider';
 
 interface Message {
   user: string;
@@ -147,11 +148,10 @@ const ChatComponent: React.FC<ChatComponentProps> = (props) => {
     // Clear notification after a delay (e.g., 3 seconds)
     const notificationTimeout = setTimeout(() => {
       setNotification(null);
-    }, 3000);
+    }, 6000);
 
     return () => clearTimeout(notificationTimeout);
   }, [notification]);
-
   const handleSendMessage = (event: React.FormEvent) => {
     event.preventDefault();
     if (socket && message) {

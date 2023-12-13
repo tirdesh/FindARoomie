@@ -83,6 +83,7 @@ const RoomieCard: React.FC<Props> = ({ roommate, style }) => {
                             imageId={roommate.photos[0]} style={{ height: '100% ', width: '100% ' }}
                         />
                     </div>
+                    </div>
                 
 
                 <CardContent>

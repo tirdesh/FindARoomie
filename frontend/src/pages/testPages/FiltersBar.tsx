@@ -33,6 +33,8 @@ interface Filters {
   preferences: string[];
   priceRange: number[];
   moveInDate: Date | null;
+  sortOrder: string;
+  sortBy: string;
 }
 
 interface PriceRangeProps {
@@ -130,13 +132,18 @@ const FiltersBar: React.FC<FiltersBarProps> = ({ applyFilters }) => {
     amenities: [],
     preferences: [],
     priceRange: [0, 1500],
-    moveInDate: null, // Set default moveInDate to today
+    moveInDate: null,
+    sortOrder: 'asc', // Set default sort order to 'asc'
+    sortBy: 'costly',
   });
 
-  const [selectedDate, setSelectedDate] = useState<Date | null> (null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [priceRangeOpen, setPriceRangeOpen] = useState(false);
 
-  const handleFilterChange = (filterType: keyof Filters, value: string | string[] | number | number[] | Date | null) => {
+  const handleFilterChange = (
+    filterType: keyof Filters,
+    value: string | string[] | number | number[] | Date | null
+  ) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [filterType]: Array.isArray(value) ? value : [value],
@@ -145,11 +152,25 @@ const FiltersBar: React.FC<FiltersBarProps> = ({ applyFilters }) => {
 
   const handleDateChange = (newDate: string) => {
     const formattedDate = newDate ? new Date(newDate) : null;
-  
+
     setSelectedDate(formattedDate);
     handleFilterChange('moveInDate', formattedDate);
   };
-  
+
+  const handleSortChange = (event: SelectChangeEvent<string>) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      sortOrder: event.target.value,
+    }));
+  };
+
+  const handleSortByChange = (event: SelectChangeEvent<string>) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      sortBy: event.target.value,
+    }));
+  };
+
 
   const handleApplyFilters = () => {
     console.log('Applying filters:', filters);
@@ -166,8 +187,19 @@ const FiltersBar: React.FC<FiltersBarProps> = ({ applyFilters }) => {
     { name: 'Furnished', key: 'furnished', values: ['Fully', 'Semi', 'Unfurnished'] },
     { name: 'Utilities', key: 'utilities', values: ['Laundry', 'Heater', 'Hot Water'] },
     { name: 'Amenities', key: 'amenities', values: ['Swimming Pool', 'Gym', 'Pet-Friendly'] },
-    { name: 'Preferences', key: 'preferences', values: ['No Smoking','No Alcohol', 'Occasional Parties','Indians Preferred', 
-    'All Girl Apartment','All Guys Apartment', 'Mixed Gender Apartment'] },
+    {
+      name: 'Preferences',
+      key: 'preferences',
+      values: [
+        'No Smoking',
+        'No Alcohol',
+        'Occasional Parties',
+        'Indians Preferred',
+        'All Girl Apartment',
+        'All Guys Apartment',
+        'Mixed Gender Apartment',
+      ],
+    },
   ];
 
   return (
@@ -232,6 +264,27 @@ const FiltersBar: React.FC<FiltersBarProps> = ({ applyFilters }) => {
               onChange={(e) => handleDateChange(e.target.value)}
               fullWidth
             />
+          </Grid>
+
+          {/* Sort Order */}
+          <Grid item xs={2}>
+            <FormControl fullWidth>
+              <StyledInputLabel>Sort Order</StyledInputLabel>
+              <Select value={filters.sortOrder} onChange={handleSortChange}>
+                <MenuItem value="asc">A to Z</MenuItem>
+                <MenuItem value="desc">Z to A</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          {/* Sort By */}
+          <Grid item xs={2}>
+            <FormControl fullWidth>
+              <StyledInputLabel>Sort By</StyledInputLabel>
+              <Select value={filters.sortBy} onChange={handleSortByChange}>
+                <MenuItem value="costly">High to Low</MenuItem>
+                <MenuItem value="affordable">Low to High</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
         </Grid>
 

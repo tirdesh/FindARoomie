@@ -4,6 +4,14 @@ import mongoose  from "mongoose";
 const Schema = mongoose.Schema;
 // Defining the schema for a blog document.
 const blogSchema = new Schema({
+    blogId:{
+        type: String,
+        required: true
+    },
+    userId:{
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true
@@ -13,8 +21,8 @@ const blogSchema = new Schema({
         required: true
     },
     dateOfCreation: {
-        type: String,
-        required: true
+        type: Date,
+        default: Date.now
     },
     blogContent: {
         type: String,
@@ -24,7 +32,7 @@ const blogSchema = new Schema({
         {
             user: {type: String, required: true},
             comment: {type: String, required: true}
-        }
+        },
     ]
 });
 
