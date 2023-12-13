@@ -21,6 +21,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './navbar.css';
+import AccountMenu from './AccountMenu';
 
 interface ResponsiveAppBarProps {
   theme: string;
@@ -50,9 +51,6 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
     navigate('/login');
   };
 
-  const changeLanguage = (event: SelectChangeEvent<string>) => {
-    i18n.changeLanguage(event.target.value as string);
-  };
 
   return (
     <AppBar position="sticky" className={`navbar-app ${theme}`}>
@@ -85,17 +83,11 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
           {isLogged ? (
             <>
               {/* Logged in user navigation and profile menu */}
-              <Link to="/fetch" style={{ textDecoration: 'none' }}>
-                <Button color="inherit">Fetch API</Button>
-              </Link>
               <Link to="/listings" style={{ textDecoration: 'none' }}>
-                <Button color="inherit">Listings</Button>
+                <Button color="inherit">Find Listing</Button>
               </Link>
               <Link to="/create-listing" style={{ textDecoration: 'none' }}>
-                <Button color="inherit">Post</Button>
-              </Link>
-              <Link to="/mylistings" style={{ textDecoration: 'none' }}>
-                <Button color="inherit">My Listings</Button>
+                <Button color="inherit">Post Listing</Button>
               </Link>
               <Link to="/blogs" style={{ textDecoration: 'none' }}>
                 <Button color="inherit">Blogs</Button>
@@ -103,48 +95,13 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ theme, toggleTheme 
               <Link to="/chat" style={{ textDecoration: 'none' }}>
                 <Button color="inherit">Chat</Button>
               </Link>
-
-              <Button
-                sx={{ color: 'inherit', textTransform: 'none' }}
-                onClick={handleProfileMenu}
-              >
-                {sessionUser.firstName}
-              </Button>
-              <Menu
-                id="profile-menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleCloseProfileMenu}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-              >
-                <MenuItem onClick={handleCloseProfileMenu} component={Link} to="/profile">Profile</MenuItem>
-                <MenuItem onClick={handleCloseProfileMenu} component={Link} to="/mylistings">My Listings</MenuItem>
-                <MenuItem onClick={logoutUser}>Logout</MenuItem>
-              </Menu>
+              <AccountMenu logout={logoutUser} profileName={sessionUser.firstName} />
             </>
           ) : (
             <Link to="/login" style={{ textDecoration: 'none' }}>
               <Button color="inherit">Login / Sign Up</Button>
             </Link>
           )}
-
-          {/* Language Dropdown */}
-          <Select
-            value={i18n.language}
-            onChange={changeLanguage}
-            sx={{ color: 'inherit', '&:before': { borderBottom: 'none' } }}
-          >
-            <MenuItem value="en">English</MenuItem>
-            <MenuItem value="tel">Telugu</MenuItem>
-            <MenuItem value="es">Spanish</MenuItem>
-          </Select>
 
           {/* Theme Toggle Button */}
           <IconButton
