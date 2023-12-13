@@ -13,11 +13,28 @@ import { useNavigate } from "react-router-dom";
 import i18n from "../../i18n";
 import LanguageIcon from '@mui/icons-material/Language';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import CarouselItem from '../../assets/images/CarouselItem.jpg';
+import CarouselItem1 from '../../assets/images/CarouselItem2.jpg';
 
 interface AccountMenuProps {
   logout: () => void;
   profileName: string;
 }
+// List of avatar image URLs
+const avatarImages = [
+  CarouselItem,
+  CarouselItem1,
+  // Add more image URLs as needed
+];
+
+// Function to get a random image URL
+const getRandomAvatar = () => {
+  const randomIndex = Math.floor(Math.random() * avatarImages.length);
+  return avatarImages[randomIndex];
+};
+
 
 const changeLang = (lang: string) => {
   i18n.changeLanguage(lang);
@@ -59,7 +76,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }} src={getRandomAvatar()} />
           </IconButton>
         </Tooltip>
       </Box>
@@ -103,7 +120,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({
             navigate("/profile");
           }}
         >
-          <Avatar />
+          <Avatar>{profileName.charAt(0)}</Avatar>
           My Account
         </MenuItem>
         <Divider />
@@ -113,12 +130,16 @@ const AccountMenu: React.FC<AccountMenuProps> = ({
             navigate("/mylistings");
           }}
         >
-          <Avatar />
+          <ListItemIcon>
+            <PostAddIcon />
+          </ListItemIcon>
           My Listings
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Avatar />
-          Wishlist
+          <ListItemIcon > 
+          <FavoriteIcon />
+          </ListItemIcon > 
+          {" "}Wishlist
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleOpenSubmenu}>
