@@ -15,11 +15,12 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
+import { useAlert } from '../../handlers/AlertProvider';
 
 const Step5Form: React.FC = () => {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form.contactAndPresentation);
-
+  const {showAlert} = useAlert();
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   useEffect(() => {
     const fetchImageUrls = async () => {
@@ -90,7 +91,7 @@ const Step5Form: React.FC = () => {
       handleInputChange('photos', [...formState.photos, ...docIds]);
     } catch (error: any) {
       console.error('Error uploading images:', error.message);
-      alert('Error uploading images. Please try again.');
+      showAlert('error','Error uploading images. Please try again.');
     }
   };
 
@@ -108,7 +109,7 @@ const Step5Form: React.FC = () => {
       handleInputChange('photos', newPhotos);
     } catch (error: any) {
       console.error('Error deleting image:', error.message);
-      alert('Error deleting image. Please try again.');
+      showAlert('error','Error deleting image. Please try again.');
     }
   };
 

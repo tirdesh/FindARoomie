@@ -15,12 +15,16 @@ html, body {
 .landing.light {
   background-color: #fff; /* Light theme background color */
   color: #000; /* Light theme text color */
+  min-width: none !important;
+  max-width: 100% !important;
 }
 
 /* Dark theme styles for landing page */
 .landing.dark {
   background-color: #151515; /* Dark theme background color */
   color: #f0f8ff; /* Dark theme text color */
+  min-width: none !important;
+  max-width: 100% !important;
 }
 
 /* Canvas styles */
@@ -124,3 +128,4 @@ button:hover {
   from { opacity: 0; transform: translate3d(0, 50%, 0); }
   to { opacity: 1; transform: translateZ(0); }
 }
+

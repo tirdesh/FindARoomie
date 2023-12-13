@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Typography, Button, Box, Container, useMediaQuery, useTheme } from '@mui/material';
+import { Typography, Button, Box, Container, useMediaQuery, useTheme,Grid } from '@mui/material';
 import './LandingPage.css';
 import { useNavigate } from 'react-router-dom';
+import landingImage from './friends.png';
 
 interface Coordinates {
   x: number;
@@ -111,29 +112,24 @@ const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
   const [textCol,setTextCol] = useState("light");
   const matches = useMediaQuery(themeHook.breakpoints.up('sm'));
 
-  const changeTheme = (event: any) =>{
-    if(changeCol){
-      setThemeColor(false);
-      setTextCol("dark");
-    }else{
-      setThemeColor(true);
-      setTextCol("light");
-    }
-  }
+  
   return (
-    <Container className={`landingBody-${textCol}`} maxWidth="lg" disableGutters>
-      <Button size='large' variant='contained' color='secondary' onClick={changeTheme}>Theme</Button>
-      {changeCol?(<CanvasBackground lineColor ={"rgba(171, 171, 171, 0.118)"} backgroundColor={'dark'}/>):(<CanvasBackground lineColor ={"rgba(51, 51, 51, 0.18 )"} backgroundColor={'light'}/>)}
-        {/* <CanvasBackground themeColor ={themeColor}/> */}
+    <div className={`landingBody-${textCol}`}>
+      {(theme==="dark")?(<CanvasBackground lineColor ={"rgba(171, 171, 171, 0.118)"} backgroundColor={'dark'}/>):(<CanvasBackground lineColor ={"rgba(51, 51, 51, 0.18 )"} backgroundColor={'light'}/>)}
       <Box className="hero-text">
         <Typography variant="h2" component="h1" gutterBottom className="hero__header">
-          Find Your Perfect Space & Companion
+          Find Your Perfect Space & Companion 
         </Typography>
         <Typography variant="h5" component="h2" gutterBottom className="hero__header">
           Effortlessly with Find a Roomie!
         </Typography>
+
+        <Grid item xs={12}>
+      <img src={landingImage} alt="Landing Image" className="landingImage"/>
+        </Grid>
+
         <Box mt={4}>
-          <Button variant="contained" color="primary" size="large" onClick={(e)=>navigate("/")}>
+          <Button variant="contained" color="primary" size="large" onClick={(e)=>navigate("/listings")}>
             Find Room
           </Button>
           <Button variant="contained" color="secondary" size="large" onClick={(e)=>navigate("/create-listing")} sx={{ marginLeft: '1em' }}>
@@ -141,8 +137,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ theme }) => {
           </Button>
         </Box>
       </Box>
-    </Container>
+    </div>
   );
+  
 };
 
 export default LandingPage;

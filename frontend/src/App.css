@@ -18,7 +18,7 @@
 
 /* Light theme styles */
 .App.light {
-  background-color: #fff;
+  background-color: whitesmoke;
   color: black;
 }
 
@@ -65,4 +65,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
 }

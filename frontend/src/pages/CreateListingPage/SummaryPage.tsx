@@ -9,13 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import './summary.css';
 import axios from 'axios';
 import { error } from 'console';
+import { useAlert } from '../../handlers/AlertProvider';
 
 const SummaryPage: React.FC = () => {
   const formData = useSelector((state: RootState) => state.form);
   const sessionUser = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const {showAlert} = useAlert();
   const listingType = useSelector((state: RootState) => state.form.listingTypeAndLocationInformation.listingType);
 
 
@@ -56,7 +57,7 @@ const SummaryPage: React.FC = () => {
     }
     const data = {
       Posttype: formData.listingTypeAndLocationInformation.listingType,
-      postId: `${formData.listingTypeAndLocationInformation.listingType}`+`${sessionUser.userId}`,
+      postId: `${formData.listingTypeAndLocationInformation.listingType}`+`${sessionUser.userId}`+`${sessionUser.postedList.length+1}`,
       userId: sessionUser.userId,
       lookingForRoom: {
         name: nameForData,
@@ -94,6 +95,22 @@ const SummaryPage: React.FC = () => {
     return data;
   }
 
+  const addPostToUserDB = (postId: string) =>{
+    const apiPutData = {
+      userId: sessionUser.userId,
+      postId: postId
+    };
+    const apiURL = "http://localhost:3002/api/users/api/addPost";
+    axios.put(apiURL, apiPutData)
+      .then((response)=>{
+        console.log(response.data.message);
+        sessionUser.postedList.push(postId);
+      })
+      .catch((error)=>{
+        console.log(error.response);
+      })
+  }
+
   const handleSubmit = async () => {
 
     if(checkFields()){
@@ -102,15 +119,16 @@ const SummaryPage: React.FC = () => {
         axios
           .post(apiURL, apiPostData)
           .then((response)=>{
-              alert("Post Added Successfully");
+              showAlert('success', "Post Added Successfully");
+              addPostToUserDB(apiPostData.postId);
               console.log(response.data.message);
             })
           .catch((error)=>{
-            alert(error.response.data.message);
+            showAlert('error', error.response.data.message);
             console.log(error.response);
           })
     }else{
-      alert("Please enter all the fields");
+      showAlert('warning', "Please enter all the fields");
     }
   };
 

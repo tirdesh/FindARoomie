@@ -23,7 +23,7 @@ export const createUser = async (request, response) => {
 export const loginUser = async (request, response) => {
     try {
         const { email, password } = request.body;
-        console.log(email,password);
+        //console.log(email,password);
         const token = await userServices.loginUser(email, password);
         setResponse({ token }, response, 200, 'Login successful');
     } catch (err) {
@@ -47,6 +47,24 @@ export const resetPassword = async (request, response) => {
     }
 };
 
+export const addWishlist = async (request, response) =>{
+    try{
+        const {userId, postId} = {...request.body};
+        await userServices.addWishlistId(userId, postId);
+        setResponse({}, response, 200, "Post added to wishlist successfully");
+    } catch (err){
+        setErrorResponse(err, response);
+    }
+}
+export const addPostedList = async (request, response) =>{
+    try{
+        const {userId, postId} = {...request.body};
+        await userServices.addPostId(userId, postId);
+        setResponse({}, response, 200, "Post added to user's posted list successfully");
+    } catch (err){
+        setErrorResponse(err, response);
+    }
+}
 export const getUser = async (request, response)=> {
     try{
         const userId = request.params.loginId;
@@ -58,3 +76,13 @@ export const getUser = async (request, response)=> {
     }
 };
 
+export const updateUserData = async (req, res) => {
+    try {
+        const updatedData = req.body;
+        console.log(updatedData);
+        const user = await userServices.updateUser(updatedData.userId, updatedData);
+        setResponse(user, res, 201, 'Updated User successfully');
+    } catch (err) {
+        setErrorResponse(err, res);
+    }
+};
