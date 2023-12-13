@@ -117,11 +117,6 @@ const Step3Form: React.FC = () => {
               <FormControlLabel   control={<Checkbox value="Apartment" onChange={handleHTSelect} />} label="Apartment" />
               <FormControlLabel   control={<Checkbox value="Town House" onChange={handleHTSelect}/>} label="Town House" />
               <FormControlLabel   control={<Checkbox value="Condo" onChange={handleHTSelect}/>} label="Condo" />
-              <Button
-                 onClick={(e)=>{console.log(formState.houseType)}}
-               >
-                 Unfurnished
-               </Button>
               </FormGroup>
             )}
         </Box>

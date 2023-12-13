@@ -51,7 +51,7 @@ export const deleteRoom = async (req, res) => {
     try {
         const id = req.params.roomId;
         const deletedRoom = await roomServices.remove(id);
-        setResponse(deletedRoom, res, 'Deleted room successfully');
+        setResponse(deletedRoom, res,200, 'Deleted room successfully');
     } catch (err) {
         setErrorResponse(err, res);
     }
