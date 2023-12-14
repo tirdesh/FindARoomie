@@ -125,7 +125,7 @@ const Step3Form: React.FC = () => {
       {/* Room Size */}
       <Grid item xs={12}>
         <TextField
-          label= {(listingType==="Room")?("No. of Beds"):("Preffered no. of eds")}
+          label= {(listingType==="Room")?("No. of Beds"):("Preffered no. of Beds")}
           type="number"
           value={formState.beds}
           onChange={(e) => handleInputChange('beds', e.target.value)}
@@ -174,11 +174,6 @@ const Step3Form: React.FC = () => {
               <FormControlLabel   control={<Checkbox value="fully" onChange={handleFurnSelect} />} label="Fully" />
               <FormControlLabel   control={<Checkbox value="semi" onChange={handleFurnSelect}/>} label="Semi" />
               <FormControlLabel   control={<Checkbox value="unfurnished" onChange={handleFurnSelect}/>} label="Unfurnished" />
-              <Button
-                 onClick={(e)=>{console.log(formState.furnished)}}
-               >
-                 Unfurnished
-               </Button>
               </FormGroup>
             )}
         </Box>

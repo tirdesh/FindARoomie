@@ -1,6 +1,6 @@
 // AuthRoutes.tsx
 import React from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import RoomFiltersFetch from '../pages/testPages/sample-apiconnector-fetch';
 import RoomFiltersAxios from '../pages/testPages/sample-apiconnector-axios';
 import ListOfPosts from '../pages/Listing Page/listing';

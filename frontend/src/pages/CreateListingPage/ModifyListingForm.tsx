@@ -28,6 +28,8 @@ const StepForm: React.FC = () => {
   const receivedProps = location.state; // Replace YourPropsType with the actual type/interface of your props
   
   useEffect(() => {
+    console.log("Prods id:");
+    console.log(receivedProps.id);
     // Fetch room data by ID when the component mounts
     if (receivedProps && receivedProps.id) {
       fetch(`http://localhost:3002/roomposts`)
@@ -94,7 +96,7 @@ const StepForm: React.FC = () => {
         dispatch(incrementStep());
       } else {
         const propsToSend = {
-          id: receivedProps._id
+          id: receivedProps.id
         };
         // If it's the last step, navigate to the summary page
         navigate('/editSummary', {state: propsToSend});

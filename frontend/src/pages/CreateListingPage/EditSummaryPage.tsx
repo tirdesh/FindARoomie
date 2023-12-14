@@ -99,16 +99,20 @@ const EditSummaryPage: React.FC = () => {
   }
 
   const handleSubmit = async () => {
-    showAlert("info", "Id will be "+receivedProps._id);
+    showAlert("info", "Id will be "+receivedProps.id);
 
     if(checkFields()){
         const apiPostData = getData();
-        const apiURL = "http://localhost:3002/roomposts/"+`${apiPostData.postId}`
+        console.log(receivedProps.id);
+        const apiURL = "http://localhost:3002/roomposts/"+`${receivedProps.id}`;
+        console.log('edit data:');
+        console.log(apiPostData);
         axios
           .put(apiURL, apiPostData)
           .then((response)=>{
-              showAlert('success', "Post Added Successfully");
+              showAlert('success', "Update Succefful");
               console.log(response.data.message);
+              navigate('/mylistings');
             })
           .catch((error)=>{
             showAlert('error', error.response.data.message);

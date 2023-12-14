@@ -35,12 +35,12 @@ export const getById = async (id) => {
 
 export const update = async (id, updatedRoom) => {
     try {
-        const existingRoom = await Room.findOne({ postId:id}).exec();
+        const existingRoom = await Room.findOne({ _id:id}).exec();
 
         if (!existingRoom) {
             throw new Error('Room not found');
         }
-        const room = await Room.findOneAndUpdate({postId:id}, updatedRoom, { new: true }).exec();
+        const room = await Room.findOneAndUpdate({_id:id}, updatedRoom, { new: true }).exec();
         return room;
     } catch (error) {
         console.error('Error in update service:', error);

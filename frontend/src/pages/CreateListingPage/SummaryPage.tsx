@@ -122,6 +122,7 @@ const SummaryPage: React.FC = () => {
               showAlert('success', "Post Added Successfully");
               addPostToUserDB(apiPostData.postId);
               console.log(response.data.message);
+              navigate('/listings');
             })
           .catch((error)=>{
             showAlert('error', error.response.data.message);
