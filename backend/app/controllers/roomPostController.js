@@ -39,6 +39,7 @@ export const getRoomById = async (req, res) => {
 export const updateRoom = async (req, res) => {
     try {
         const id = req.params.roomId;
+        console.log(id);
         const updatedRoom = { ...req.body };
         const room = await roomServices.update(id, updatedRoom);
         setResponse(room, res, 201, 'Updated room successfully');
@@ -51,7 +52,7 @@ export const deleteRoom = async (req, res) => {
     try {
         const id = req.params.roomId;
         const deletedRoom = await roomServices.remove(id);
-        setResponse(deletedRoom, res, 'Deleted room successfully');
+        setResponse(deletedRoom, res,200, 'Deleted room successfully');
     } catch (err) {
         setErrorResponse(err, res);
     }

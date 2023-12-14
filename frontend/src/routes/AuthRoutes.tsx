@@ -1,6 +1,6 @@
 // AuthRoutes.tsx
 import React from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import RoomFiltersFetch from '../pages/testPages/sample-apiconnector-fetch';
 import RoomFiltersAxios from '../pages/testPages/sample-apiconnector-axios';
 import ListOfPosts from '../pages/Listing Page/listing';
@@ -45,7 +45,7 @@ const AuthRoutes: React.FC = () => (
 function LoggedSession(props:any) {
   const sessionUser = useSelector((state: RootState) => state.user);
   if(!sessionUser._id){
-    //return <Navigate to="/login" />;
+    return <Navigate to="/login" />;
   }
   return props.element;
 }

@@ -26,6 +26,7 @@ import PreviewIcon from '@mui/icons-material/Preview';
 
 import { addWishListId } from "../../redux/slices/user-slice";
 import DirectionsIcon from '@mui/icons-material/Directions';
+import axios from "axios";
 
 type Props = {
   roommate: RoommatePost;
@@ -71,15 +72,33 @@ const RoomieCard: React.FC<Props> = ({ roommate, style }) => {
 
   const handleEditClick = () => {
     // Add your edit functionality here
+    const propsToSend={
+        id:roommate._id
+    }
+    navigate('/modify-listing-form', { state: propsToSend });
     console.log('Edit clicked for post ID:', roommate.postId);
     handleMenuClose();
   };
 
   const handleDeleteClick = () => {
     // Add your delete functionality here
+    deletePost(roommate._id);
     console.log('Delete clicked for post ID:', roommate.postId);
     handleMenuClose();
   };
+
+  const deletePost = async (id:string) =>{
+    const apiURL = `http://localhost:3002/roomposts/${id}`;
+    axios
+        .delete(apiURL)
+        .then((response)=>{
+            console.log(response.data);
+            alert(response.data.message);
+        })
+        .catch((error)=>{
+            console.log(error.response);
+        })
+  }
 
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
