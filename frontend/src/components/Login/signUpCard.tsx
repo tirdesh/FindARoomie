@@ -128,7 +128,7 @@ const SignUpCard: React.FC = ():ReactElement =>{
         <Grid  container direction="column"  alignItems="center" spacing={3}>
             
             <Grid item alignSelf="center">
-                <Typography variant="h4">SignUp </Typography>
+                <Typography variant="h4">Register </Typography>
             </Grid>
             
             <Grid item>
