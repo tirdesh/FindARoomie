@@ -9,5 +9,5 @@ const server = http.createServer(app);
 initialize(app);
 initializeSocket(server); // Initialize Socket.IO with the server
 
-const port = 3002;
+const port = process.env.PORT || 3002;
 server.listen(port, () => console.log(`Server is listening on port ${port}`));
