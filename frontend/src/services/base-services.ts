@@ -10,7 +10,7 @@ interface Login{
 export const loginTrail = async () => {
     const emailAdd = "abhinav@gmail.com";
     const passwordS = "password";
-    const responseData = await axios.post('http://localhost:3002/api/users/api/login',{
+    const responseData = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/users/api/login`,{
         email: emailAdd,
         password: passwordS
     })

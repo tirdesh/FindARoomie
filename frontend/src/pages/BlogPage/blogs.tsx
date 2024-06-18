@@ -23,7 +23,7 @@ const BlogPage: React.FC = ():ReactElement=>{
 
     useEffect(()=>{
         const fetch = async () =>{
-            const apiURL = "http://localhost:3002/blogs/";
+            const apiURL = `${process.env.REACT_APP_API_BASE_URL}/blogs/`;
             axios
                 .get(apiURL)
                 .then((response)=>{
@@ -67,7 +67,7 @@ const BlogPage: React.FC = ():ReactElement=>{
 
     const hanldePostBlog = () =>{
         const apiData =  getPostCallData();
-        const apiPostURL = "http://localhost:3002/blogs";
+        const apiPostURL = `${process.env.REACT_APP_API_BASE_URL}/blogs`;
         axios
             .post(apiPostURL, apiData)
             .then((response)=>{

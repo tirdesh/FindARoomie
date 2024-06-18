@@ -26,7 +26,7 @@ const RoomFiltersFetch: React.FC = () => {
 
   useEffect(() => {
     // Fetch data from the API
-    fetch('http://localhost:3002/roomlistings/filters')
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/roomlistings/filters`)
       .then((response) => response.json())
       .then((data) => setRoomFilters(data.data))
       .catch((error) => console.error('Error fetching data:', error));

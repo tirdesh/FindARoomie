@@ -1,7 +1,10 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import http from 'http';
 import initialize from './app/app.js';
 import initializeSocket from './app/socket.js'; // import the Socket.IO initializer
+
+dotenv.config(); // Load environment variables from .env file
 
 const app = express();
 const server = http.createServer(app);
@@ -15,4 +18,6 @@ app.get('*', (req, res) => {
   });
   
 const port = process.env.PORT || 3002;
-server.listen(port, () => console.log(`Server is listening on port ${port}`));
+server.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
+});

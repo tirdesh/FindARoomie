@@ -22,7 +22,7 @@ const LoginCard: React.FC = (): ReactElement => {
   // Login Api Call
   const handleSumbit = (event: any) => {
     event.preventDefault();
-    const apiURL = "http://localhost:3002/api/users/api/login";
+    const apiURL = `${process.env.REACT_APP_API_BASE_URL}/api/users/api/login`;
     if (!email || !password) {
       showAlert("error", "Please Enter All the fields");
     } else {

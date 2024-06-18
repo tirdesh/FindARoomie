@@ -14,7 +14,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ imageId, style }) => {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await axios.get(`http://localhost:3002/upload/${imageId}`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/upload/${imageId}`, {
           responseType: 'arraybuffer',
         });
 

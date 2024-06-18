@@ -88,7 +88,7 @@ const RoomieCard: React.FC<Props> = ({ roommate, style }) => {
   };
 
   const deletePost = async (id:string) =>{
-    const apiURL = `http://localhost:3002/roomposts/${id}`;
+    const apiURL = `${process.env.REACT_APP_API_BASE_URL}/roomposts/${id}`;
     axios
         .delete(apiURL)
         .then((response)=>{

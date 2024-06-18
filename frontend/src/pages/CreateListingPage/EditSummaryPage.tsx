@@ -104,7 +104,7 @@ const EditSummaryPage: React.FC = () => {
     if(checkFields()){
         const apiPostData = getData();
         console.log(receivedProps.id);
-        const apiURL = "http://localhost:3002/roomposts/"+`${receivedProps.id}`;
+        const apiURL = `${process.env.REACT_APP_API_BASE_URL}/roomposts/`+`${receivedProps.id}`;
         console.log('edit data:');
         console.log(apiPostData);
         axios

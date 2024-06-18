@@ -32,7 +32,7 @@ const StepForm: React.FC = () => {
     console.log(receivedProps.id);
     // Fetch room data by ID when the component mounts
     if (receivedProps && receivedProps.id) {
-      fetch(`http://localhost:3002/roomposts`)
+      fetch(`${process.env.REACT_APP_API_BASE_URL}/roomposts`)
         .then((response) => response.json())
         .then((data) => {
           const roomData = data.data.find((room: any) => room._id === receivedProps.id);

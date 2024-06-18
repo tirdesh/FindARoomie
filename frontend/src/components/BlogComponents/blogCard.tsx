@@ -30,7 +30,7 @@ const BlogCard: React.FC<Props> = (props):ReactElement =>{
     const handleAddComment = () =>{
         dispatch(addComment({blogId: blogData.blogId, userId: sessionUser.userId, comment:newComment}));
         
-        const apiURL = `http://localhost:3002/blogs/${blogData._id}`
+        const apiURL = `${process.env.REACT_APP_API_BASE_URL}/blogs/${blogData._id}`
         const apiData = {
             $push:{
                 blogComments:{

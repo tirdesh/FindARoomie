@@ -30,7 +30,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ roomName, username, onClose }) 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:3002');
+    const newSocket = io(`${process.env.REACT_APP_API_BASE_URL}`);
     newSocket.emit('joinRoom', { roomName, username });
 
     newSocket.on('message', (messageData: Message) => {

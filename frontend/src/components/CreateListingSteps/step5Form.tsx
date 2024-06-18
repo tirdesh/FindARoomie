@@ -31,7 +31,7 @@ const Step5Form: React.FC = () => {
             return existingImageUrl;
           }
           try {
-            const response = await axios.get(`http://localhost:3002/upload/${docId}`, {
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/upload/${docId}`, {
               responseType: 'arraybuffer',
             });
             const base64Image = btoa(
@@ -68,7 +68,7 @@ const Step5Form: React.FC = () => {
         formData.append('image', file);
 
         try {
-          const response = await axios.post('http://localhost:3002/upload', formData, {
+          const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/upload`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
@@ -101,7 +101,7 @@ const Step5Form: React.FC = () => {
       const deletedDocId = formState.photos[index];
 
       // Make a request to your server to delete the image by ID
-      await axios.delete(`http://localhost:3002/upload/${deletedDocId}`);
+      await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/upload/${deletedDocId}`);
 
       // Update the state in React
       const newPhotos = [...formState.photos];

@@ -100,7 +100,7 @@ const SummaryPage: React.FC = () => {
       userId: sessionUser.userId,
       postId: postId
     };
-    const apiURL = "http://localhost:3002/api/users/api/addPost";
+    const apiURL = `${process.env.REACT_APP_API_BASE_URL}/api/users/api/addPost`;
     axios.put(apiURL, apiPutData)
       .then((response)=>{
         console.log(response.data.message);
@@ -115,7 +115,7 @@ const SummaryPage: React.FC = () => {
 
     if(checkFields()){
         const apiPostData = getData();
-        const apiURL = "http://localhost:3002/roomposts/";
+        const apiURL = `${process.env.REACT_APP_API_BASE_URL}/roomposts/`;
         axios
           .post(apiURL, apiPostData)
           .then((response)=>{

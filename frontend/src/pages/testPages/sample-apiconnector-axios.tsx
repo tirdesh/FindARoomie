@@ -26,7 +26,7 @@ const RoomFiltersAxios: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3002/roomposts/');
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/roomposts/`);
         setRoomPosts(response.data.data);
       } catch (error) {
         console.error('Error fetching data:', error);

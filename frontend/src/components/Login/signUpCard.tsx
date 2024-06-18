@@ -100,7 +100,7 @@ const SignUpCard: React.FC = ():ReactElement =>{
     };
 
     const registerUser = () =>{
-        const apiURL = "http://localhost:3002/api/users/api/signup";
+        const apiURL = `${process.env.REACT_APP_API_BASE_URL}/api/users/api/signup`;
         axios
             .post(apiURL,
                 {

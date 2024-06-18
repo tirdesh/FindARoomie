@@ -40,7 +40,7 @@ const UserProfile: React.FC = () => {
     console.log(userData);
     console.log("Session Data structer");
     console.log(sessionUser);
-    const apiURL = "http://localhost:3002/api/users/api/update/";
+    const apiURL = `${process.env.REACT_APP_API_BASE_URL}/api/users/api/update/`;
     axios
       .put(apiURL, userData)
       .then((response)=>{
