@@ -1,14 +1,6 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/OuSBNpwM)
-
 <p align="center">
   <img src="misc/images/image.png" alt="Alt text"/>
 </p>
-
-# Team Maverick Team 35
-- Abhishek Chintapalli
-- Abhinav Chary Eeranti
-- Tirdesh Pettugani
-- Sai Krishna Kotla
 
 # Find a Roomie
 
@@ -23,327 +15,100 @@
   - *Find a Room*: Advanced search options with customizable filters.
 - **Additional Implementations**: Blog integration, advanced security features, and confidentiality of personal information.
 
-## How It Works
-### Creating an Account
-- Quick and simple registration process.
-- Enhanced security features available.
 
-### Listing/Searching for a Room
-- Easy steps to list or search for rooms.
-- Customizable filters to meet individual needs.
+## Set up project in VS code:
 
-### Blogs and Community Support
-- Engage with the community through integrated blogs.
+1. **Clone the Repository:**
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
 
-### User Verification and Safety
-- Comprehensive checks for user identity verification.
-- Data protection and privacy guidelines.
+2. **Open Project in VS Code:**
+   Open VS Code and navigate to File -> Open... or use the command line:
+   ```bash
+   code .
+   ```
 
-## User Authentication
-- Account creation via email or social media.
-- Strong password policies and optional two-factor authentication.
-- Profile management for personal details and preferences.
+3. **Environment Variables**
+   Ensure to set up these environment variables before running the application:
+   - **MONGODB_URI**: MongoDB connection string for the 'roomies' database.
+   - **PORT**: Port number on which the server will run (e.g., 3002).
+   - **REACT_APP_API_BASE_URL**: Base URL for the API server (e.g., http://localhost:3002).
 
-## Site Features
-### How to Find a Room
-- **Checklist Creation**: Specify location, budget, gender preference, amenities, etc.
-- **Search Filters**: Refined search capabilities.
-- **Communication**: Facilitates initial contact between users.
-- **Contact Exchange and Moving In**: Coordinate finalizing the deal and moving in.
+4. **Install Dependencies:**
+   If your project requires dependencies (typically managed via `package.json` for Node.js projects, install them using:
+   ```bash
+   npm install-all   # From root folder for installing backend and frontend dependencies
+   or
+   npm install # To be run individually from backend and frontend
+   ```
 
-### Renting a Room
-- Comprehensive form to capture property details, type, accommodation duration, security deposit, availability date, expectations, and amenities.
+5. **Run Project**
+   #### Start Backend Server
+   To start the backend server, run:
+   ```bash
+   npm run start-backend # run from root folder
+   ```
+   This will start the server using `node backend/server.js`.
 
-## Site Tabs
-### Dashboard
-- For guests: List of apartments with uploader details.
-- For logged-in users: Additional contact features.
+   #### Start Frontend Development Server
+   To start the frontend development server, run:
+   ```bash
+   npm run start-frontend # run from root folder
+   ```
+   This will navigate to the `frontend` directory and start the development server using `npm start`.
 
-### Activity
-- Track apartment listings, contacts, and house hunting progress.
+   #### Start Both Backend and Frontend Concurrently
+   To start both the backend and frontend concurrently (in development mode), run:
+   ```bash
+   npm start # run from root folder
+   ```
+   This uses `concurrently` to run both `npm run start-backend` and `npm run start-frontend` simultaneously.
 
-### Our Listings
-- Post and manage personal housing listings.
+6. **Git Workflow**
 
-### Account
-- Manage personal details and connections akin to social media features.
-
-## Handling GIT:
-
-### Creating a new branch:
-
-```bash
-git branch new-branch-name
-git checkout new-branch-name
-# or using a single command
-git checkout -b new-branch-name
-```
-
-### Commit Changes:
-
-```bash
-git add .
-git commit -m "Your commit message"
-git push origin new-branch-name
-```
+   1. Creating a new branch:
+      ```bash
+      git branch new-branch-name
+      git checkout new-branch-name
+      # or using a single command
+      git checkout -b new-branch-name
+      ```
+   2. Commit Changes:
+      
+      ```bash
+      git add .
+      git commit -m "Your commit message"
+      git push origin new-branch-name
+      ```
 
 These commands help in creating a new branch, switching to it, staging changes, committing them, and pushing the changes to the remote repository.
 
+
+
 ## Object Model Using Domain Driven Design
 <p align="center">
-  <img width="717" alt="Object Model" src="https://github.com/info-6150-fall-2023/final-project-mavericks/assets/145165383/3db253b6-86d5-4c6b-a437-b480e4d18381">
+  <img src="misc/images/image_model.png" alt="Alt text"/>
 </p>
 
 # Find a Roomie - User Stories and Corresponding REST API Resources
 
-## User Story 1: Account Creation and Login
-- **As** a new user,
-- **I want** to easily create an account and log in to "Find a Roomie",
-- **So that** I can securely access the features for finding or listing a room.
+- [API Testing Guide with Postman](documentation/api_testing_with_postman.md)
+-  [User Stories](documentation/user_stories)
+   - [User Story 1](documentation/user_stories/user_story_1.md)
+   - [User Story 2](documentation/user_stories/user_story_2.md)
+   - [User Story 3](documentation/user_stories/user_story_3.md)
+   - [User Story 4](documentation/user_stories/user_story_4.md)
+   - [User Story 5](documentation/user_stories/user_story_5.md)
+   - [User Story 6](documentation/user_stories/user_story_6.md)
+   - [User Story 7](documentation/user_stories/user_story_7.md)
+   - [User Story 8](documentation/user_stories/user_story_8.md)
+   - [User Story 9](documentation/user_stories/user_story_9.md)
+- [Other Resources](documentation/other_resources.md)
 
-### API Resources:
-1. **Endpoint:** `/api/users`
-   - **Method:** `GET`
-   - **Description:** Retrieve a list of users.
-
-2. **Endpoint:** `/api/users/{userId}`
-   - **Method:** `GET`
-   - **Description:** Retrieve user details by ID.
-
-3. **Endpoint:** `/api/users/{userId}`
-   - **Method:** `PUT`
-   - **Description:** Update user details by ID.
-
-4. **Endpoint:** `/api/signup`
-   - **Method:** `POST`
-   - **Description:** Create a new user account.
-
-5. **Endpoint:** `/api/login`
-   - **Method:** `POST`
-   - **Description:** Authenticate and log in a user.
-
-6. **Endpoint:** `/api/password-reset`
-   - **Method:** `POST`
-   - **Description:** Reset user password.
-
-## User Story 2:  Profile Management and Access
-- **As** a new user,
-- **I want** to efficiently manage my profile and access the "Profile Management" features,
-- **So that** I can keep my profile information up to date and utilize the available profile management functionalities.
-
-### API Resources:
-1. **Endpoint:** `/api/profiles`
-   - **Method:** `POST`
-   - **Description:** Create a new user profile.
-
-2. **Endpoint:** `/api/profiles/{username}`
-   - **Method:** `GET`
-   - **Description:** Retrieve user profile by username.
-
-3. **Endpoint:** `/api/profiles/{username}`
-   - **Method:** `PUT`
-   - **Description:** Update user profile by username.
-
-4. **Endpoint:** `/api/profiles/{username}`
-   - **Method:** `DELETE`
-   - **Description:** Delete user profile by username.
-
-## User Story 3: Effortless Room Search
-- **As** a student looking for accommodation,
-- **I want** to find the perfect room,
-- **Utilizing** specific filters like location, budget, and amenities,
-- **So that** the room aligns seamlessly with my needs and preferences.
-
-### API Resources:
-1. **Endpoint:** `/roomlistings/filters`
-   - **Method:** `GET`
-   - **Description:** Get saved filters for room searches.
-
-2. **Endpoint:** `/roomlistings/filters`
-   - **Method:** `POST`
-   - **Description:** Save a new filter.
-
-3. **Endpoint:** `/roomlistings/filters/{id}`
-   - **Method:** `PUT`
-   - **Description:** Update a saved filter by ID.
-
-4. **Endpoint:** `/roomlistings/filters/{id}`
-   - **Method:** `DELETE`
-   - **Description:** Delete a saved filter by ID.
-
-## User Story 4: Listing a Room
-- **As** a room owner,
-- **I want** to list my available room with detailed preferences and amenities,
-- **So that** I can attract suitable roommates.
-
-### API Resources:
-1. **Endpoint:** `/api/rooms`
-  - **method:** `GET`
-  - **Description:** Get a list of available rooms.
-
-2. **Endpoint:** `/api/rooms`
-  - **method:** `POST`
-  - **Description:** List a room as available with detailed preferences and amenities.
-
-3. **Endpoint:** `/api/rooms/{roomNumber}`
-  - **method:** `PUT`
-  - **Description:**  Update details of a room listing by room number.
-
-4. **Endpoint:** `/api/rooms/{roomNumber}`
-  - **method:** `DELETE`
-  - **Description:** Delete a room listing by room number.
- 
-## User Story 5: In-App Communication
-- **As** a user,
-- **I want** to communicate safely with potential roommates within the app,
-- **So that** I can discuss details without sharing personal contact information prematurely.
-
-## User Story 6: Blog and Community Engagement
-- **As** a user interested in shared living best practices,
-- **I want** to access and contribute to blogs and community discussions within the app,
-- **So that** I can learn from and engage with a community of like-minded individuals.
-
-### API Resources:
-1. **Endpoint:** `/community_blogs`
-  - **method:** `GET`
-  - **Description:** Retrieve all the blogs
-
-2. **Endpoint:** `/community_blogs`
-  - **method:** `POST`
-  - **Description:** Post a new Blog with a blogID
-
-3. **Endpoint:** `/community_blogs/{blogID}`
-  - **method:** `PUT`
-  - **Description:** Update the blog with selected blog id
-
-4. **Endpoint:** `/community_blogs/{blogID}`
-  - **method:** `DELETE`
-  - **Description:** Delete the blog with selected blog id
- 
-## User Story 7: User Verification and Safety
-- **As** a user concerned about safety,
-- **I want** to know that other users are verified,
-- **So that** I feel secure in my interactions and potential living arrangements.
-## User Story 8: Checklist and Preferences
-- **As** a user,
-- **I want** to create a checklist of my room and roommate preferences,
-- **So that** the search results are tailored to my specific needs.
- 
-## User Story 9: Roommate Agreement
-- **As** a user finalizing a roommate arrangement,
-- **I want** to access resources and templates for roommate agreements,
-- **So that** both parties have clear, agreed-upon terms from the beginning.
-
-## Set up project in VS code:
-### commands:
-   -  npm init
-   -  npm use 18 (since 20 is not working in Abhinav and Abhishek's environment)
-   -  npm i -s express mongoose cors debug bcrypt jsonwebtoken dotenv
-### package.json:
-   - add ***"type": "module"***
-
-# API Testing Guide with Postman
-## Testing User Login with Postman
-
-### Prerequisites:
-- Run `node server.js` to start the server.
-
-### 1. Signing Up a New User (/api/signup)
-- **HTTP Method:** POST
-- **URL:** `http://localhost:3000/api/signup`
-- **Body:** JSON format
-
-### 2. User Login (/api/login)
-- **HTTP Method:** POST
-- **URL:** `http://localhost:3000/api/login`
-- **Body:** JSON format
-
-### 3. Resetting Password (/api/password-reset)
-- **HTTP Method:** POST
-- **URL:** `http://localhost:3000/api/password-reset`
-- **Body:** JSON format
-
-## Profile Management with Postman
-
-### Prerequisites:
-- Ensure the server is running: `node server.js`
-
-### 1. Retrieve a User's Profile
-- **Method:** GET
-- **Endpoint:** `/profile/:userId`
-- **URL:** `http://localhost:3000/profile/:userId`
-- **Parameters:** Replace `:userId` with the actual user ID.
-
-### 2. Create or Update a User's Profile
-- **Method:** POST
-- **Endpoint:** `/profile/:userId`
-- **URL:** `http://localhost:3000/profile/:userId`
-- **Parameters:** Replace `:userId` with the user ID.
-
-### 3. Update Specific Fields in a User's Profile
-- **Method:** PATCH
-- **Endpoint:** `/profile/:userId`
-- **URL:** `http://localhost:3000/profile/:userId`
-- **Parameters:** Replace `:userId` with the user ID.
-
-### 4. Delete a User's Profile
-- **Method:** DELETE
-- **Endpoint:** `/profile/:userId`
-- **URL:** `http://localhost:3000/profile/:userId`
-- **Parameters:** Replace `:userId` with the user ID.
-
-## Room Filtering with Postman
-
-### 1. Display All Room Filters
-- **Method:** GET
-- **Endpoint:** `/`
-- **URL:** `http://localhost:3000/`
-
-### 2. Create a New Room Filter
-- **Method:** POST
-- **Endpoint:** `/`
-- **URL:** `http://localhost:3000/`
-
-### 3. Retrieve a Specific Room Filter
-- **Method:** GET
-- **Endpoint:** `/:id`
-- **URL:** `http://localhost:3000/:id`
-
-### 4. Update a Specific Room Filter
-- **Method:** PUT
-- **Endpoint:** `/:id`
-- **URL:** `http://localhost:3000/:id`
-
-### 5. Delete a Specific Room Filter
-- **Method:** DELETE
-- **Endpoint:** `/:id`
-- **URL:** `http://localhost:3000/:id`
-
-## Blog Management with Postman
-
-### 1. Display All Blogs
-- **Method:** GET
-- **Endpoint:** `/`
-- **URL:** `http://localhost:3000/`
-
-### 2. Create a New Blog
-- **Method:** POST
-- **Endpoint:** `/`
-- **URL:** `http://localhost:3000/`
-- **Body:** JSON format
-
-### 3. Retrieve a Specific Blog
-- **Method:** GET
-- **Endpoint:** `/:id`
-- **URL:** `http://localhost:3000/:id`
-
-### 4. Update a Specific Blog
-- **Method:** PUT
-- **Endpoint:** `/:id`
-- **URL:** `http://localhost:3000/:id`
-- **Body:** JSON format
-
-### 5. Delete a Specific Blog
-- **Method:** DELETE
-- **Endpoint:** `/:id`
-- **URL:** `http://localhost:3000/:id`
+# Team Maverick Team 35
+- [Abhishek Chintapalli](www.linkedin.com/in/abhishekchintapalli)
+- [Abhinav Chary Eeranti](www.linkedin.com/in/abhinaveeranti)
+- [Tirdesh Pettugani](www.linkedin.com/in/tirdesh)
+- [Sai Krishna Kotla](www.linkedin.com/in/saikrishnakotla)
