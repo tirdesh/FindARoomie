@@ -20,6 +20,11 @@ const initialize = (app) => {
     mongoose.connect('mongodb+srv://admin:admin@cluster0.y87gij4.mongodb.net/roomies?retryWrites=true&w=majority');
     // Registering the application routes
     registerRouter(app);
+
+    // Example default route handler
+    app.get('/', (req, res) => {
+        res.send('Hello from your Vercel deployment!');
+    });
 }
 
 // Exporting the initialize function to be used in the main application file
